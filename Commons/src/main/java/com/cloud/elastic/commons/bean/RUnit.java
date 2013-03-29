@@ -1,5 +1,7 @@
 package com.cloud.elastic.commons.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +21,11 @@ import org.hibernate.annotations.GenericGenerator;
  * */
 @Entity
 @Table(name="t_runit")
-public class RUnit {
+public class RUnit implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**RUnit编号*/
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")

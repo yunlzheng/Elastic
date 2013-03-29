@@ -1,9 +1,11 @@
 package com.cloud.elastic.commons.bean;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -19,7 +22,12 @@ import org.hibernate.annotations.FetchMode;
  * 应用对象
  * @author 云龙
  * */
-public class Application {
+@Entity
+@Table(name="t_application")
+public class Application implements Serializable{
+
+	
+	private static final long serialVersionUID = 1L;
 
 	/**RUnit编号*/
 	@Id

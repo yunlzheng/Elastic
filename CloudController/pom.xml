@@ -124,7 +124,6 @@
 	 </dependency>
 	 
 	 <!-- cxf 配置-->
-
 	 <dependency>
 	 	<groupId>org.apache.cxf</groupId>
 	 	<artifactId>cxf-rt-frontend-jaxrs</artifactId>
@@ -150,6 +149,15 @@
 	 	<artifactId>jackson-jaxrs</artifactId>
 	 	<version>1.9.12</version>
 	 </dependency>
+	 
+	  <!-- 组件依赖-->
+
+
+	  <dependency>
+	  	<groupId>com.zhyl.elastic</groupId>
+	  	<artifactId>Commons</artifactId>
+	  	<version>0.0.1-SNAPSHOT</version>
+	  </dependency>
   </dependencies>
   <build>
     <finalName>CloudController</finalName>

@@ -27,7 +27,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<jaxrs:server id="external" address="/rest">
 		<jaxrs:serviceBeans>
-			<bean class="com.icp.middleware.service.impl.ClusterServer" />
+			<bean class="com.cloud.elastic.controler.resources.impl.ApplicationResourcesImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
@@ -37,7 +37,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	<!-- JDBC 数据访问配置 -->
 	<bean id="datasources" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/elastic?useUnicode=true&amp;characterEncoding=UTF-8" /> 
+		<property name="url" value="jdbc:mysql://localhost/db_elastic?useUnicode=true&amp;characterEncoding=UTF-8" /> 
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -65,7 +65,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 
 		<property name="packagesToScan">
 			<list>
-				<value>com.icp.middleware.bean</value>
+				<value>com.cloud.elastic.commons.bean</value>
 			</list>
 		</property>
 	</bean>
@@ -76,8 +76,42 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		</property>
 	</bean>
 
-
-
+	<!-- 数据库Dao -->
+	<bean id="ApplicationDao" class="com.cloud.elastic.commons.dao.impl.ApplicationHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RouterDao" class="com.cloud.elastic.commons.dao.impl.RouterHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RUnitDao" class="com.cloud.elastic.commons.dao.impl.RUnitHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RuntimeDao" class="com.cloud.elastic.commons.dao.impl.RuntimeHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ServerDao" class="com.cloud.elastic.commons.dao.impl.ServerHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserDao" class="com.cloud.elastic.commons.dao.impl.UserHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	
 </beans>
 

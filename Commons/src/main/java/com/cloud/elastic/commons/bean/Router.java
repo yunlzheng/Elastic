@@ -1,5 +1,7 @@
 package com.cloud.elastic.commons.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,11 @@ import org.hibernate.annotations.GenericGenerator;
  * */
 @Entity
 @Table(name="t_router")
-public class Router {
+public class Router implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")

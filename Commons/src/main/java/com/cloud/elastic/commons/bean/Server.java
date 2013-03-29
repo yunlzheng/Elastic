@@ -1,18 +1,42 @@
 package com.cloud.elastic.commons.bean;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * 虚拟机资源对象
  * @author 云龙
  * */
-public class Server {
+@Entity
+@Table(name="t_server")
+public class Server implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**服务器编号*/
+	@Id
+	@GenericGenerator(name = "idGenerator", strategy = "uuid")
+	@GeneratedValue(generator = "idGenerator")
+	@Column(length=32)
 	private int uuid;
 	
 	/**服务器ip地址*/
+	@Column(name="ip")
 	private String ip;
 	
 	/**服务器所属用户*/
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private User user;
 
 	public int getUuid() {

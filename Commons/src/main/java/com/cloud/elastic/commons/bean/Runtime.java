@@ -1,5 +1,7 @@
 package com.cloud.elastic.commons.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +19,11 @@ import org.hibernate.annotations.GenericGenerator;
  * */
 @Entity
 @Table(name="t_runtimes")
-public class Runtime {
+public class Runtime implements Serializable{
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**运行时环境组件唯一标示*/
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
