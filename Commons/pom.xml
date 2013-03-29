@@ -7,20 +7,123 @@
     <artifactId>CloudElastic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.zhyl.elastic</groupId>
   <artifactId>Commons</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>Commons</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+	 <!-- Spring 日志配置 -->
+	 <dependency>
+	 	<groupId>org.slf4j</groupId>
+	 	<artifactId>jcl-over-slf4j</artifactId>
+	 	<version>1.7.4</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.slf4j</groupId>
+	 	<artifactId>slf4j-api</artifactId>
+	 	<version>1.7.4</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.slf4j</groupId>
+	 	<artifactId>slf4j-log4j12</artifactId>
+	 	<version>1.7.4</version>
+	 </dependency>
+	 <!-- Spring framework配置 -->
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-web</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-orm</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-beans</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-context-support</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-tx</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework</groupId>
+	 	<artifactId>spring-core</artifactId>
+	 	<version>3.0.6.RELEASE</version>
+	 </dependency>
+	 <!-- Spring amqp配置 -->
+	 <dependency>
+	 	<groupId>org.springframework.amqp</groupId>
+	 	<artifactId>spring-amqp</artifactId>
+	 	<version>1.0.0.RELEASE</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.springframework.amqp</groupId>
+	 	<artifactId>spring-rabbit</artifactId>
+	 	<version>1.0.0.RELEASE</version>
+	 </dependency>
+	 <!-- hibernate配置 -->
+	 <dependency>
+	 	<groupId>org.hibernate</groupId>
+	 	<artifactId>hibernate-core</artifactId>
+	 	<version>3.6.9.Final</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>javassist</groupId>
+	 	<artifactId>javassist</artifactId>
+	 	<version>3.12.1.GA</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>mysql</groupId>
+	 	<artifactId>mysql-connector-java</artifactId>
+	 	<version>5.1.24</version>
+	 </dependency>
+	 <!-- 其它配置 -->
+
+	 <dependency>
+	 	<groupId>javax.xml.bind</groupId>
+	 	<artifactId>jaxb-api</artifactId>
+	 	<version>2.2.9</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>javax.servlet</groupId>
+	 	<artifactId>servlet-api</artifactId>
+	 	<version>2.5</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.sonatype.nexus</groupId>
+	 	<artifactId>nexus-rest-client-java</artifactId>
+	 	<version>2.3.1-01</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>org.sonatype.nexus.client</groupId>
+	 	<artifactId>nexus-client-core</artifactId>
+	 	<version>2.3.1-01</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>commons-util</groupId>
+	 	<artifactId>commons-util</artifactId>
+	 	<version>final</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>commons-io</groupId>
+	 	<artifactId>commons-io</artifactId>
+	 	<version>20030203.000550</version>
+	 </dependency>
+	 <dependency>
+	 	<groupId>commons-fileupload</groupId>
+	 	<artifactId>commons-fileupload</artifactId>
+	 	<version>1.2.2</version>
+	 </dependency>
   </dependencies>
 </project>
