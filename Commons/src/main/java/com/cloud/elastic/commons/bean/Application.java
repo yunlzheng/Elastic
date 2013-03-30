@@ -1,22 +1,17 @@
 package com.cloud.elastic.commons.bean;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 /**
  * 应用对象
@@ -29,10 +24,11 @@ public class Application implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	/**RUnit编号*/
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "idGenerator", strategy = "uuid")
+	@GeneratedValue(generator = "idGenerator")
+	@Column(length=32)
+	private int uuid;
 	
 	/**应用名称*/
 	@Column(name="name")
@@ -50,21 +46,25 @@ public class Application implements Serializable{
 	@Column(name="health")
 	private String health;
 	
-	@OneToMany(targetEntity=RUnit.class,cascade=CascadeType.ALL)
-	@Fetch(FetchMode.JOIN)
-	@JoinColumn(name="runitId",updatable=false)
-	private Set<RUnit> rUnits;
+	/**应用使用的最小内存*/
+	@Column(name="minMemory")
+	private int minMemory;
 	
-	/**应用所属的用户*/
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private User user;
+	/**应用使用的最大内存*/
+	@Column(name="maxMemory")
+	private int maxMemory;
+	
 
-	public int getId() {
-		return id;
+	/**应用所属的用户*/
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	private User user;
+	
+	public int getUuid() {
+		return uuid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
 	}
 
 	public String getName() {
@@ -107,14 +107,21 @@ public class Application implements Serializable{
 		this.user = user;
 	}
 
-	public Set<RUnit> getrUnits() {
-		return rUnits;
+
+	public int getMinMemory() {
+		return minMemory;
 	}
 
-	public void setrUnits(Set<RUnit> rUnits) {
-		this.rUnits = rUnits;
+	public void setMinMemory(int minMemory) {
+		this.minMemory = minMemory;
 	}
-	
-	
+
+	public int getMaxMemory() {
+		return maxMemory;
+	}
+
+	public void setMaxMemory(int maxMemory) {
+		this.maxMemory = maxMemory;
+	}
 	
 }

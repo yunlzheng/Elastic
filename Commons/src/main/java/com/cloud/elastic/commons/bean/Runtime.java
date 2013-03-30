@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +32,10 @@ public class Runtime implements Serializable{
 	@Column(length=32)
 	private int uuid;
 
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	private Application application;
+	
+	
 	/**运行时环境所在服务器*/
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Server server;

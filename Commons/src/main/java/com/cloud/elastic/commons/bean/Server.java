@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -36,7 +36,7 @@ public class Server implements Serializable{
 	private String ip;
 	
 	/**服务器所属用户*/
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private User user;
 
 	public int getUuid() {

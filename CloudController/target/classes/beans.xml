@@ -28,6 +28,8 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	<jaxrs:server id="external" address="/rest">
 		<jaxrs:serviceBeans>
 			<bean class="com.cloud.elastic.controler.resources.impl.ApplicationResourcesImpl" />
+			<bean class="com.cloud.elastic.controler.resources.impl.UserResourcesImpl" />
+			<bean class="com.cloud.elastic.controler.resources.impl.ServerResourcesImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />

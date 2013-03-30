@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -37,10 +36,6 @@ public class RUnit implements Serializable{
 	@Column(name="port")
 	private int port;
 
-	/**运行时单元所属的应用*/
-	@ManyToOne(targetEntity=Application.class)
-	@JoinColumn(name="applicationId",updatable=false)
-	private Application  application;
 
 	/**运行时单元所属的运行时环境*/
 	@ManyToOne(cascade={CascadeType.REFRESH,CascadeType.MERGE})
@@ -54,12 +49,5 @@ public class RUnit implements Serializable{
 		this.uuid = uuid;
 	}
 
-	public Application getApplication() {
-		return application;
-	}
-
-	public void setApplication(Application application) {
-		this.application = application;
-	}
 	
 }
