@@ -2,6 +2,7 @@ package com.cloud.elastic.controler.resources.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,13 +11,18 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.bean.Application;
+import com.cloud.elastic.commons.bean.User;
+import com.cloud.elastic.commons.constant.ApplicationConstant;
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.UserDao;
 import com.cloud.elastic.controler.resources.ApplicationResources;
@@ -30,21 +36,60 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@Autowired
 	private UserDao userDao;
 	
+	@Value("#{config['app.domain']}")
+	private String appDomain;
+	
 	@GET
-	@PathParam("/{id}")
-	public Response get(@PathParam("id") Integer id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response loadAll() {
+		
+		System.out.println(">>>>>>>>>>>>");
+		return Response.ok(applicationDao.loadAll(),MediaType.APPLICATION_JSON).build();
+		
+	}
+	
+	@GET
+	@Path("/{id}")
+	public Response get(@PathParam("id") String id) {
 		
 		
 		Application application = null;
-		
 		application= applicationDao.get(id);
-		
-		
 		return Response.ok(application, MediaType.APPLICATION_JSON).build();
 
 	}
 
 	@POST
+	@Path("/form")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response save(MultivaluedMap<String, Object> formParams,
+			@Context HttpServletRequest request) {
+		
+		Application application = new Application();
+//		for(String key:formParams.keySet()){
+//			System.out.println(key);
+//		}
+		application.setName(formParams.getFirst("name").toString());
+		application.setUrl(formParams.getFirst("url").toString()+appDomain);
+		application.setMaxMemory(Integer.parseInt(formParams.getFirst("maxMemory").toString()));
+		application.setMinMemory(Integer.parseInt(formParams.getFirst("minMemory").toString()));
+		User user = (User) request.getSession().getAttribute("user");
+		
+		String uua = (String) request.getSession().getAttribute("runit");
+		
+		//To do Maven Upload
+		
+		application.setRepositoryUrl(uua);
+		//application.setHealth(ApplicationConstant.UPLOADED);
+		
+		application.setUser(user);
+		applicationDao.save(application);
+		return Response.ok(application,MediaType.APPLICATION_JSON).build();
+	
+	}
+	
+	@POST
+	@Path("/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response save(Application entity) {
@@ -60,6 +105,7 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 		return Response.ok(entity, MediaType.APPLICATION_JSON).build();
 		
 	}
+	
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +120,7 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@DELETE
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response delete(@PathParam("id") Integer id) {
+	public Response delete(@PathParam("id") String id) {
 		
 		applicationDao.deleteByKey(id);  
 		return Response.ok().build();
@@ -92,11 +138,15 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 		
 	}
 
+	@GET
+	@Path("rowcount/{offset}/{length}")
 	public Response getPageCount(int offset, int length) {
 		
 		DetachedCriteria criteria=null;
 		int rowcount = applicationDao.getRowCount(criteria);
 		return Response.ok(rowcount,MediaType.APPLICATION_JSON).build();
+
 	}
 
+	
 }

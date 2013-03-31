@@ -28,7 +28,7 @@ public class Application implements Serializable{
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(length=32)
-	private int uuid;
+	private String uuid;
 	
 	/**应用名称*/
 	@Column(name="name")
@@ -59,11 +59,13 @@ public class Application implements Serializable{
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private User user;
 	
-	public int getUuid() {
+	
+
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(int uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 

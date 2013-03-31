@@ -39,7 +39,20 @@
 				<h2>创建应用</h2>
 			</div>
 			<div class="space"></div>
-			<form action="service/rest/applications" method="post" class="form-horizontal push-form">
+			 <form action="proxy" id="formUploadApplication" method="post" enctype="multipart/form-data" class="form-horizontal push-form">
+			 	<fieldset>
+			 		<legend>应用程序</legend>
+				 	<div class="control-group">
+					    <label class="control-label" >应用包:</label>
+					    <div class="controls">
+					      <input name="application" type="file" placeholder="上传应用">
+					     <button id="btnUpload" type="submit" class="btn btn-success">上传</button>
+					    </div>
+					</div>
+			 	</fieldset>
+				
+			</form>
+			<form id="formCreateApplication" action="service/rest/applications/form" method="post" class="form-horizontal push-form">
 				<fieldset>
 					<legend>应用基本信息</legend>
 						<div class="control-group">
@@ -64,13 +77,6 @@
 					   
 					 </div>
 		
-					 <div class="control-group">
-					    <label class="control-label" >应用包:</label>
-					    <div class="controls">
-					      <input type="file" placeholder="上传应用">
-					     <button type="button" class="btn btn-success">上传</button>
-					    </div>
-					 </div>
 				</fieldset>
 				<fieldset>
 					
@@ -107,6 +113,7 @@
 	</div>
 	<script type="text/javascript" src="assect/js/jquery.js"></script>
 	<script type="text/javascript" src="assect/js/jquery.form.js"></script>
+	<script type="text/javascript" src="assect/js/jquery.from.push.js"></script>
 	<script type="text/javascript" src="assect/js/bootstrap.js"></script>
 	<script type="text/javascript">
 		

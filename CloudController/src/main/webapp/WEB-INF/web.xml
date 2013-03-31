@@ -27,10 +27,22 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>Proxy</servlet-name>
+		<servlet-class>com.cloud.elastic.controler.servlet.Proxy</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Proxy</servlet-name>
+		<url-pattern>/proxy</url-pattern>
+	</servlet-mapping>
+	
 	<!-- servlet mapping -->
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
+	
+	
 	
 </web-app>

@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-danger" style="float: right;">创建应用</button>
+			<button id="btn_create" type="button" class="btn btn-danger" style="float: right;">创建应用</button>
 			<br/>
 			<br/>
 			<table class="table table-bordered">
@@ -67,7 +67,7 @@
 	                  <th>操作</th>
 	                </tr>
   				</thead>
-  				<tbody>
+  				<tbody id="table_applications">
   					<tr>
 	                  <td>1</td>
 	                  <td><b>Hello World</b></td>
@@ -110,17 +110,6 @@
 	</div>
 	<script type="text/javascript" src="assect/js/jquery.js"></script>
 	<script type="text/javascript" src="assect/js/bootstrap.js"></script>
-	<script type="text/javascript">
-		
-		$(function(){
-			
-			$('.login-info').click(function(){
-			
-				$("#menu3").toggle();
-				
-			});
-		});
-	
-	</script>
+	<script type="text/javascript" src="assect/js/jquery.index.js"></script>
 </body>
 </html>
