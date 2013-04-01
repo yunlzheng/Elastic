@@ -1,3 +1,8 @@
 .settings/
 *.class/
-*/target/
+CloudController/target/
+Commons/target/
+Core/target/
+HealthManager/target/
+Router/target/
+Runtimes/target/
