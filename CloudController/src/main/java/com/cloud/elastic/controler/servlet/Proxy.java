@@ -120,17 +120,20 @@ public class Proxy extends HttpServlet{
                     zipUtil.unZip(instanceFile.getAbsolutePath(), instanceTmpFile.getAbsolutePath());
                     
                     zipUtil.createZip(instanceTmpFile.getAbsolutePath(), instanceFile.getAbsolutePath());
-                    
-                    FileUtils.deleteDirectory(instanceTmpFile);
-                    
+                  
                     req.getSession().setAttribute("runit", uuname);
                     resp.getWriter().print("success");
+                    
+                    
+                    //FileUtils.deleteDirectory(instanceTmpFile);
+                    
                   
                     return;
 				}
 				
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			 resp.getWriter().print("fails");
 		}
 		

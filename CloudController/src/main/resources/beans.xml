@@ -22,19 +22,22 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	<bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer" />
 
 	<!-- 消息处理 -->
-	<!--  pick up rabbit broker configuration -->
+	<context:component-scan base-package="com.cloud.elastic.controler.rabbit.config"></context:component-scan>
+	
 	<util:properties id="config" location="classpath:config.properties" />
 
 	<jaxrs:server id="external" address="/rest">
 		<jaxrs:serviceBeans>
 			<bean class="com.cloud.elastic.controler.resources.impl.ApplicationResourcesImpl" />
 			<bean class="com.cloud.elastic.controler.resources.impl.UserResourcesImpl" />
-			<bean class="com.cloud.elastic.controler.resources.impl.ServerResourcesImpl" />
+			<bean class="com.cloud.elastic.controler.resources.impl.CloudControllerImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
+
+	<bean id="nexusUtil" class="com.cloud.elastic.commons.util.NexusUtil"></bean>
 
 	<!-- JDBC 数据访问配置 -->
 	<bean id="datasources" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -78,6 +81,8 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		</property>
 	</bean>
 
+	<bean id="command" class="com.cloud.elastic.controler.command.Command"></bean>
+
 	<!-- 数据库Dao -->
 	<bean id="ApplicationDao" class="com.cloud.elastic.commons.dao.impl.ApplicationHibernateDao">
 		<property name="sessionFactory">
@@ -98,12 +103,6 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	</bean>
 	
 	<bean id="RuntimeDao" class="com.cloud.elastic.commons.dao.impl.RuntimeHibernateDao">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	
-	<bean id="ServerDao" class="com.cloud.elastic.commons.dao.impl.ServerHibernateDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

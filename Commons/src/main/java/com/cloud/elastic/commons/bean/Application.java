@@ -42,9 +42,15 @@ public class Application implements Serializable{
 	@Column(name="repositoryUrl")
 	private String repositoryUrl;
 	
-	/**应用状态*/
+	/**
+	 * 应用状态
+	 * @see Health
+	 * */
 	@Column(name="health")
-	private String health;
+	private int health;
+	
+	@Column(name="operatStatus")
+	private int operatStatus = OperatStatus.STABLE.getStatus();
 	
 	/**应用使用的最小内存*/
 	@Column(name="minMemory")
@@ -56,11 +62,9 @@ public class Application implements Serializable{
 	
 
 	/**应用所属的用户*/
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private User user;
 	
-	
-
 	public String getUuid() {
 		return uuid;
 	}
@@ -93,11 +97,12 @@ public class Application implements Serializable{
 		this.repositoryUrl = repositoryUrl;
 	}
 
-	public String getHealth() {
+
+	public int getHealth() {
 		return health;
 	}
 
-	public void setHealth(String health) {
+	public void setHealth(int health) {
 		this.health = health;
 	}
 
@@ -125,5 +130,81 @@ public class Application implements Serializable{
 	public void setMaxMemory(int maxMemory) {
 		this.maxMemory = maxMemory;
 	}
+	
+	
+	
+	public int getOperatStatus() {
+		return operatStatus;
+	}
+
+	public void setOperatStatus(int operatStatus) {
+		this.operatStatus = operatStatus;
+	}
+
+	public enum OperatStatus{
+		
+		STABLE(100,"未进行任何操作"),
+		DEPLOYING(0,"部署中"),
+		STARTING(1,"启动中"),
+		STOPING(2,"停止中"),
+		UNDEPLOYED(3,"卸载中");
+		
+		private int status;
+		private String desc;
+		
+		private OperatStatus(int status,String desc) {
+			this.status = status;
+			this.desc = desc;
+		}
+		
+		public int getStatus() {
+			return status;
+		}
+		public void setStatus(int status) {
+			this.status = status;
+		}
+		public String getDesc() {
+			return desc;
+		}
+		public void setDesc(String desc) {
+			this.desc = desc;
+		}
+		
+		
+		
+	}
+
+	public enum Health{
+		
+		UPLOADED(0,"未部署"),
+		RUNNING(1,"运行中"),
+		STOPED(2,"停止");
+		
+		private int health;
+		private String desc;
+		
+		private Health(int health,String desc){
+			this.health=health;
+			this.desc=desc;
+		}
+
+		public int getHealth() {
+			return health;
+		}
+
+		public void setHealth(int health) {
+			this.health = health;
+		}
+
+		public String getDesc() {
+			return desc;
+		}
+
+		public void setDesc(String desc) {
+			this.desc = desc;
+		}
+		
+	}
+	
 	
 }

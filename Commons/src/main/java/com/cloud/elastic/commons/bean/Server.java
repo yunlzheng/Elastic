@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,8 +16,6 @@ import org.hibernate.annotations.GenericGenerator;
  * 虚拟机资源对象
  * @author 云龙
  * */
-@Entity
-@Table(name="t_server")
 public class Server implements Serializable{
 
 	

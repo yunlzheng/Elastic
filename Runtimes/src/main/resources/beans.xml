@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws
+http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<context:property-placeholder />
+	<context:annotation-config />
+	<bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer" />
+	<bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer" />
+
+	<!-- 消息处理 -->
+	<context:component-scan base-package="com.cloud.elastic.runtimes.rabbit.config"></context:component-scan>
+	
+	<util:properties id="config" location="classpath:config.properties" />
+
+	<!-- JDBC 数据访问配置 -->
+	<bean id="datasources" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/db_elastic?useUnicode=true&amp;characterEncoding=UTF-8" /> 
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref local="datasources" />
+		</property>
+		
+		<!-- 设置hibernate相关属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="generate_statistics">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+		
+		<!-- 实体bean -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.cloud.elastic.commons.bean</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="transactionManager" name="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 数据库Dao -->
+	<bean id="ApplicationDao" class="com.cloud.elastic.commons.dao.impl.ApplicationHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RouterDao" class="com.cloud.elastic.commons.dao.impl.RouterHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RUnitDao" class="com.cloud.elastic.commons.dao.impl.RUnitHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RuntimeDao" class="com.cloud.elastic.commons.dao.impl.RuntimeHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserDao" class="com.cloud.elastic.commons.dao.impl.UserHibernateDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+</beans>
+

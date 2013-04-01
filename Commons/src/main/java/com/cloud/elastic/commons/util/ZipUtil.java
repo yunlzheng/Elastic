@@ -33,9 +33,10 @@ public class ZipUtil {
 			ZipEntry ze = null;
 			byte[] buf = new byte[1024];
 			int readLen = 0;
+			System.out.println("ziping...");
 			for (int i = 0; i < fileList.size(); i++) {
 				File f = (File) fileList.get(i);
-				System.out.println("Adding: " + f.getPath() +">>>>>>>>" +f.getName());
+				//System.out.println("Adding: " + f.getPath() +">>>>>>>>" +f.getName());
 				/*
 				 * 创建一个ZipEntry，并设置Name和其它的一些属性
 				 * 注意，该ZipEntry是包含目录结构的，此功能是由getAbsFileName(String,string)完成的
@@ -50,16 +51,17 @@ public class ZipUtil {
 					zos.write(buf, 0, readLen);
 				}
 				is.close();
-				System.out.println("done...");
+				
 			}
 			zos.close();
+			System.out.println("done...");
 		} else {
 			throw new Exception("this folder isnot exist!");
 		}
 	}
 	
     @SuppressWarnings("resource")
-	public static void unZip(String zipfile, String destDir) {
+	public void unZip(String zipfile, String destDir) {
     	 
         destDir = destDir.endsWith( "//" ) ? destDir : destDir + "//" ;
         byte b[] = new byte [1024];

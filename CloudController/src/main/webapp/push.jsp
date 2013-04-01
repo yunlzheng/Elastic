@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="com.cloud.elastic.commons.bean.*"%>
+<% 
+	
+	User user = (User)request.getSession().getAttribute("User"); 
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +20,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 	    <div class="head">
 	      <div class="logo"><img src="assect/img/logo.png"><a href="#">Cloud</a></div>
-	      <div class="login-info" >Admin<span class="caret"></span></div>
+	      <div class="login-info" ><%=user.getNickName()%><span class="caret"></span></div>
 	    </div>
 	    <ul class="dropdown-menu" id="menu3">
           <!-- <li role="presentation" class="divider"></li> -->

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="t_runtimes")
 public class Runtime implements Serializable{
-
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -30,30 +28,25 @@ public class Runtime implements Serializable{
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(length=32)
-	private int uuid;
+	private String uuid;
 
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Application application;
-	
-	
-	/**运行时环境所在服务器*/
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private Server server;
-	
-	public int getUuid() {
+
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(int uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
-	public Server getServer() {
-		return server;
+	public Application getApplication() {
+		return application;
 	}
 
-	public void setServer(Server server) {
-		this.server = server;
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 	
 }

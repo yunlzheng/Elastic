@@ -43,6 +43,7 @@ function applicationDataHandler(data){
             '  	<span class="caret"></span>'+
              ' </button>'+
              ' <ul class="dropdown-menu">'+
+             '   <li><a href="javascript:deploy(\'{uuid}\')">部署</a></li>'+
              '   <li><a href="#">启动</a></li>'+
              '   <li><a href="#">停止</a></li>'+
              '   <li><a href="#">卸载</a></li>'+
@@ -61,6 +62,7 @@ function applicationDataHandler(data){
     	 var application = data[i];
     	 var row = temp.replace(/{index}/g,i)
     	 	.replace(/{name}/g,application["name"])
+    	 	.replace(/{uuid}/g,application["uuid"])
     	 	.replace(/{url}/g,application["url"])
     	 	.replace(/{health}/g,application["health"]);
     	 
@@ -68,8 +70,23 @@ function applicationDataHandler(data){
     	 
      }
 	
-	console.log(data);
+}
+
+/**部署应用*/
+function deploy(uuid){
 	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/deploy/'+uuid,
+		type:'get',
+		success:deployResultHandler
+		
+	});
+	
+}
+
+function deployResultHandler(data){
+	alert(data);
 }
 
 function redictToPush() {

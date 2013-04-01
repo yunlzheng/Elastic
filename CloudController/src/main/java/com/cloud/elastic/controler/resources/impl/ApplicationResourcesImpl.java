@@ -16,20 +16,25 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.bean.Application;
 import com.cloud.elastic.commons.bean.User;
-import com.cloud.elastic.commons.constant.ApplicationConstant;
+
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.UserDao;
 import com.cloud.elastic.controler.resources.ApplicationResources;
 
+
 @Path("/applications")
 public class ApplicationResourcesImpl implements ApplicationResources{
 
+	private Log log = LogFactory.getLog(ApplicationResources.class);
+	
 	@Autowired
 	private ApplicationDao applicationDao;
 	
@@ -43,7 +48,6 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response loadAll() {
 		
-		System.out.println(">>>>>>>>>>>>");
 		return Response.ok(applicationDao.loadAll(),MediaType.APPLICATION_JSON).build();
 		
 	}
@@ -66,23 +70,29 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 			@Context HttpServletRequest request) {
 		
 		Application application = new Application();
-//		for(String key:formParams.keySet()){
-//			System.out.println(key);
-//		}
+
 		application.setName(formParams.getFirst("name").toString());
 		application.setUrl(formParams.getFirst("url").toString()+appDomain);
 		application.setMaxMemory(Integer.parseInt(formParams.getFirst("maxMemory").toString()));
 		application.setMinMemory(Integer.parseInt(formParams.getFirst("minMemory").toString()));
-		User user = (User) request.getSession().getAttribute("user");
+		User user = (User) request.getSession().getAttribute("User");
+		
+		if(user==null){
+			
+			log.info("Session->User null");
+			
+		}
+		
 		
 		String uua = (String) request.getSession().getAttribute("runit");
 		
 		//To do Maven Upload
 		
 		application.setRepositoryUrl(uua);
-		//application.setHealth(ApplicationConstant.UPLOADED);
+		application.setHealth(Application.Health.UPLOADED.getHealth());
 		
 		application.setUser(user);
+		
 		applicationDao.save(application);
 		return Response.ok(application,MediaType.APPLICATION_JSON).build();
 	
