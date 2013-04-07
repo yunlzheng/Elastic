@@ -18,7 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.bean.Runtime;
-import com.cloud.elastic.runtimes.core.RunTimesCore;
+
 import com.cloud.elastic.runtimes.info.SystemInfo;
 import com.cloud.elastic.runtimes.rabbit.convert.RuntimeInstanceMessageConverter;
 import com.cloud.elastic.runtimes.rabbit.listener.RuntimeInstanceMessageListener;
