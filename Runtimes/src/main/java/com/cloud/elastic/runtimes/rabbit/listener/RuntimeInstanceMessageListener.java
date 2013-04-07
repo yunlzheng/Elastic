@@ -1,5 +1,7 @@
 package com.cloud.elastic.runtimes.rabbit.listener;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cloud.elastic.commons.bean.Runtime;
@@ -12,6 +14,8 @@ import com.cloud.elastic.runtimes.rabbit.message.ApplicationMessage;
 
 public class RuntimeInstanceMessageListener {
 
+	private Log log = LogFactory.getLog(RuntimeInstanceMessageListener.class);
+	
 	@Autowired
 	private ApplicationDao applicationDao;
 	
@@ -51,6 +55,7 @@ public class RuntimeInstanceMessageListener {
 	
 	public void execute(String action,String applicationId){
 		
+		log.info("execute:"+action);
 		if(action.equals(ApplicationCommand.DEPLOY)){
 			try {
 				core.createRunit();

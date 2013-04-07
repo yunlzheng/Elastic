@@ -85,7 +85,6 @@ public class Command{
 			try {
 				this.sendMessage(exchange_application, "*.runtimes."+runtime.getUuid(), data);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

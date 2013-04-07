@@ -48,6 +48,7 @@ function applicationDataHandler(data){
              '   <li><a href="javascript:start(\'{uuid}\')">启动</a></li>'+
              '   <li><a href="javascript:stop(\'{uuid}\')">停止</a></li>'+
              '   <li><a href="javascript:undeploy(\'{uuid}\')">卸载</a></li>'+
+             '   <li><a href="javascript:del(\'{uuid}\')">删除</a></li>'+
              '   <li class="divider"></li>'+
              '   <li><a href="javascript:expand(\'{uuid}\')">扩展</a></li>'+
              '   <li><a href="javascript:shrink(\'{uuid}\')">收缩</a></li>'+
@@ -71,6 +72,10 @@ function applicationDataHandler(data){
     	 
      }
 	
+}
+
+function del(uuid){
+	alert("delete "+uuid);
 }
 
 function shrink(uuid){

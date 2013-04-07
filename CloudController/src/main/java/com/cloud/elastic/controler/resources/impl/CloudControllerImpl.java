@@ -4,8 +4,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -16,7 +14,6 @@ import com.cloud.elastic.controller.CloudController;
 @Path("/cloudcontroller")
 public class CloudControllerImpl implements CloudController{
 
-	private Log log = LogFactory.getLog(CloudController.class);
 	
 	@Autowired
 	private ApplicationDao applicationDao;
@@ -40,7 +37,7 @@ public class CloudControllerImpl implements CloudController{
 
 	@GET
 	@Path("/undeploy/{id}")
-	public String undeploy(String applicationId) {
+	public String undeploy(@PathParam("id") String applicationId) {
 		
 		
 		command.undeploy(applicationId);
@@ -50,7 +47,7 @@ public class CloudControllerImpl implements CloudController{
 
 	@GET
 	@Path("/start/{id}")
-	public String start(String applicationId) {
+	public String start(@PathParam("id") String applicationId) {
 		
 		
 		command.start(applicationId);
@@ -60,7 +57,7 @@ public class CloudControllerImpl implements CloudController{
 
 	@GET
 	@Path("/stop/{id}")
-	public String stop(String applicationId) {
+	public String stop(@PathParam("id") String applicationId) {
 		
 		
 		command.stop(applicationId);
@@ -71,7 +68,7 @@ public class CloudControllerImpl implements CloudController{
 
 	@GET
 	@Path("/expand/{id}")
-	public String expand(String applicationId) {
+	public String expand(@PathParam("id") String applicationId) {
 		
 		
 		command.expand(applicationId);
@@ -82,7 +79,7 @@ public class CloudControllerImpl implements CloudController{
 
 	@GET
 	@Path("/shrink/{id}")
-	public String shrink(String applicationId) {
+	public String shrink(@PathParam("id") String applicationId) {
 		
 		
 		command.shrink(applicationId);
