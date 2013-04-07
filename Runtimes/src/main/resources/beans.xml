@@ -95,5 +95,9 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		</property>
 	</bean>
 	
+	<!-- 核心能力 -->
+	<bean id="Core" class="com.cloud.elastic.runtimes.core.RunTimesCore">
+	</bean>
+	
 </beans>
 

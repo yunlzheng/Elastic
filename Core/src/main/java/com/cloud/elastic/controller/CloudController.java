@@ -9,18 +9,18 @@ public interface CloudController {
 	public String deploy(String applicationId);
 	
 	/**卸载应用*/
-	public void undeploy(String applicationId);
+	public String undeploy(String applicationId);
 	
 	/**启动应用**/
-	public void start(String applicationId);
+	public String start(String applicationId);
 	
 	/**停止应用*/
-	public void stop(String applicationId);
+	public String stop(String applicationId);
 	
 	/**扩展应用*/
-	public void expand(String applicationId);
+	public String expand(String applicationId);
 	
 	/**收缩应用*/
-	public void shrink(String applicationId);
+	public String shrink(String applicationId);
 	
 }

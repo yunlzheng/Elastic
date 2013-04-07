@@ -1,5 +1,9 @@
 package com.cloud.elastic.controler.resources.impl;
-
+/**
+ * 演示注意事项
+ * 1，由于单机原因，必须事先建好Runtimes实例，并添加到数据库
+ * */
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +27,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.bean.Application;
+import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.commons.bean.User;
 
 import com.cloud.elastic.commons.dao.ApplicationDao;
+import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.dao.UserDao;
+import com.cloud.elastic.commons.util.NexusUtil;
 import com.cloud.elastic.controler.resources.ApplicationResources;
 
 
@@ -41,8 +48,15 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private RuntimeDao runtimeDao;
+	
+	@Autowired
+	private NexusUtil nexusUtil;
+	
 	@Value("#{config['app.domain']}")
 	private String appDomain;
+
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -86,14 +100,40 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 		
 		String uua = (String) request.getSession().getAttribute("runit");
 		
-		//To do Maven Upload
-		
-		application.setRepositoryUrl(uua);
-		application.setHealth(Application.Health.UPLOADED.getHealth());
-		
-		application.setUser(user);
-		
-		applicationDao.save(application);
+		try {
+			
+			String repositoryUrl = nexusUtil.upload(uua);
+			//To do Maven Upload
+			
+			application.setRepositoryUrl(repositoryUrl);
+			application.setHealth(Application.Health.UPLOADED.getHealth());
+			application.setUser(user);
+			applicationDao.save(application);
+			
+			//binding 应用和runtimes
+			List<Runtime> runtimes = runtimeDao.find("from Runtime where application_uuid=null");
+			if(runtimes.size()!=0){
+				
+				Runtime runtime = runtimes.get(0);
+				runtime.setApplication_uuid(application.getUuid());
+				runtimeDao.update(runtime);
+				
+			}else{
+				
+				System.out.println("没有可用的Runtime实例");
+				return Response.serverError().build();
+				
+			}
+			
+			
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			return Response.noContent().build();
+			
+		}
+	
 		return Response.ok(application,MediaType.APPLICATION_JSON).build();
 	
 	}

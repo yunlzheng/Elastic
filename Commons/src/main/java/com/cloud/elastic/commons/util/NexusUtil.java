@@ -28,22 +28,58 @@ public class NexusUtil {
 	@Value("#{config['nexus.base']}")
 	private String nexus_base;
 	
-	public void upload(String uuid) throws IOException{
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNexus_base() {
+		return nexus_base;
+	}
+
+	public void setNexus_base(String nexus_base) {
+		this.nexus_base = nexus_base;
+	}
+
+	public String upload(String uuid) throws IOException{
 		
 		Content content = nexusClient().getSubsystem(Content.class);
-		Location location = new Location("release",nexus_base+uuid+".zip");
+		Location location = new Location("releases",nexus_base+uuid+"/"+uuid+".zip");
 		String rootPath = System.getProperty("user.home");
-		File toDeploy = new File(rootPath+"cloud.tmp"+File.separator+"instance"+File.separator+"uuid"+File.separator+"instance-"+uuid+".zip");
+		File toDeploy = new File(rootPath+File.separator
+				+"cloud.tmp"+File.separator
+				+"instance"+File.separator+uuid+
+				File.separator+"instance-"+uuid+".zip");
 		content.upload(location, toDeploy);
+		return host+"/content/repositories/releases/"+nexus_base+uuid+"/"+uuid+".zip";
 		
 	}
 	
 	public File download(String uuid) throws IOException{
 		
 		Content content = nexusClient().getSubsystem(Content.class);
-		Location location = new Location("release",nexus_base+uuid+".zip");
+		Location location = new Location("releases",nexus_base+uuid+".zip");
 		String rootPath = System.getProperty("user.home");
-		File downloaded = new File(rootPath+"cloud.tmp"+File.separator+"download"+File.separator+"uuid"+File.separator+"instance-"+uuid+".zip");
+		File downloaded = new File(rootPath+File.separator+"cloud.tmp"+File.separator+"download"+File.separator+uuid+File.separator+"instance-"+uuid+".zip");
 		content.download(location, downloaded);
 		return downloaded;
 	} 
@@ -51,7 +87,7 @@ public class NexusUtil {
 	public void delete(String uuid) throws IOException {
 		
 		Content content = nexusClient().getSubsystem(Content.class);
-		Location location = new Location("release",nexus_base+uuid+".zip");
+		Location location = new Location("releases",nexus_base+uuid+".zip");
 		content.delete( location );
 	
 	}
@@ -60,11 +96,28 @@ public class NexusUtil {
 	public NexusClient nexusClient() throws MalformedURLException{
 		
 		NexusClientFactory factory = new JerseyNexusClientFactory(new JerseyContentSubsystemFactory());
-		NexusClient client = factory.createFor(BaseUrl.baseUrlFrom("http://nexus.dev4yun70.com"),new UsernamePasswordAuthenticationInfo(userName,password));
+		NexusClient client = factory.createFor(BaseUrl.baseUrlFrom(host),new UsernamePasswordAuthenticationInfo(userName,password));
 		return client;
 		
 	}
 	
-	
+	public static void main(String[] args) {
+		
+		NexusUtil util = new NexusUtil();
+		util.setHost("http://192.168.146.1:8080/nexus-2.0.3");
+		util.setUserName("admin");
+		util.setPassword("admin123");
+		util.setNexus_base("com/mini_cloud/instance-");
+		
+		try {
+			String url = util.upload("20130402102829");
+			System.out.println(url);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
 }

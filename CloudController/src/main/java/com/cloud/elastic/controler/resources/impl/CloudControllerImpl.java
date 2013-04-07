@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cloud.elastic.commons.bean.Application;
+
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.controler.command.Command;
 import com.cloud.elastic.controller.CloudController;
@@ -28,19 +28,7 @@ public class CloudControllerImpl implements CloudController{
 	@Path("/deploy/{id}")
 	public String deploy(@PathParam("id") String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return "应用不存在";
-		}
-		
-		//应用是否在停止状态
-		if(application.getHealth()!=Application.Health.UPLOADED.getHealth()){
-			log.info("application already deployed");
-			return "应用已经部署";
-		}
+
 		
 		command.deploy(applicationId);
 		
@@ -50,112 +38,55 @@ public class CloudControllerImpl implements CloudController{
 		
 	}
 
-	public void undeploy(String applicationId) {
+	@GET
+	@Path("/undeploy/{id}")
+	public String undeploy(String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return;
-		}
-		
-		//状态判断
-		if(application.getHealth()==Application.Health.UPLOADED.getHealth()){
-			log.info("application already undeployed");
-			return;
-		}
 		
 		command.undeploy(applicationId);
 		
+		return "操作处理中...";
 	}
 
-	public void start(String applicationId) {
+	@GET
+	@Path("/start/{id}")
+	public String start(String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return;
-		}
-		
-		//状态判断
-		if(application.getHealth()!=Application.Health.STOPED.getHealth()){
-			
-			log.info("application status error current status:"+application.getHealth());
-			return;
-			
-		}
 		
 		command.start(applicationId);
 		
+		return "操作处理中...";
 	}
 
-	public void stop(String applicationId) {
+	@GET
+	@Path("/stop/{id}")
+	public String stop(String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return;
-		}
-		
-		//状态判断
-		if(application.getHealth()!=Application.Health.RUNNING.getHealth()){
-			
-			log.info("application status error current status:"+application.getHealth());
-			return;
-			
-		}
 		
 		command.stop(applicationId);
 		
+		return "操作处理中...";
+		
 	}
 
-	public void expand(String applicationId) {
+	@GET
+	@Path("/expand/{id}")
+	public String expand(String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return;
-		}
-		
-		//应用未在运行中
-		if(application.getHealth()!=Application.Health.RUNNING.getHealth()){
-			
-			log.info("application status error current status:"+application.getHealth());
-			return;
-			
-		}
 		
 		command.expand(applicationId);
 		
+		return "操作处理中...";
+		
 	}
 
-	public void shrink(String applicationId) {
+	@GET
+	@Path("/shrink/{id}")
+	public String shrink(String applicationId) {
 		
-		Application application = applicationDao.get(applicationId);
-		
-		//应用是否存在
-		if(application==null){
-			log.info("application not exist!");
-			return;
-		}
-		
-		//应用未在运行中
-		if(application.getHealth()!=Application.Health.RUNNING.getHealth()){
-			
-			log.info("application status error current status:"+application.getHealth());
-			return;
-			
-		}
 		
 		command.shrink(applicationId);
-		
+		return "操作处理中...";
 	}
 
 

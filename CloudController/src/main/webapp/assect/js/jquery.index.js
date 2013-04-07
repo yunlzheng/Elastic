@@ -13,6 +13,7 @@ $(function() {
 		$("#menu3").toggle();
 
 	});
+	
 });
 
 function loadApplications(){
@@ -44,12 +45,12 @@ function applicationDataHandler(data){
              ' </button>'+
              ' <ul class="dropdown-menu">'+
              '   <li><a href="javascript:deploy(\'{uuid}\')">部署</a></li>'+
-             '   <li><a href="#">启动</a></li>'+
-             '   <li><a href="#">停止</a></li>'+
-             '   <li><a href="#">卸载</a></li>'+
+             '   <li><a href="javascript:start(\'{uuid}\')">启动</a></li>'+
+             '   <li><a href="javascript:stop(\'{uuid}\')">停止</a></li>'+
+             '   <li><a href="javascript:undeploy(\'{uuid}\')">卸载</a></li>'+
              '   <li class="divider"></li>'+
-             '   <li><a href="#">扩展</a></li>'+
-             '   <li><a href="#">收缩</a></li>'+
+             '   <li><a href="javascript:expand(\'{uuid}\')">扩展</a></li>'+
+             '   <li><a href="javascript:shrink(\'{uuid}\')">收缩</a></li>'+
              ' </ul>'+
          ' </div>'+
        ' </td>'+
@@ -72,6 +73,82 @@ function applicationDataHandler(data){
 	
 }
 
+function shrink(uuid){
+	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/shrink/'+uuid,
+		type:'get',
+		success:function(data){
+			
+			alert(data);
+		}
+		
+	});
+	
+}
+
+function expand(uuid){
+	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/expand/'+uuid,
+		type:'get',
+		success:function(data){
+			
+			alert(data);
+		}
+		
+	});
+	
+}
+
+function stop(uuid){
+	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/stop/'+uuid,
+		type:'get',
+		success:function(data){
+			
+			alert(data);
+		}
+		
+	});
+	
+}
+
+function start(uuid){
+	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/start/'+uuid,
+		type:'get',
+		success:function(data){
+			
+			alert(data);
+		}
+		
+	});
+	
+}
+
+/**卸载应用*/
+function undeploy(uuid){
+	
+	$.ajax({
+		
+		url:'service/rest/cloudcontroller/undeploy/'+uuid,
+		type:'get',
+		success:function(data){
+			
+			alert(data);
+		}
+		
+	});
+	
+}
+
 /**部署应用*/
 function deploy(uuid){
 	
@@ -79,15 +156,15 @@ function deploy(uuid){
 		
 		url:'service/rest/cloudcontroller/deploy/'+uuid,
 		type:'get',
-		success:deployResultHandler
+		success:function (data){
+			alert(data);
+		}
 		
 	});
 	
 }
 
-function deployResultHandler(data){
-	alert(data);
-}
+
 
 function redictToPush() {
 

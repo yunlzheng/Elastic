@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 
 /**
@@ -61,8 +62,25 @@ public interface GenericDao<T extends Serializable,PK extends Serializable> {
     public List<T> findByCriteria(DetachedCriteria criteria, int firstResult,
             int maxResults);
 
+    
+    // 创建与会话无关的检索标准对象  
+    public DetachedCriteria createDetachedCriteria();  
+  
+    // 创建与会话绑定的检索标准对象  
+    public Criteria createCriteria();  
+    
 
     /**使用指定的检索标准检索数据，返回指定范围的记录*/
     public Integer getRowCount(DetachedCriteria criteria);
+    
+   
+    
+    // 使用指定的实体及属性检索（满足除主键外属性＝实体值）数据  
+    public List<T> findEqualByEntity(T entity, String [] propertyNames);
+    
+    // 使用指定的实体及属性(非主键)检索（满足属性 like 串实体值）数据  
+    public List<T> findLikeByEntity(T entity, String [] propertyNames); 
+    
+   
     
 }

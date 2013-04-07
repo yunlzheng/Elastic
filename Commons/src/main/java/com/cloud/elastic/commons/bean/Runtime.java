@@ -2,15 +2,11 @@ package com.cloud.elastic.commons.bean;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -30,8 +26,19 @@ public class Runtime implements Serializable{
 	@Column(length=32)
 	private String uuid;
 
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Application application;
+	@Column(length=32)
+	private String application_uuid;
+	
+	@Column(name="ip")
+	private String ip;
+	
+	public String getApplication_uuid() {
+		return application_uuid;
+	}
+
+	public void setApplication_uuid(String application_uuid) {
+		this.application_uuid = application_uuid;
+	}
 
 	public String getUuid() {
 		return uuid;
@@ -41,12 +48,12 @@ public class Runtime implements Serializable{
 		this.uuid = uuid;
 	}
 
-	public Application getApplication() {
-		return application;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 }

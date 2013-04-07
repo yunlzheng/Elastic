@@ -5,14 +5,16 @@ package com.cloud.elastic.runtime;
  * */
 public interface RunTimes {
 
-	/**创建运行时单元*/
-	public void createRunit();
+	/**创建运行时单元
+	 * @throws Exception */
+	public void createRunit() throws Exception;
 	
 	/**删除运行时单元*/
 	public void destoryRunit();
 
-	/**克隆运行时单元*/
-	public void cloneRunit();
+	/**克隆运行时单元
+	 * @throws Exception */
+	public void cloneRunit() throws Exception;
 	
 	/**启动运行时单元*/
 	public void startRunit();
