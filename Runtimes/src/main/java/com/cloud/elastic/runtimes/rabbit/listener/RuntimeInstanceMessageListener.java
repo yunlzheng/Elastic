@@ -84,6 +84,7 @@ public class RuntimeInstanceMessageListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(action.equals(ApplicationCommand.EXPAND)){
 			
 			try {
@@ -94,8 +95,25 @@ public class RuntimeInstanceMessageListener {
 			
 		}else if(action.equals(ApplicationCommand.SHRINK)){
 			
+			try{
+				
+				core.shrinkRunit();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			
+		}else if(action.equals(ApplicationCommand.DELETE)){
 			
+			try{
+				
+				core.free();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		
 		}
 		
 		

@@ -6,8 +6,8 @@ $(document).ready(function() {
         beforeSerialize :showSerialize,
         beforeSubmit:  showRequest,  // pre-submit callback 
         success:       showResponse,  // post-submit callback 
-
-        url:"service/rest/applications/form",
+        error:			showError,
+        url:"../service/rest/applications/form",
         // other available options: 
         //url:       url         // override for form's 'action' attribute 
         //type:      type        // 'get' or 'post', override for form's 'method' attribute 
@@ -45,12 +45,21 @@ function uploadResultHandler(responseText, statusText, xhr, $form){
 	
 	if("success"==responseText){
 		
-		alert("文件上传成功!");
+		$.dialog({
+	    	content:'上传成功',
+	    	icon: 'succeed',
+	    	time:2
+		});
 		$("#btnUpload").removeAttr("disabled");
 		$("#btnUpload").text("重新上传");
+		
 	}else{
 		
-		alert("文件上传失败!");
+		$.dialog({
+	    	content:'文件上传失败',
+	    	icon: 'error',
+	    	time:2
+		});
 		$("#btnUpload").removeAttr("disabled");
 		$("#btnUpload").text("上传");
 		
@@ -68,6 +77,10 @@ function showSerialize($form, options){
 function showRequest(formData, jqForm, options) { 
     
     var queryString = $.param(formData); 
+    infoDialog = $.dialog({
+    	content:'应用创建中...',
+    	lock:true,
+    });
     return true; 
     
 } 
@@ -77,9 +90,36 @@ function showResponse(responseText, statusText, xhr, $form)  {
    
 	if(responseText.uuid){
 		
-		alert("应用创建成功");
-		self.location.href="index.jsp";
+		successDialog = $.dialog({
+		    	content:'应用创建成功',
+		    	icon: 'succeed',
+		    	lock:true,
+		});
+		
+		infoDialog.close();
+		self.location.href="home.jsp";
+		
+	}else{
+		
+		successDialog = $.dialog({
+	    	content:responseText,
+	    	icon:'error',
+	    	lock:true,
+		});
+		
+		infoDialog.close();
 		
 	}
    
+}
+
+function showError(data){
+	
+	console.log(data);
+	infoDialog.close();
+	errorDialog = $.dialog({
+    	content:'应用创建失败，无可用的资源',
+    	lock:true,
+	});
+	
 }

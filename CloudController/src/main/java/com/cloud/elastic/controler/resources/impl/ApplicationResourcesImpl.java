@@ -4,6 +4,8 @@ package com.cloud.elastic.controler.resources.impl;
  * 1，由于单机原因，必须事先建好Runtimes实例，并添加到数据库
  * */
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,13 +29,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.bean.Application;
-import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.commons.bean.User;
+
 
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.dao.UserDao;
 import com.cloud.elastic.commons.util.NexusUtil;
+import com.cloud.elastic.controler.command.Command;
 import com.cloud.elastic.controler.resources.ApplicationResources;
 
 
@@ -54,6 +57,9 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@Autowired
 	private NexusUtil nexusUtil;
 	
+	@Autowired
+	private Command command;
+	
 	@Value("#{config['app.domain']}")
 	private String appDomain;
 
@@ -62,7 +68,8 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response loadAll() {
 		
-		return Response.ok(applicationDao.loadAll(),MediaType.APPLICATION_JSON).build();
+		List<Application> list = applicationDao.loadAll();
+		return Response.ok(list,MediaType.APPLICATION_JSON).build();
 		
 	}
 	
@@ -79,13 +86,17 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 
 	@POST
 	@Path("/form")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Response save(MultivaluedMap<String, Object> formParams,
 			@Context HttpServletRequest request) {
 		
 		Application application = new Application();
-
-		application.setName(formParams.getFirst("name").toString());
+		
+		String name = (String) formParams.getFirst("name");
+		if(name.equals("")){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyymmddss");
+			name = "app_"+sdf.format(new Date());
+		}
+		application.setName(name);
 		application.setUrl(formParams.getFirst("url").toString()+appDomain);
 		application.setMaxMemory(Integer.parseInt(formParams.getFirst("maxMemory").toString()));
 		application.setMinMemory(Integer.parseInt(formParams.getFirst("minMemory").toString()));
@@ -100,37 +111,28 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 		
 		String uua = (String) request.getSession().getAttribute("runit");
 		
+		if(uua==null){
+			
+			return Response.ok("请先上传应用").build();
+			
+		}
+		
 		try {
 			
 			String repositoryUrl = nexusUtil.upload(uua);
 			//To do Maven Upload
 			
 			application.setRepositoryUrl(repositoryUrl);
-			application.setHealth(Application.Health.UPLOADED.getHealth());
+			application.setHealth(Application.Health.UNBINDED.getHealth());
+			
 			application.setUser(user);
+			application.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 			applicationDao.save(application);
-			
-			//binding 应用和runtimes
-			List<Runtime> runtimes = runtimeDao.find("from Runtime where application_uuid=null");
-			if(runtimes.size()!=0){
-				
-				Runtime runtime = runtimes.get(0);
-				runtime.setApplication_uuid(application.getUuid());
-				runtimeDao.update(runtime);
-				
-			}else{
-				
-				System.out.println("没有可用的Runtime实例");
-				return Response.serverError().build();
-				
-			}
-			
-			
 			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
-			return Response.noContent().build();
+			return Response.ok("应用构建失败").build();
 			
 		}
 	
@@ -173,6 +175,7 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 	public Response delete(@PathParam("id") String id) {
 		
 		applicationDao.deleteByKey(id);  
+		command.delete(id);
 		return Response.ok().build();
 		
 	}
@@ -198,5 +201,4 @@ public class ApplicationResourcesImpl implements ApplicationResources{
 
 	}
 
-	
 }

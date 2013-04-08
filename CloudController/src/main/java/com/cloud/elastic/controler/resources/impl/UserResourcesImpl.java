@@ -1,6 +1,10 @@
 package com.cloud.elastic.controler.resources.impl;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +28,57 @@ public class UserResourcesImpl implements UserResources{
 
 	@Autowired
 	private UserDao userDao;
+	
+	@POST
+	@Path("/login")
+	public void login(@Context HttpServletRequest request,@Context HttpServletResponse response) throws IOException{
+		
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		System.out.println(email+"  "+password);
+		
+//		if(email==null||email.equals("")||password==null||password.equals("")){
+//			
+//			response.sendRedirect(request.getContextPath()+"/login.jsp#error2");
+//			return;
+//		}
+		
+		User templatesUser = new User();
+		templatesUser.setEmail(email);
+		templatesUser.setPassword(password);
+		
+		List<User> users = userDao.findEqualByEntity(templatesUser, new String[]{"email","password"});
+		
+		System.out.println(users.size());
+		
+		if(users.size()>0){
+			
+			request.getSession().setAttribute("User", users.get(0));
+			response.sendRedirect(request.getContextPath()+"/jsp/home.jsp");
+			return;
+			
+		}else{
+			
+			response.sendRedirect(request.getContextPath()+"/login.jsp#error");
+			return;
+			
+		}
+		
+		
+	}
+	
+	@GET
+	@Path("/logout")
+	public void logout(@Context HttpServletRequest request,@Context HttpServletResponse response) throws IOException{
+		
+		request.getSession().invalidate();
+		response.sendRedirect(request.getContextPath()+"/login.jsp");
+		return;
+			
+		
+		
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,6 +113,8 @@ public class UserResourcesImpl implements UserResources{
 		return null;
 	}
 
+	
+	
 	@PUT
 	public Response update(User entity) {
 		

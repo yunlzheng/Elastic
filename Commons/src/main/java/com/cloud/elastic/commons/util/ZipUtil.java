@@ -59,8 +59,7 @@ public class ZipUtil {
 			throw new Exception("this folder isnot exist!");
 		}
 	}
-	
-    @SuppressWarnings("resource")
+
 	public void unZip(String zipfile, String destDir) {
     	 
         destDir = destDir.endsWith( "//" ) ? destDir : destDir + "//" ;
@@ -81,17 +80,24 @@ public class ZipUtil {
                    // 这段都可以不要，因为每次都貌似从最底层开始遍历的
                    loadFile.mkdirs();
                } else {
+            	   
                    if (!loadFile.getParentFile().exists())
                       loadFile.getParentFile().mkdirs();
   
                    OutputStream outputStream = new FileOutputStream(loadFile);
                    InputStream inputStream = zipFile.getInputStream(zipEntry);
   
-                   while ((length = inputStream.read(b)) > 0)
-                      outputStream.write(b, 0, length);
+                   while ((length = inputStream.read(b)) > 0){
+                	   outputStream.write(b, 0, length);
+                   }
+                   outputStream.close();
   
                }
+               
+             
             }
+            
+
             System. out .println( " 文件解压成功 " );
         } catch (IOException e) {
             // TODO Auto-generated catch block

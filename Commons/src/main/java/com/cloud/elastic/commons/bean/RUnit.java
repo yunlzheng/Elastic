@@ -44,6 +44,9 @@ public class RUnit implements Serializable{
 	@Column(name="confuguration")
 	private String tomcatAvailableConfiguration;
 	
+	@Column(name="create_date")
+	private String createDate;
+	
 	/**
 	 * 运行时单元，标准状态
 	 * @see Status
@@ -121,6 +124,16 @@ public class RUnit implements Serializable{
 
 	public int getHealthStatus() {
 		return healthStatus;
+	}
+
+	
+	
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 	public void setHealthStatus(int healthStatus) {

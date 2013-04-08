@@ -26,11 +26,17 @@ public class Runtime implements Serializable{
 	@Column(length=32)
 	private String uuid;
 
+	/**运行是环境绑定的应用编号*/
 	@Column(length=32)
 	private String application_uuid;
 	
+	/**运行时环境所在服务器IP地址*/
 	@Column(name="ip")
 	private String ip;
+	
+	/**运行是单元实例数*/
+	@Column(name="instances_num")
+	private int instancesNum=0;
 	
 	public String getApplication_uuid() {
 		return application_uuid;
@@ -54,6 +60,14 @@ public class Runtime implements Serializable{
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+
+	public int getInstancesNum() {
+		return instancesNum;
+	}
+
+	public void setInstancesNum(int instancesNum) {
+		this.instancesNum = instancesNum;
 	}
 	
 }

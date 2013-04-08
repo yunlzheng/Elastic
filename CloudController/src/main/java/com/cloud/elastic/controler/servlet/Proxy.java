@@ -127,13 +127,16 @@ public class Proxy extends HttpServlet{
                     req.getSession().setAttribute("runit", uuname);
                     resp.getWriter().print("success");
                     
+                    
+                    zipSourceFile = null;
+                    instanceDir = null;
+                    
                     try{
                     	FileUtils.deleteDirectory(instanceTmpFile);
                     }catch(Exception e){
                     	log.info(e);
                     }
                     
-                  
                     return;
 				}
 				

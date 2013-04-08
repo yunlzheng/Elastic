@@ -2,13 +2,12 @@ package com.cloud.elastic.commons.bean;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,7 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_application")
 public class Application implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -60,9 +58,13 @@ public class Application implements Serializable{
 	@Column(name="maxMemory")
 	private int maxMemory;
 	
+	@Column(name="create_date")
+	private String createDate;
 
+
+	
 	/**应用所属的用户*/
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	private User user;
 	
 	public String getUuid() {
@@ -140,14 +142,24 @@ public class Application implements Serializable{
 	public void setOperatStatus(int operatStatus) {
 		this.operatStatus = operatStatus;
 	}
+	
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 
 	public enum OperatStatus{
 		
-		STABLE(100,"未进行任何操作"),
-		DEPLOYING(0,"部署中"),
-		STARTING(1,"启动中"),
-		STOPING(2,"停止中"),
-		UNDEPLOYED(3,"卸载中");
+		STABLE(0,"未进行任何操作"),
+		DEPLOYING(1,"部署中"),
+		STARTING(2,"启动中"),
+		STOPING(3,"停止中"),
+		UNDEPLOYED(4,"卸载中"),
+		EXPANDING(5,"扩展中"),
+		SHIRKING(6,"收缩中");
 		
 		private int status;
 		private String desc;
@@ -170,15 +182,14 @@ public class Application implements Serializable{
 			this.desc = desc;
 		}
 		
-		
-		
 	}
 
 	public enum Health{
 		
-		UPLOADED(0,"未部署"),
-		RUNNING(1,"运行中"),
-		STOPED(2,"停止");
+		UNBINDED(100,"未绑定到运行环境"),
+		BINDED(101,"没有运行任何实例"),
+		RUNNING(102,"运行中"),
+		STOPED(103,"停止");
 		
 		private int health;
 		private String desc;

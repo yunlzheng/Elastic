@@ -8,5 +8,6 @@ public class ApplicationCommand {
 	public static final String STOP="STOP";
 	public static final String EXPAND="EXPAND";
 	public static final String SHRINK="SHRINK";
+	public static final String DELETE="DELETE";
 	
 }

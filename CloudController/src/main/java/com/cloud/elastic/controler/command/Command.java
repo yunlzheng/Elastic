@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.command.ApplicationCommand;
+import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.bean.Runtime;
 
@@ -32,6 +33,9 @@ public class Command{
 	
 	@Autowired
 	private RuntimeDao runtimeDao;
+	
+	@Autowired
+	private ApplicationDao applicationDao;
 	
 	@Value("#{config['exchange.application']}")
 	private String exchange_application;
@@ -69,6 +73,12 @@ public class Command{
 	public void shrink(String uuid){
 	
 		sendMessage(uuid,ApplicationCommand.SHRINK);
+	}
+	
+	/**删除应用*/
+	public void delete(String uuid){
+		
+		sendMessage(uuid,ApplicationCommand.DELETE);
 	}
 	
 	public void sendMessage(String uuid,String action){

@@ -11,16 +11,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cloud.elastic.commons.bean.User;
-import com.cloud.elastic.commons.dao.UserDao;
+
 
 public class LoginFilter implements Filter{
 
-	private ApplicationContext applicationContext;
-	private UserDao userDao;
+	
 	public void destroy() {
 		
 		
@@ -32,12 +29,13 @@ public class LoginFilter implements Filter{
 		HttpServletRequest request = (HttpServletRequest)arg0;
 		HttpServletResponse response = (HttpServletResponse)arg1;
 		
-		User tmp = (User) request.getSession().getAttribute("User");
-		if(tmp==null){
+		
+		User user = (User) request.getSession().getAttribute("User");
+		
+		if(user==null){
 			
-			User user = userDao.get(1);
-			request.getSession().setAttribute("User",user);
-			
+			response.sendRedirect("../login.jsp");
+			return;
 		}
 		
 		arg2.doFilter(request, response);
@@ -46,8 +44,7 @@ public class LoginFilter implements Filter{
 
 	public void init(FilterConfig arg0) throws ServletException {
 		
-		applicationContext = WebApplicationContextUtils.getWebApplicationContext(arg0.getServletContext());
-		userDao = applicationContext.getBean(UserDao.class);
+		
 	}
 
 }

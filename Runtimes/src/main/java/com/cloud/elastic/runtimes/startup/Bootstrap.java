@@ -102,6 +102,18 @@ public class Bootstrap {
 		log.info("runtimes instance listener container isRunning?"+container.isRunning());
 		log.info("Started Runtimes Instance["+entity.getUuid()+"]");
 
+//		RunTimesCore core = (RunTimesCore) context.getBean("Core");
+//		try {
+//			/*for(int i=0;i<10;i++){
+//				
+//					core.cloneRunit();
+//				
+//			}*/
+//			core.shrinkRunit();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 	

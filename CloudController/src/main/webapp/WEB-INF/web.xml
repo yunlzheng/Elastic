@@ -6,6 +6,10 @@
 	
   	<display-name>Archetype Created Web Application</display-name>
 	
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/beans.xml</param-value>
@@ -29,7 +33,12 @@
 	<!-- filter mapping -->
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/jsp/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/service/rest/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- servlet -->

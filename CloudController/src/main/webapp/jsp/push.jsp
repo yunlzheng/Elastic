@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="assect/css/bootstrap.css"/>
-<link rel="stylesheet" type="text/css" href="assect/css/bootstrap-responsive.css"/>
-<link rel="stylesheet" type="text/css" href="assect/css/base.css"/>
+<link rel="stylesheet" type="text/css" href="../assect/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="../assect/css/bootstrap-responsive.css"/>
+<link rel="stylesheet" type="text/css" href="../assect/css/base.css"/>
+<link rel="stylesheet" href="../assect/js/skins/twitter.css?4.1.7">
 <style type="text/css">
 
 </style>
@@ -19,13 +20,15 @@
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 	    <div class="head">
-	      <div class="logo"><img src="assect/img/logo.png"><a href="#">Cloud</a></div>
-	      <div class="login-info" ><%=user.getNickName()%><span class="caret"></span></div>
+	    	<div class="container-fluid">
+	    		<img src="../assect/img/logo.png"/>
+	      		<div class="login-info pull-right" >
+	      			<%=user.getNickName()%>
+	      			<a href="../service/foo/users/logout" class="navbar-link">退出</a>
+	      		</div>
+	    	</div>
 	    </div>
-	    <ul class="dropdown-menu" id="menu3">
-          <!-- <li role="presentation" class="divider"></li> -->
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">退出</a></li>
-       </ul>
+	   
     </div>
 	<div class="row-fluid cloud-fluid">
 		
@@ -33,7 +36,7 @@
 			<h3>管理控制台</h3>
 			<ul class="nav nav-list">
               
-              <li class="active"><a href="#">我的应用</a></li>
+              <li class="active"><a href="home.jsp">我的应用</a></li>
               <li><a href="#">日志</a></li>
             </ul>
              
@@ -43,7 +46,7 @@
 				<h2>创建应用</h2>
 			</div>
 			<div class="space"></div>
-			 <form action="proxy" id="formUploadApplication" method="post" enctype="multipart/form-data" class="form-horizontal push-form">
+			 <form action="../proxy" id="formUploadApplication" method="post" enctype="multipart/form-data" class="form-horizontal push-form">
 			 	<fieldset>
 			 		<legend>应用程序</legend>
 				 	<div class="control-group">
@@ -56,7 +59,7 @@
 			 	</fieldset>
 				
 			</form>
-			<form id="formCreateApplication" action="service/rest/applications/form" method="post" class="form-horizontal push-form">
+			<form id="formCreateApplication" action="../service/rest/applications/form" method="post" class="form-horizontal push-form">
 				<fieldset>
 					<legend>应用基本信息</legend>
 						<div class="control-group">
@@ -115,10 +118,11 @@
 		</div>
 		
 	</div>
-	<script type="text/javascript" src="assect/js/jquery.js"></script>
-	<script type="text/javascript" src="assect/js/jquery.form.js"></script>
-	<script type="text/javascript" src="assect/js/jquery.from.push.js"></script>
-	<script type="text/javascript" src="assect/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.form.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.from.push.js"></script>
+	<script type="text/javascript" src="../assect/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.artDialog.js"></script>
 	<script type="text/javascript">
 		
 		$(function(){

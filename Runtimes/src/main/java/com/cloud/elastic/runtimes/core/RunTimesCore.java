@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
@@ -85,7 +87,6 @@ public class RunTimesCore implements RunTimes{
 			
 			throw new Exception("无法下载Runit基础文件");
 		
-			
 		}
 		
 		File instancesFile = new File(rootPath,url);
@@ -133,6 +134,8 @@ public class RunTimesCore implements RunTimes{
 			xmlFactory.updateAttribute("/Server/Service/Connector[2]","port",portAjp+"");
 			xmlFactory.documentToFile(serverConfig.getAbsolutePath());
 			
+			serverConfig = null;
+			
 		} catch (Exception e1) {
 			
 			e1.printStackTrace();
@@ -146,6 +149,7 @@ public class RunTimesCore implements RunTimes{
 		runit.setRuntime(runtime);
 		runit.setStatus(RUnit.Status.RUNNIG.getStatus());
 		runit.setHealthStatus(RUnit.Status.RUNNIG.getStatus());
+		runit.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		
 		try{
 			
@@ -156,6 +160,9 @@ public class RunTimesCore implements RunTimes{
 			e.printStackTrace();
 		}
 	
+		//更新应用操作状态为启动中
+		application.setOperatStatus(Application.OperatStatus.STARTING.getStatus());
+		applicationDao.update(application);
 		
 		//启动运行是单元
 		try {
@@ -183,10 +190,20 @@ public class RunTimesCore implements RunTimes{
 			
 			}
 			
+			catalinaHome = null;
+			
+			//更新应用操作状态为启动中,更新应用状态为运行中
+			application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+			application.setHealth(Application.Health.RUNNING.getHealth());
+			applicationDao.update(application);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		runtime.setInstancesNum(countInstanceNum());
+		runtimeDao.update(runtime);
 		
 		log.info("createRunit handle over...");
 		
@@ -197,13 +214,21 @@ public class RunTimesCore implements RunTimes{
 	 * */
 	public void destoryRunit() {
 		
-		
 		log.info("destoryRunit handling...");
 		
 		String uuid = SystemInfo.getInstanceKey();
 		
 		Runtime runtime = runtimeDao.get(uuid);
 		Application application = applicationDao.get(runtime.getApplication_uuid());
+		
+		//更新应用操作状态为卸载中
+		try{
+			application.setOperatStatus(Application.OperatStatus.UNDEPLOYED.getStatus());
+			applicationDao.update(application);
+		}catch(Exception e){
+			
+		}
+		
 		
 		RUnit templateUnit = new RUnit();
 		templateUnit.setRuntime(runtime);
@@ -214,17 +239,80 @@ public class RunTimesCore implements RunTimes{
 			rUnitDao.delete(runit);
 		}
 		
-		if(application==null){
-			throw new NullArgumentException("应用不存在");
-		}
 		
 		File rootFile = new File(rootPath);
+		
+		File[] files = rootFile.listFiles();
+		
+		if(files!=null){
+			
+			for(File file : files){
+				
+				File[] units = file.listFiles();
+				if(units!=null){
+					
+					for(File unit :units){
+						
+						if(new File(unit,"bin"+File.separator+"shutdown.bat").exists()||new File(unit,"bin"+File.separator+"shutdown.sh").exists()){
+							
+							Properties props=System.getProperties(); //获得系统属性集    
+							
+							String osName = props.getProperty("os.name"); //操作系统名称    
+							if(osName.toLowerCase().indexOf("windows")!=-1){
+								
+								//windows操作系统
+								ExecuteThread executer = new ExecuteThread(new File(unit,"bin").getAbsolutePath()+File.separator+"shutdown.bat", unit);
+								Thread t = new Thread(executer);
+								t.start();
+
+							}else{
+								
+								//linux操作系统
+								ExecuteThread executer = new ExecuteThread(new File(unit,"bin").getAbsolutePath()+File.separator+"shutdown.sh", unit);
+								Thread t = new Thread(executer);
+								t.start();
+							
+							}
+							
+							
+						}
+						unit=null;
+						
+					}
+					
+					units=null;
+					
+				}
+				
+				file = null;
+				
+			}
+			
+			files = null;
+			
+		}
+		
 		
 		try {
 			FileUtils.deleteDirectory(rootFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		try{
+			
+			//更新应用操作状态为卸载中  更新健康状态为未运行任何实例
+			application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+			application.setHealth(Application.Health.BINDED.getHealth());
+			applicationDao.update(application);
+			
+			
+		}catch(Exception e){
+			
+		}
+		
+		runtime.setInstancesNum(countInstanceNum());
+		runtimeDao.update(runtime);
 		
 		log.info("destoryRunit handle over...");
 	}
@@ -237,9 +325,7 @@ public class RunTimesCore implements RunTimes{
 	 */
 	public void cloneRunit() throws Exception {
 		
-		
 		this.createRunit();
-		
 		
 	}
 	
@@ -261,11 +347,16 @@ public class RunTimesCore implements RunTimes{
 		
 		Runtime runtime = runtimeDao.get(uuid);
 		Application application = applicationDao.get(runtime.getApplication_uuid());
+		
 		if(application==null){
 			
 			throw new NullArgumentException("应用不存在");
 		
 		}
+		
+		//更新应用操作状态状态为启动中
+		application.setOperatStatus(Application.OperatStatus.STARTING.getStatus());
+		applicationDao.update(application);
 		
 		String url = application.getUrl();
 		
@@ -313,6 +404,12 @@ public class RunTimesCore implements RunTimes{
 
 		}
 		
+		//更新应用操作状态，更新应用状态为运行中
+		application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+		application.setHealth(Application.Health.RUNNING.getHealth());
+		applicationDao.update(application);
+		
+		
 		log.info("startRunit handle over!");
 		
 	}
@@ -335,6 +432,10 @@ public class RunTimesCore implements RunTimes{
 		if(application==null){
 			throw new NullArgumentException("应用不存在");
 		}
+		
+		//更新应用操作状态
+		application.setOperatStatus(Application.OperatStatus.STOPING.getStatus());
+		applicationDao.update(application);
 		
 		String url = application.getUrl();
 		
@@ -382,6 +483,10 @@ public class RunTimesCore implements RunTimes{
 
 		}
 		
+		//更新应用操作状态
+		application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+		application.setHealth(Application.Health.STOPED.getHealth());
+		applicationDao.update(application);
 		log.info("stopRunit handle over");
 	}
 	
@@ -404,6 +509,9 @@ public class RunTimesCore implements RunTimes{
 		if(application==null){
 			throw new NullArgumentException("应用不存在");
 		}
+		
+		application.setOperatStatus(Application.OperatStatus.SHIRKING.getStatus());
+		applicationDao.update(application);
 		
 		String url = application.getUrl();
 		
@@ -443,23 +551,42 @@ public class RunTimesCore implements RunTimes{
 			rUnitDao.delete(runit);
 			
 			try {
-				
+				Thread.sleep(3000);
 				FileUtils.deleteDirectory(runitHome);
 			
 			}catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
 			
 		}else{
 			
+			application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+			applicationDao.update(application);
 			throw new Exception("应用当前只有唯一运行实例，无法收缩资源");
 			
 		}
 		
+		application.setOperatStatus(Application.OperatStatus.STABLE.getStatus());
+		applicationDao.update(application);
+		
+		runtime.setInstancesNum(countInstanceNum());
+		runtimeDao.update(runtime);
+		
 		log.info("shrinkRunit handle over!!!");
 	}
+	
+	public void free() {
+		
+		this.destoryRunit();
+		String uuid = SystemInfo.getInstanceKey();
+		Runtime runtime = runtimeDao.get(uuid);
+		runtime.setApplication_uuid(null);
+		runtimeDao.update(runtime);
+		
+	}
+	
 	
 	public void initAvailablePortConfig(){
 		
@@ -579,6 +706,21 @@ public class RunTimesCore implements RunTimes{
 		
 	}
 	
+	public int countInstanceNum(){
+		
+		String uuid = SystemInfo.getInstanceKey();
+		
+		Runtime runtime = runtimeDao.get(uuid);
+		RUnit templateUnit = new RUnit();
+		templateUnit.setRuntime(runtime);
+		String[] properteNames = {"runtime"};
+		
+		List<RUnit> rUnits = rUnitDao.findEqualByEntity(templateUnit, properteNames);
+		
+		return rUnits.size();
+		
+	}
+	
 	class ExecuteThread implements Runnable{
 
 		private String command;
@@ -593,6 +735,8 @@ public class RunTimesCore implements RunTimes{
 		
 		public void run() {
 			
+			log.info("command:"+command+"\t"+dir.getAbsolutePath());
+			
 			try {
 				
 				Process process = java.lang.Runtime.getRuntime().exec(command,null,dir);
@@ -603,8 +747,11 @@ public class RunTimesCore implements RunTimes{
 				
 				while((length = is.read(buffer))!=-1){
 					
-					System.out.println(new String(buffer));
+					log.info(new String(buffer));
 				}
+				
+				process.destroy();
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -613,6 +760,8 @@ public class RunTimesCore implements RunTimes{
 		}
 		
 	}
+
+	
 
 
 }
