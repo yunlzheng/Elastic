@@ -1,1 +1,0 @@
-/home/cloud/haproxy/sbin/haproxy -f /home/cloud/haproxy/haproxy.cfg -st `cat /home/cloud/haproxy/haproxy.pid

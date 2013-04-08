@@ -99,7 +99,6 @@ public class Application implements Serializable{
 		this.repositoryUrl = repositoryUrl;
 	}
 
-
 	public int getHealth() {
 		return health;
 	}
