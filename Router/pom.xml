@@ -188,5 +188,69 @@
   	
     
   </dependencies>
+  
+  <build>
+  	<pluginManagement>  
+         <plugins>  
+             <plugin>  
+                 <groupId>org.eclipse.m2e</groupId>  
+                 <artifactId>lifecycle-mapping</artifactId>  
+                 <version>1.0.0</version>  
+                 <configuration>  
+                     <lifecycleMappingMetadata>  
+                         <pluginExecutions>  
+                             <pluginExecution>  
+                                 <pluginExecutionFilter>  
+                                     <groupId>org.apache.maven.plugins</groupId>  
+                                     <artifactId>maven-dependency-plugin</artifactId>  
+                                     <versionRange>[2.0,)</versionRange>  
+                                     <goals>  
+                                         <goal>copy-dependencies</goal>  
+                                     </goals>  
+                                 </pluginExecutionFilter>  
+                                 <action>  
+                                     <ignore />  
+                                 </action>  
+                             </pluginExecution>  
+                         </pluginExecutions>  
+                     </lifecycleMappingMetadata>  
+                 </configuration>  
+             </plugin>  
+         </plugins>  
+     </pluginManagement>  
+  	
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-jar-plugin</artifactId>
+  			<configuration>
+  				<archive>
+  					 <manifest>
+  					 	<addClasspath>true</addClasspath>
+			            <mainClass>com.cloud.elastic.router.startup.Bootstrap</mainClass>
+			          </manifest>
+  				</archive>
+  			</configuration>
+  		</plugin>
+		<plugin>  
+		    <artifactId>maven-assembly-plugin</artifactId>  
+		    <executions>  <!--执行器 mvn assembly:assembly-->  
+		        <execution>  
+		            <id>make-zip</id><!--名字任意 -->    
+		        <phase>package</phase><!-- 绑定到package生命周期阶段上 -->    
+		        <goals>    
+		           <goal>single</goal><!-- 只运行一次 -->    
+		        </goals>    
+		            <configuration>  
+		                     <descriptors> <!--描述文件路径-->  
+		                          <descriptor>src/main/resources/zip.xml</descriptor>  
+		                    </descriptors>  
+		            </configuration>  
+		        </execution>  
+		    </executions>  
+		</plugin> 
+  	</plugins>
+  	<finalName>Router</finalName>
+  </build>
  
 </project>

@@ -24,6 +24,7 @@ import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.RUnitDao;
 import com.cloud.elastic.commons.dao.RuntimeDao;
+import com.cloud.elastic.router.Globals;
 import com.cloud.elastic.router.velocity.template.BackendTemplate;
 import com.cloud.elastic.router.velocity.template.HaproxyTemplate;
 
@@ -46,13 +47,13 @@ public class HAProxyTemplateFactory {
 	
 	private VelocityContext velocityContext;
 	
-	private static String rootPath = System.getProperty("user.dir");
+	private static String rootPath = System.getProperty(Globals.ELASTIC_ROUTER_ROOT);
 	
 	/**私有构造函数*/
 	private HAProxyTemplateFactory(){
 		
+		System.out.println("USE ROOT PATH:"+rootPath);
 		
-		System.out.println(rootPath);
 		Properties p = new Properties();
 		p.setProperty("input.encoding ", "UTF-8");
 		p.setProperty("output.encoding", "UTF-8");
