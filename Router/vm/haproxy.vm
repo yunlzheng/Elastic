@@ -9,7 +9,7 @@ defaults
         option httpclose
 	option redispatch
 	option dontlognull
-	
+
 	maxconn 4000
         timeout connect 5000ms
         timeout client 50000ms
@@ -20,26 +20,26 @@ frontend http-in
         option httplog
         log global
         default_backend default
-	
-	
+
+
 #foreach($HaproxyTemplate in $haproxyTemplates)	
-	
+
 acl $HaproxyTemplate.getUuid() hdr_beg(host) -i $HaproxyTemplate.getHost()
 use_backend $HaproxyTemplate.getHost() if $HaproxyTemplate.getUuid()
 
 #end
 
 #foreach($HaproxyTemplate in $haproxyTemplates)	
-	
+
 backend $HaproxyTemplate.getHost()
 #foreach($BackendTemplate in $HaproxyTemplate.getBackendTemplates())
 #foreach($port in $BackendTemplate.getPorts())
 	server $BackendTemplate.getIp() $BackendTemplate.getIp():$port maxconn 32
 #end
 #end
-	
+
 #end
-	
+
 backend default
 	server serverdefault 127.0.0.1:8080 maxconn 32
 

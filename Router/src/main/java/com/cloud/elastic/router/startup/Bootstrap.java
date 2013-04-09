@@ -10,6 +10,7 @@ import com.cloud.elastic.router.Globals;
 
 
 
+
 public class Bootstrap {
 
 	/**
@@ -67,6 +68,15 @@ public class Bootstrap {
 		
 		Bootstrap bootstrap = new Bootstrap();
 		bootstrap.start();
+//		try {
+//			bootstrap.getApplicationContext().getBean(HAProxyTemplateFactory.class).createHaproxyConfigFile();
+//		} catch (BeansException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		
 	}
