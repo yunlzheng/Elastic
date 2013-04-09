@@ -1,27 +1,40 @@
 package com.cloud.elastic.router.velocity.template;
 
 import java.util.List;
-import com.cloud.elastic.commons.bean.RUnit;
-import com.cloud.elastic.commons.bean.Runtime;
 
+/**
+ * Haproxy配置模板对象
+ * */
 public class HaproxyTemplate {
 
-	private Runtime runtime;
-	private List<RUnit> runit;
+	private String uuid;
 	
-	public Runtime getRuntime() {
-		return runtime;
-	}
-	public void setRuntime(Runtime runtime) {
-		this.runtime = runtime;
-	}
-	public List<RUnit> getRunit() {
-		return runit;
-	}
-	public void setRunit(List<RUnit> runit) {
-		this.runit = runit;
-	}
+	private String host;
 	
-	
+	private List<BackendTemplate> backendTemplates;
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public List<BackendTemplate> getBackendTemplates() {
+		return backendTemplates;
+	}
+
+	public void setBackendTemplates(List<BackendTemplate> backendTemplates) {
+		this.backendTemplates = backendTemplates;
+	}
 	
 }

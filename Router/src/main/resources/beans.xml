@@ -24,6 +24,10 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	<!-- <context:component-scan base-package="com.cloud.elastic.runtimes.rabbit.config"></context:component-scan>
 	 -->
 	<util:properties id="config" location="classpath:config.properties" />
+	
+	<bean id="HAProxyTemplateFactory" 
+		class="com.cloud.elastic.router.factory.HAProxyTemplateFactory">
+	</bean>
 
 	<!-- JDBC 数据访问配置 -->
 	<bean id="datasources" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

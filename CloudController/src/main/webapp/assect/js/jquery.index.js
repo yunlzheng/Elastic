@@ -99,7 +99,7 @@ function htmlTemp2(os,hel){
 	
 	
 	
-	if(hel==100){
+	if(hel==100||hel==101){
 		temp2 +='<li><a  href="javascript:deploy(\'{uuid}\')">部署</a></li>';	
 	}
 	
