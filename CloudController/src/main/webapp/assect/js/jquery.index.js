@@ -39,7 +39,7 @@ function applicationDataHandler(data){
 	var temp = '<tr class="{tr_class}">'+
         '<td>{index}</td>'+
        ' <td><b>{name}</b></td>'+
-        '<td><a href="http://hello.app.cloud.com" target="_blank">http://{url}</a></td>'+
+        '<td><a href="http://{url}" target="_blank">http://{url}</a></td>'+
         '<td><b>{createDate}</b></td>'+
        ' <td><span class="label label-success">{info}</span></td>'+
        '<td>'+

@@ -136,6 +136,12 @@ body{
 	
 }
 
+.content .auto{
+	
+	min-height:30px;
+	
+}
+
 .hero-unit .hero-head{
 	
 	margin:-10px;

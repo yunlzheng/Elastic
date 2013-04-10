@@ -77,20 +77,12 @@
 			<div class="topbar">
 				<h2>应用<%=app.getName() %>详情</h2>
 			</div>
-			<div class="space"></div>
 			
+			<div class="space"></div>
 			<div class="row-fluid">
-				<div class="span4 hero-unit">
-					<div class="hero-head">访问地址</div>
-					<div class="big-info"><h1>5</h1></div>
-				</div>
-				<div class="span4 hero-unit">
-					<div class="hero-head">Memory</div>
-					<div class="big-info"><h1>5</h1></div>
-				</div>
-				<div class="span4 hero-unit">
-					<div class="hero-head">Disk</div>
-					<div class="big-info"><h1>5</h1></div>
+				<div class="hero-unit auto">
+					<div class="span6"><span>域名:</span><span>http://app.app.cloue.dev</span></div>
+					<div class="span6"><span>运行状态：</span><span class="label label-success">运行中</span></div>
 				</div>
 			</div>
 			
@@ -109,7 +101,7 @@
 						
 						%>
 						
-							<h2>运行时环境<%=(i+1)%></h2>
+							<h3>运行的实例：</h3>
 							<table class="table table-bordered">
 							
 				  				<thead>
@@ -121,6 +113,7 @@
 					                  <th>类型</th>
 					                  <th>创建时间</th>
 					                  <th>状态</th>
+					                 
 					                </tr>
 				  				</thead>
 				  				<tbody id="table_applications">
@@ -159,6 +152,7 @@
 						  							<td>Tomcat</td>
 						  							<td><%=runit.getCreateDate() %></td>
 						  							<td><%=desc %></td>
+						  							
 						  						</tr>
 						  						
 				  							<% 
