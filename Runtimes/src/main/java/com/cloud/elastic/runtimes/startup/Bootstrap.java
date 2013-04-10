@@ -19,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.bean.Runtime;
 
+import com.cloud.elastic.runtimes.core.RunTimesCore;
 import com.cloud.elastic.runtimes.info.SystemInfo;
 import com.cloud.elastic.runtimes.rabbit.convert.RuntimeInstanceMessageConverter;
 import com.cloud.elastic.runtimes.rabbit.listener.RuntimeInstanceMessageListener;
@@ -102,18 +103,14 @@ public class Bootstrap {
 		log.info("runtimes instance listener container isRunning?"+container.isRunning());
 		log.info("Started Runtimes Instance["+entity.getUuid()+"]");
 
-//		RunTimesCore core = (RunTimesCore) context.getBean("Core");
-//		try {
-//			/*for(int i=0;i<10;i++){
-//				
-//					core.cloneRunit();
-//				
-//			}*/
-//			core.shrinkRunit();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		RunTimesCore core = (RunTimesCore) context.getBean("Core");
+		
+		try {
+			core.startRunit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

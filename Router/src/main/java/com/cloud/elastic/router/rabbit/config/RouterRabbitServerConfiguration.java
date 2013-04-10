@@ -72,15 +72,13 @@ public class RouterRabbitServerConfiguration {
 	
 	@Bean
 	public Queue routerQueue(){
-		//Declares a server-named exclusive, autodelete, non-durable queue.
-		return amqpAdmin().declareQueue();
+		return new Queue("Router",false,false,true);
 	}
 	
 	@Bean
 	public Binding routerBinding(){
 		
 		return BindingBuilder.bind(routerQueue()).to(routerTopicExchange()).with("*.update");
-		
 		
 	} 
 	

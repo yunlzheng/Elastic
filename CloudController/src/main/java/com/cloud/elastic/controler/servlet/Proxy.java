@@ -44,6 +44,7 @@ public class Proxy extends HttpServlet{
 		
 		String rootPath = System.getProperty("user.home")+File.separator+"cloud.tmp";
 		
+		//Tomcat模板文件路
 		String templatePath = rootPath+File.separator+"template"+File.separator+"cloud-tomcat-template.zip";
 		
 		//Tomcat 模板zip文件
@@ -101,7 +102,7 @@ public class Proxy extends HttpServlet{
 					String fname = item.getName();
 					String fixed = fname.substring(fname.lastIndexOf("."),fname.length());
 					
-					String filename = sdf.format(new Date())+fixed;
+					String filename = "ROOT"+fixed;
 					target = new File(zipSourceFile,filename);
 					OutputStream out = new FileOutputStream(target);  
                     

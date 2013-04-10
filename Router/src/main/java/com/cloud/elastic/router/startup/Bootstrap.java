@@ -3,13 +3,14 @@ package com.cloud.elastic.router.startup;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cloud.elastic.router.Globals;
-
-
-
+import com.cloud.elastic.router.factory.HAProxyTemplateFactory;
 
 public class Bootstrap {
 
@@ -18,7 +19,7 @@ public class Bootstrap {
 	 * */
 	private ApplicationContext applicationContext=null;
 	
-
+	private static Log log = LogFactory.getLog(Bootstrap.class);
 	
 	private void setRouterRoot(){
 		
@@ -40,6 +41,8 @@ public class Bootstrap {
 			System.setProperty(Globals.ELASTIC_ROUTER_ROOT,System.getProperty("user.dir"));
 			
 		}
+		
+		log.info("USE "+Globals.ELASTIC_ROUTER_ROOT+":"+System.getProperty(Globals.ELASTIC_ROUTER_ROOT));
 		
 	}
 	
@@ -66,19 +69,25 @@ public class Bootstrap {
 	
 	public static void main(String[] args) {
 		
+		log.info("Init Spring Application Context");
 		Bootstrap bootstrap = new Bootstrap();
 		bootstrap.start();
-//		try {
-//			bootstrap.getApplicationContext().getBean(HAProxyTemplateFactory.class).createHaproxyConfigFile();
-//		} catch (BeansException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 		
+		log.info("Init Cloud Router information...");
+		try {
+			log.info("Update Haproxy inforation...");
+			bootstrap.getApplicationContext().getBean(HAProxyTemplateFactory.class).createHaproxyConfigFile();
+		
+			
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("Router Started...");
+
 	}
 	
 }

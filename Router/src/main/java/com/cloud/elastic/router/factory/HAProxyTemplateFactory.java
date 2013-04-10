@@ -24,6 +24,7 @@ import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.commons.dao.ApplicationDao;
 import com.cloud.elastic.commons.dao.RUnitDao;
 import com.cloud.elastic.commons.dao.RuntimeDao;
+import com.cloud.elastic.router.Executer;
 import com.cloud.elastic.router.Globals;
 import com.cloud.elastic.router.velocity.template.BackendTemplate;
 import com.cloud.elastic.router.velocity.template.HaproxyTemplate;
@@ -174,6 +175,11 @@ public class HAProxyTemplateFactory {
 		bufferedWriter.close();
 		
 		System.out.println("success create haproxy config file "+output.getName());
+		
+		String command = "./startHa.sh "+output.getAbsolutePath();
+		
+		Thread t = new Thread(new Executer(command,new File(System.getProperty(Globals.ELASTIC_ROUTER_ROOT)+File.separator+"bin")));
+		t.start();
 		
 		return output;
 		

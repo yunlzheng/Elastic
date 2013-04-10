@@ -1,5 +1,7 @@
 package com.cloud.elastic.router.rabbit.converter;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.support.converter.AbstractMessageConverter;
@@ -9,6 +11,8 @@ import com.cloud.elastic.router.rabbit.message.RouterMessage;
 
 public class RouterMessageConverter extends AbstractMessageConverter{
 
+	private Log log = LogFactory.getLog(RouterMessageConverter.class);
+	
 	@Override
 	protected Message createMessage(Object object,
 			MessageProperties messageProperties) {
@@ -20,7 +24,12 @@ public class RouterMessageConverter extends AbstractMessageConverter{
 	public Object fromMessage(Message message)
 			throws MessageConversionException {
 		
-		return new RouterMessage();
+		log.info("convert message:"+new String(message.getBody()));
+		
+		RouterMessage imessage = new RouterMessage();
+		imessage.setAction("update");
+		
+		return imessage;
 	}
 
 }

@@ -15,7 +15,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.cloud.elastic.commons.XmlFactory;
 import com.cloud.elastic.commons.dao.ApplicationDao;
@@ -27,6 +31,7 @@ import com.cloud.elastic.commons.bean.RUnit;
 import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.runtime.RunTimes;
 import com.cloud.elastic.runtimes.info.SystemInfo;
+
 
 public class RunTimesCore implements RunTimes{
 
@@ -42,7 +47,14 @@ public class RunTimesCore implements RunTimes{
 	@Autowired
 	private RUnitDao rUnitDao;
 	
+	@Autowired
+	private RabbitAdmin rabbitAdmin;
+	
+	@Value("#{config['exchange.router']}")
+	private String exchange_router;
+	
 	private Boolean initAvailablePort=false;
+	
 	
 	/**
 	 * 配置对象
@@ -205,6 +217,7 @@ public class RunTimesCore implements RunTimes{
 		runtime.setInstancesNum(countInstanceNum());
 		runtimeDao.update(runtime);
 		
+		updateHaproxy();
 		log.info("createRunit handle over...");
 		
 	}
@@ -314,7 +327,9 @@ public class RunTimesCore implements RunTimes{
 		runtime.setInstancesNum(countInstanceNum());
 		runtimeDao.update(runtime);
 		
+		updateHaproxy();
 		log.info("destoryRunit handle over...");
+		
 	}
 
 	/**
@@ -574,6 +589,7 @@ public class RunTimesCore implements RunTimes{
 		runtime.setInstancesNum(countInstanceNum());
 		runtimeDao.update(runtime);
 		
+		updateHaproxy();
 		log.info("shrinkRunit handle over!!!");
 	}
 	
@@ -584,6 +600,7 @@ public class RunTimesCore implements RunTimes{
 		Runtime runtime = runtimeDao.get(uuid);
 		runtime.setApplication_uuid(null);
 		runtimeDao.update(runtime);
+		updateHaproxy();
 		
 	}
 	
@@ -718,6 +735,14 @@ public class RunTimesCore implements RunTimes{
 		List<RUnit> rUnits = rUnitDao.findEqualByEntity(templateUnit, properteNames);
 		
 		return rUnits.size();
+		
+	}
+	
+	public void updateHaproxy(){
+		
+		Message message = new Message("update ha".getBytes(),new MessageProperties());
+		rabbitAdmin.getRabbitTemplate().send(exchange_router, "*.update", message);
+		log.info("send message to exchange["+exchange_router+"] with routingKey[*.update]");
 		
 	}
 	
