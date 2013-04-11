@@ -1,0 +1,38 @@
+.form legend{
+	
+	font-weight: bold;
+	padding-bottom: 20px;
+	font-size: 15px;
+	
+}
+
+.create_content{
+	
+	 margin-left: 30px;
+	
+}
+
+.form .file_item{
+	
+}
+
+.form .file_item label{
+	
+	display: inline-block;
+	margin-right: 10px;
+	width:120px;
+	text-align: right;
+	
+}
+
+.file_item label{
+	font-weight: bold;
+	font-size:14px;
+}
+
+.file_item .mes{
+	font-size: 12px;
+	display: block;
+	margin-left: 130px;
+	margin-bottom: 5px;
+}

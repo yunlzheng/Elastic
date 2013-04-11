@@ -1,11 +1,12 @@
 body{
-	margin-top: 50px;
+	margin-top: 35px;
 	min-width: 1000px;
 	color:#999999;
+	padding-left:20px;
+	padding-bottom: 50px;
 }
 .head{
 
-	
 	background-color: #2d2d2d;
 	background-image: -moz-linear-gradient(top, #2d2d2d, rgb(65, 63, 63));
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2d2d2d), to(rgb(65, 63, 63)));
@@ -71,6 +72,15 @@ body{
 	
 }
 
+.head .title{
+	
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 5px;
+	display: inline-block;
+	text-decoration: none;
+	
+}
 
 .login-info .caret{
 	
@@ -83,15 +93,35 @@ body{
 
 .side{
 	
-	margin-left: 0px;
-	padding-left: 20px;
+	width:207px;
+	position:absolute;
+	top:20px;
+	left:0px;
+	bottom:0px;
 	background-color: #f7f7f9;
 	border: 1px solid #e1e1e8;
 	padding-bottom:20px;
-	padding-top:100px;
-	margin-top:-20px;
-	
-	
+	padding-top:10px;
+	padding-left:20px;
+	box-shadow: 1px -2px 5px #333333;
+}
+
+h1.brand {
+width: 100%;
+margin: 0;
+
+}
+
+h1.brand a {
+background: url(../img/logo_big.png) top left no-repeat;
+display: block;
+float: left;
+width: 116px;
+height: 110px;
+text-indent: -9999px;
+margin-left: 56px;
+margin-top: 15px;
+margin-bottom: 25px;
 }
 
 .side li{
@@ -110,13 +140,13 @@ body{
 .side li.active a{
 	
 	font-weight: bolder;
-	color:#999999;
-	background-color: #fff;
+	color:#fff;
+	background-color: #0088cc;
 	text-shadow:none;
 	border-left: 2px solid #e1e1e8;
 	border-top: 1px solid #e1e1e8;
 	border-bottom: 1px solid #e1e1e8;
-	
+	margin-right: -23px;
 }
 
 .side h3{
@@ -125,6 +155,12 @@ body{
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	color: #999999;
 	font-size: 16px;
+}
+
+.main_content{
+	
+	margin-left: 229px;
+	
 }
 
 .content{
@@ -187,15 +223,22 @@ body{
 	font-family: STCaiyun ,FangSong  ;
 }
 
-.content .topbar{
+.topbar{
 
-	overflow:hidden;
+	overflow: hidden;
 	margin-left: -10px;
 	padding-left: 10px;
+	background: #f2f2f2;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 10px 25px;
+	margin-top: 0;
+	margin-left: -25px;
+	margin-bottom: 20px;
+	margin-right: -25px;
+	min-width: 700px;
 	
 }
-
-.content .topbar h2{
+.topbar h2{
 	
 	line-height: 25px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -204,8 +247,7 @@ body{
 	display: inline-block;
 	
 }
-
-.content .topbar .breadcrumb{
+.topbar .breadcrumb{
 	margin:10px 10px 10px 0px;
 }
 
@@ -251,9 +293,9 @@ body{
 	margin-left:95px;
 	
 }
-
+/* 
  @media (max-width: 980px) {
-   /* Enable use of floated navbar text */
+   Enable use of floated navbar text
    .navbar-text.pull-right {
      float: none;
      padding-left: 5px;
@@ -264,6 +306,6 @@ body{
    	padding-top: 90px;
    }
    
- }
+ } */
 
 
