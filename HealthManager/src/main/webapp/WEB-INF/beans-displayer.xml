@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd">
+
+
+	<!-- Dao 配置 -->
+	<bean id="ResultsTempDao" class="com.icp.monitor.commons.dao.impl.ResultsTempDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.ResultsTemp</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AlertMemberDao" class="com.icp.monitor.commons.dao.impl.AlertMemberDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.AlertMember</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="MemberDao" class="com.icp.monitor.commons.dao.impl.MemberDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.Member</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServerConfigDao" class="com.icp.monitor.commons.dao.impl.ServerConfigDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.ServerConfig</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="AlertMessageDao" class="com.icp.monitor.commons.dao.impl.AlertMessageDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.AlertMessage</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="MonitorLogDao" class="com.icp.monitor.commons.dao.impl.MonitorLogDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.MonitorLog</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MonitorThresholdDao"
+		class="com.icp.monitor.commons.dao.impl.MonitorThresholdDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.MonitorThreshold</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="LBStatusBackendDao"
+		class="com.icp.monitor.commons.dao.impl.LBStatusBackendDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.LBStatusBackend</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	
+	<bean id="ExceptionDao" class="com.icp.monitor.commons.dao.impl.ExceptionDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.ExceptionMessage</value>
+		</constructor-arg>
+
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="OpenAccountDao" class="com.icp.monitor.commons.dao.impl.OpenAccountDaoImpl">
+		<constructor-arg>
+			<value>com.icp.monitor.commons.bean.OpenAccount</value>
+		</constructor-arg>
+
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+        <bean id="smsNetConstructionDao" class="com.icp.monitor.commons.dao.impl.SmsNetConstructionDaoImpl">
+    
+   		 <constructor-arg>
+			<value>com.icp.monitor.commons.bean.SmsNetConstruction</value>
+		</constructor-arg>
+		
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+    </bean>
+    
+    <bean id="smsInfoConfigDao" class="com.icp.monitor.commons.dao.impl.SmsInfoConfigDaoImpl">
+       <constructor-arg>
+			<value>com.icp.monitor.commons.bean.SmsInfoConfig</value>
+		</constructor-arg>
+		
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+    </bean>
+    
+</beans>

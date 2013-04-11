@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css"/>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/dropdown.css"/>
+</head>
+<body class="iframebody">
+
+    <div class="conLayer">
+        <div class="breadcrumb">
+            <p>当前位置：<a href="#">云监控</a><span>&gt;</span><a href="#">应用</a>
+            </p>
+        </div>
+       <div class="section" style="margin-top:50px">
+            <div class="title container">
+              	  我的应用
+            </div>
+            <!-- 运行中 -->
+           <div class="table-header">
+				<span class="searchFrame right"><input type="button"
+					class="searchButton" /><img class="searchimg" style="position: absolute;right: 0px;top: 5px;display: none;" src="../assets/images/searchminus.png"/> <span class="searchLeft"></span> <input
+					type="text" class="searchInput" value="应用名称搜索" style="color: gray;"/></span>
+			</div>
+          	<div>
+				<table cellpadding="0" cellspacing="0" class="table" style="clear: both;">
+						<thead>
+							<tr><th>应用编号</th><th>应用名称</th><th>访问地址</th><th>创建时间</th><th>访问量</th><th>流量（输入）</th><th>流量（输出）</th><th>状态</th><th>操作</th></tr>
+						</thead>
+						<tbody id="deployapplist">
+						<tr>
+							<td colspan="9" align="left"><img src="../assets/images/ajax-loader.gif" alt="" /><span>数据加载中</span></td>
+					    </tr>
+						</tbody>
+				</table>
+			</div>
+            <div id="deploy-table-footer" class="table-footer">
+            	<div class="table-data-summary">第 0 - 0条纪录 / 共 0条纪录</div>
+            	<div class="table-pagination">
+            		<span class="pagination-info">第<input type="text" value="0"/>页 / 共 0页 </span>
+            		<a class="pagination-button disable" rel="first">
+            		<img src="../assets/images/pagination-first-arrow.png"/></a>
+            		 <a class="pagination-button disable" rel="brfore">
+            		 <img src="../assets/images/pagination-prev-arrow.png"/></a>
+            		<a class="pagination-button disable" rel="after">
+            		<img src="../assets/images/pagination-next-arrow.png"/></a><a class="pagination-button disable" rel="last">
+            		<img src="../assets/images/pagination-last-arrow.png"/></a></div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.ajax.tooltip.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/view.apps.js"></script>
+	
+</body>
+</html>

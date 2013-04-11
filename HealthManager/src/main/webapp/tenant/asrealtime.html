@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 单个服务器监控详情界面 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css"
+	href="../assets/stylesheets/content.css" />
+
+<style type="text/css">
+.charts {
+	height: 300px;
+	margin-bottom: 30px;
+}
+
+.title_menu {
+	float: right;
+	margin-right: 40px;
+}
+
+.title_menu a {
+	margin-left: 5px;
+	cursor: pointer;
+}
+.conLayer {
+	margin-top: 0px;
+	position: relative;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<div class="conLayer">
+		<div class="section" id="view_cpu">
+			<div class="charts" id="charts"></div>
+		</div>
+		<div class="section">
+			<div id=container></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/view.app.realtime.js"></script>
+
+  </body>
+
+</html>

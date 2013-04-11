@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/twitter.alert.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/skins/green.css" />
+
+
+<style type="text/css">
+label {
+	width: 120px;
+	display: inline-block;
+}
+
+input[type="text"] {
+	width: 150px;
+	margin-left: -10px;
+}
+
+.form-item {
+	margin: 5px;
+}
+
+.links {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.windows-info {
+	display: none;
+}
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">我的控制台</a><span>&gt;</span><a href="#">监控人员</a>
+			</p>
+		</div>
+
+
+		<div class="section" style="margin-top: 50px">
+			<div class="title container">通知账户</div>
+			<div class="table-header">
+				<span class="searchFrame right"> <input type="button"
+					class="searchButton" id="searchButton" /> <span class="searchLeft"></span>
+					<input type="text" class="searchInput" id="searchInput" value="账户名搜索"
+					style="color: gray;" />
+				</span> <a class="button" id="add-user-button"> <span
+					class="cl"></span> <span class="cr"></span> 添加
+				</a>
+			</div>
+			<table cellpadding="0" cellspacing="0" class="table">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>账户名</th>
+						<th>创建者</th>
+						<th>创建时间</th>
+						<th>电子邮箱</th>
+						<th>电话</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="view_memberlist">
+					<tr>
+						<td colspan="7"><br /> <img
+							src="../assets/images/ajax-loader.gif" alt="" /><span>数据加载中</span>
+							<br /> <br /></td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="table-footer" class="table-footer">
+				
+			</div>
+		</div>
+		<input type="hidden" id="xxxid" value=""/>
+	</div>
+
+	<div id="add-user" style="display: none;">
+		<div class="section" style="width: 280px;">
+			<div class="windows-info">
+				<p id="windows-info"></p><hr />
+			</div>
+			<form id="memconfigform">
+				<input type="hidden" id="id" />
+				<div class="form-item">
+					<label>成员名：</label><input type="text" id="name" />
+				</div>
+				<div class="form-item">
+					<label>电子邮箱：</label><input type="text" id="email" />
+				</div>
+				<div class="form-item">
+					<label>联系电话：</label><input type="text" id="tell" />
+				</div>
+				<input type="submit" style="background: rgb(247, 247, 247);border:none;color:rgb(247, 247, 247);"/>
+			</form>
+		</div>
+	</div>
+	
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/artDialog.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/model.member.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+	<script type="text/javascript" src="../jslib/view.member.js"></script>
+
+
+</body>
+</html>

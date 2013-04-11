@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 单个服务器监控详情界面 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/tabs.css" />
+
+
+<style type="text/css">
+.charts {
+	height: 300px;
+	margin-bottom: 30px;
+	clear: both;
+	width: 100%;
+}
+
+.title_menu {
+	float: right;
+	margin-right: 40px;
+}
+
+.title_menu a {
+	margin-left: 5px;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.cpu_mode,.mem_mode,.io_mode,.disk_mode {
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+.active {
+	background: #EEF7E6;
+}
+</style>
+
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a>云监控</a><span>&gt;</span><a href="clustersv2.html">云服务器</a>&gt;</span><a>监控详情</a>
+			</p>
+		</div>
+		<div class="section" style="margin-top: 50px;">
+			<div class="head-title">
+				<div class="title container">
+					<span>服务器[<span id="view_server_ip"></span>]基本信息
+					</span>
+				</div>
+				<p>
+					创建时间:<span id="view_server_jointime"></span>&nbsp;&nbsp;<a href="#"
+						id="update_address">修改监控设置</a>&nbsp;&nbsp;<a id="viewrealtime" style="display:none;cursor: pointer;">查看实时数据</a>
+				</p>
+				<p>CPU：2G 内存：256M 磁盘:20G 网络:1M带宽</p>
+			</div>
+			<div class="head-title sys-logo" style="display:none"><img src="../assets/images/ubuntu_logo.png"/></div>
+			<div class="head-title chart-logo">
+				<div style="height:180px;" id="scale-chart"></div>
+			</div>
+		</div>
+
+		<div style="clear: both;"></div>
+	
+		<div class="section">
+			<ul class="nav nav-tabs" id="nav-tabs" style="margin-bottom: 0px;">
+			
+			</ul>
+		</div>
+
+		<div id="tabs">
+
+			<div class="section" id="view_cpu" style="margin-top: 0px;padding-top:10px;display: none"
+				tab-data="cpu-tab">
+				<div class="title container">
+					
+					<div class="title_menu">
+						<a class="cpu_mode active" data="1">最近一天</a>
+						<a class="cpu_mode" data="2">最近一周</a>
+						<a class="cpu_mode" data="3">最近一月</a>
+					</div>
+				</div>
+				<div class="charts" id="charts_cpu">
+					<div align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" id="view_mem" style="margin-top: 0px;padding-top:10px;display: none"
+				tab-data="mem-tab">
+				<div class="title container">
+					
+					<div class="title_menu">
+						<a class="mem_mode active" data="1">最近一天</a> 
+						<a class="mem_mode" data="2">最近一周</a>
+						<a class="mem_mode" data="3">最近一月</a>
+					</div>
+				</div>
+				<div class="charts" id="charts_memory">
+					<div align="center">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" id="view_io" style="margin-top: 0px; padding-top:10px;display: none"
+				tab-data="io-tab">
+				<div class="title container">
+					
+					<div class="title_menu">
+						<a class="io_mode active" data="1">最近一天</a> 
+						<a class="io_mode" data="2">最近一周</a>
+						<a class="io_mode" data="3">最近一月</a>
+					</div>
+				</div>
+				<div class="charts" id="charts_io">
+					<div align="center">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" id="view_disk" style="margin-top: 0px;padding-top:10px; display: none"
+				tab-data="disk-tab">
+				<div class="title container">
+					
+					<div class="title_menu" style="display: none">
+						<a>自定义</a>起始时间<input type="text" />结束时间<input type="text" />
+					</div>
+					<div class="title_menu">
+						<a class="disk_mode active" data="1">最近一天</a> 
+						<a class="disk_mode" data="2">最近一周</a>
+						 <a class="disk_mode" data="3">最近一月</a>
+					</div>
+				</div>
+				<div class="charts" id="charts_disk">
+					<div align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="section" style="display:none">
+			<div class="title container">监控日志</div>
+			<div class="table-header">
+				<span class="searchFrame right"> <input type="button"
+					class="searchButton" /> <span class="searchLeft"></span> <input
+					type="text" class="searchInput" /></span>
+			</div>
+
+			<table cellpadding="0" cellspacing="0" class="table">
+				<thead>
+					<tr>
+						<th>日志编号</th>
+						<th>服务器地址</th>
+						<th>监控项目</th>
+						<th>信息级别</th>
+						<th>详细信息</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="exception-list">
+					
+					<tr>
+						<td>a0023</td>
+						<td>10.0.0.1</td>
+						<td>CPU信息</td>
+						<td>异常</td>
+						<td>丹江口撒娇的卡萨</td>
+						<td>详情</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="table-footer">
+				<div class="table-data-summary">第 20 - 40 条纪录 / 共 230 条纪录</div>
+				<div class="table-pagination">
+					第<input type="text" value="8" />页 / 共 12 页 <a href="#"
+						class="pagination-button"><img
+						src="../assets/images/pagination-first-arrow.png" /></a> <a href="#"
+						class="pagination-button"><img
+						src="../assets/images/pagination-prev-arrow.png" /></a> <a href="#"
+						class="pagination-button disable"><img
+						src="../assets/images/pagination-next-arrow.png" /></a> <a href="#"
+						class="pagination-button disable"><img
+						src="../assets/images/pagination-last-arrow.png" /></a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="warning-window" class="window warning-window">
+		<p>你没有权限使用此功能！</p>
+		<div class="actions">
+			<p>
+				<a href="clusters.html" class="button"> <span class="cl"></span>
+					<span class="cr"></span> 确定
+				</a>
+			</p>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/model.monitorconfig.js"></script>
+	<script type="text/javascript" src="../jslib/model.monitorlog.js"></script>
+	<script type="text/javascript" src="../jslib/view.monitorlog.js"></script>
+	<script type="text/javascript">
+		$(function() {
+
+			$.ajaxSetup({cache:false});
+			
+			$(".cpu_mode").click(function() {
+
+				$(".cpu_mode").removeClass("active");
+				$(this).addClass("active");
+
+			});
+
+			$(".mem_mode").click(function() {
+
+				$(".mem_mode").removeClass("active");
+				$(this).addClass("active");
+
+			});
+
+			$(".io_mode").click(function() {
+
+				$(".io_mode").removeClass("active");
+				$(this).addClass("active");
+
+			});
+
+			$(".disk_mode").click(function() {
+
+				$(".disk_mode").removeClass("active");
+				$(this).addClass("active");
+
+			});
+
+			$("#viewrealtime").click(
+					function() {
+
+						var url = "srealtime.html?ip=" + $.getParam("ip");
+
+						var iWidth = 800; //窗口宽度
+						var iHeight = 400;//窗口高度
+						var iTop = (window.screen.height - iHeight) / 2;
+						var iLeft = (window.screen.width - iWidth) / 2;
+						window.open(url, "Detail",
+								"resizable:no;status:no;scroll:no,location:no, Width="
+										+ iWidth + " ,Height=" + iHeight
+										+ ",top=" + iTop + ",left=" + iLeft);
+
+					});
+
+		});
+		
+	</script>
+</body>
+
+
+</html>

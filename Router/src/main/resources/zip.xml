@@ -23,6 +23,7 @@
             </excludes>  
             <outputDirectory>vm</outputDirectory>  
         </fileSet>  
+         
         <fileSet>  
             <directory>${project.basedir}\logs</directory>  
             <!-- 过滤 -->  
@@ -40,7 +41,6 @@
             <outputDirectory>output</outputDirectory>  
         </fileSet>  
     </fileSets>  
-      
     <dependencySets>  
         <dependencySet>  
             <useProjectArtifact>true</useProjectArtifact>  

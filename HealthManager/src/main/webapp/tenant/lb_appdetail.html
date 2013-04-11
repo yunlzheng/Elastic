@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css"
+	href="../assets/stylesheets/jagger40.tab.css" />
+<link rel="stylesheet" type="text/css"
+	href="../assets/stylesheets/twitter.alert.css" />
+
+<title>LB监控详情</title>
+<style rel="stylesheet" type="text/css">
+.section .left {
+	float: left;
+	width: 48%;
+	min-height: 100px;
+	height: 150px;
+}
+.conLayer .section .title {
+	font-size:14px;
+}
+</style>
+
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div id="ajaxinfo"></div>
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">云监控</a><span>&gt;</span><a href="artifacts.html" id="view_mode">应用</a><span>&gt;</span><a href="#" >监控详情</a>
+			</p>
+		</div>
+		
+		<div class="section" style="margin-top:50px">
+			<div class="title container" style="font-size:20px">
+				<span id="view_mode_title">应用</span>[<span id="view_app_name"></span>]
+			</div>
+			<br/>&nbsp;&nbsp;<a class="btn" id="viewapprealtime" style="cursor: pointer;">查看实时Session统计</a>&nbsp;&nbsp;<a class="btn" id="viewapprealtime2" style="cursor: pointer;">查看实时流量统计</a>
+			
+			<div class="section">
+				<div class="left" align="center">
+					<img src="../assets/images/server.png" />
+				</div>
+				<div class="left">
+					<div class="left">
+						<div class="title container">错误信息</div>
+						<div>
+							Conn：<span id="econ"></span><br /> Req：<span id="ereq"></span><br />
+							Resp：<span id="eresp"></span>
+						</div>
+					</div>
+					<div class="left">
+						<div class="title container">告警信息</div>
+						<div>
+							Retr：<span id="wretr"></span><br /> Redis：<span id="wredis"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div class="section">
+			<div class="left">
+				<div class="title container">网络流量统计</div>
+				<div id="chart_network" style="height: 250px"></div>
+				<div style="clear: both;"></div>
+			</div>
+
+			<div class="left">
+				<div class="title container">Session相关信息统计</div>
+				<div id="chart_session" style="height: 250px"></div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/view_lb_detail.js"></script>
+	<script type="text/javascript">
+	
+		$(function(){
+			
+			
+			$("#viewapprealtime").click(function(){
+				
+				 var url = "asrealtime.html?pxname="+$.getParam("pxname")+"&type=session";
+				
+				 var iWidth=800; //窗口宽度
+		         var iHeight=400;//窗口高度
+		         var iTop=(window.screen.height-iHeight)/2;
+		         var iLeft=(window.screen.width-iWidth)/2;
+		         window.open(url,"Detail","resizable:no;status:no;scroll:no,location:no, Width="+iWidth+" ,Height="+iHeight+",top="+iTop+",left="+iLeft);
+			});
+			
+			$("#viewapprealtime2").click(function(){
+				
+				 var url = "asrealtime.html?pxname="+$.getParam("pxname")+"&type=byte";
+				 var iWidth=800; //窗口宽度
+		         var iHeight=400;//窗口高度
+		         var iTop=(window.screen.height-iHeight)/2;
+		         var iLeft=(window.screen.width-iWidth)/2;
+		         window.open(url,"Detail","resizable:no;status:no;scroll:no,location:no, Width="+iWidth+" ,Height="+iHeight+",top="+iTop+",left="+iLeft);
+			});
+			
+		});
+	
+	</script>
+
+</body>
+</html>

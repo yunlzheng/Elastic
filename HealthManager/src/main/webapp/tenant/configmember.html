@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css"/>
+
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.css" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.all.css" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.base.css" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.core.css" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.theme.css" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/jqueryui/jquery.ui.custom.css" charset="utf-8" />	
+
+<style type="text/css">
+	label{
+		width:120px;
+		display: inline-block;
+		
+	}
+	input[type="text"]{
+		width:150px;
+		margin-left:10px;
+	}
+	.form-item{
+		margin:5px;
+	}
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">我的控制台</a><span>&gt;</span><a href="member.html">监控人员</a>&gt;</span><a
+					href="#" id="view_title">添加/修改</a>
+			</p>
+		</div>
+		<div class="section" style="margin-top:50px">
+			<div class="title container" id="other_view_title">添加/修改</div>
+				<input type="hidden" id="id"/>
+				<div class="form-item">
+					<label>成员名：</label><input type="text" id="name"/>
+				</div>
+				<div  class="form-item">
+					<label>电子邮箱：</label><input type="text" id="email"/>
+				</div>
+				<div  class="form-item">
+					<label>联系电话：</label><input type="text" id="tell"/>
+				</div>
+				 <a href="#" class="button" id="action"> <span class="cl"></span> <span
+					class="cr"></span> 
+				</a>
+				 <a href="member.html" class="button" id="action"> <span class="cl"></span> <span
+					class="cr"></span>返回 
+				</a>
+			
+		</div>
+	</div>
+	
+	<div id="success-window" class="window success-window">
+		<p id="windows-info">联系人数据保存成功！</p>
+		<div class="actions">
+			<p>
+				<a class="button"> <span class="cl"></span> <span
+					class="cr"></span> 重新修改
+				</a>
+				<a href="member.html" class="button"> <span class="cl"></span> <span
+					class="cr"></span> 返回列表
+				</a>
+			</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../assets/javascripts/jquery-ui.min.js"  charset="utf-8"></script>
+	<script type="text/javascript" src="../assets/javascripts/uni.Class.min.js"  charset="utf-8"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/model.member.js"></script>
+	<script type="text/javascript" src="../jslib/view.memberconfig.js"></script>
+
+</body>
+</html>

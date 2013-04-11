@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/tabs.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/icon.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/label.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/zTreeStyle/zTreeStyle.css" />
+</head>
+<body class="iframebody">
+	
+	<div class="conLayer">
+		<div id="ajaxinfo"></div>
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">云监控</a><span>&gt;</span><a href="#">云服务器</a> 
+			</p>
+		</div>
+		<div class="section" style="margin-top:50px">
+		
+           <div class="title container">
+             	  云服务器监控
+           </div>
+           
+           <div class="table-header" id="clusterSearch" >
+           		
+					<span class="searchFrame right"> 
+						<input type="button" class="searchButton" id="clusterSearchButton"/>
+						<span class="searchLeft"></span> 
+						<input type="text" class="searchInput" id="clusterSearchInput" value="集群名称" style="color: gray;" />
+					</span> 
+				
+		   </div>
+		   
+		   <div class="table-header" id="vmSearch" style="display:none">
+		  	
+				<span class="searchFrame right"> 
+					<input type="button" class="searchButton" id="vmSearchButton"/>
+					<span class="searchLeft"></span> 
+					<input type="text" class="searchInput" id="vmSearchInput" value="虚拟机IP" style="color: gray;" />
+				</span> 
+			 
+		   </div>
+        </div>
+        
+		<div class="section" style="margin-top:0px">
+				<ul class="nav nav-tabs" id="view-tabs" style="margin-bottom:2px;">
+					<li class="active tab" id="view-tab-servers" tab-data="servers" ><a>集群列表</a></li>
+					<li class="active tab" id="view-tab-monitor" tab-data="monitor" ><a>监控中虚拟机列表</a></li>
+					<li class="tab" id="view-tab-result" tab-data="result" style="display:none">
+						<a>集群搜索<span id="view_searchkey"></span>结果<i class="icon-remove" id="tab-close-cluster" title=""></i></a>
+					</li>
+					<li class="tab" id="view-vm-tab-result" tab-data="vmresult" style="display:none">
+						<a>虚拟机搜索<span id="view_vm_searchKey"></span>结果<i class="icon-remove" id="tab-close-vm" title=""></i></a>
+					</li>
+				</ul>	
+		</div>
+		<div id="tabs">
+			<div class="section" tab-data="servers" style="margin-top:0px;">
+				<div class="sectionside">
+					<h2>集群列表</h2>
+					<div id="zTree" class="ztree">
+						数据加载中...
+					</div>
+				</div>
+				<div class="sectioncontext" id="view_clusters_doms">
+					<!-- 显示虚拟机列表  多结构  以下为重复结构-->
+					<div id="pagelodinfo">数据加载中...</div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			
+			<div class="section" tab-data="monitor">
+			
+				<table cellpadding="0" cellspacing="0" class="table" style="text-align: center;" >
+					<thead><tr><th style="width:40px">编号</th><th>虚拟机IP地址</th><th>虚拟机状态</th><th>CPU</th><th>内存</th><th>磁盘</th><th>网络</th><th style="width:200px">操作</th></tr></thead>
+					<tbody id="result_view_vm_monitor">
+						<tr><td colspan="8">数据为空...</td></tr>
+					</tbody>
+				</table>
+				<div id="monitor-table-footer" class="table-footer">
+						<div class="table-data-summary">第 0 - 0条记录/ 共 0条记录</div>
+						<div class="table-pagination"><span class="pagination-info">第0页 / 共 0页 </span><a class="pagination-button disable" rel="first"><img src="../assets/images/pagination-first-arrow.png" /></a> <a class="pagination-button disable" rel="brfore"><img src="../assets/images/pagination-prev-arrow.png" /></a><a class="pagination-button disable" rel="after"><img src="../assets/images/pagination-next-arrow.png" /></a><a class="pagination-button disable" rel="last"><img src="../assets/images/pagination-last-arrow.png" /></a></div>
+				</div>
+			</div>
+			
+			<div class="section" tab-data="vmresult">
+				<h2>虚拟机搜索结果</h2>
+				<table cellpadding="0" cellspacing="0" class="table" style="text-align: center;" >
+					<thead><tr><th style="width:40px">编号</th><th>虚拟机IP地址</th><th>虚拟机状态</th><th>CPU</th><th>内存</th><th>磁盘</th><th>网络</th><th style="width:200px">操作</th></tr></thead>
+					<tbody id="search_vm_result">
+						<tr><td colspan="8">数据为空...</td></tr>
+					</tbody>
+				</table>
+			
+			</div>
+			
+			<div class="section" tab-data="result">
+			
+				<div class="sectionside">
+					<h2>搜索结果</h2>
+					<div id="zTreeSearch" class="ztree" style="display:none"></div>
+				</div>
+				<div class="sectioncontext" id="result-cluster-containter">
+				</div>
+				<div style="clear:both"></div>
+				
+			</div>
+		
+		</div>
+		<div class="section">
+			
+			<div class="bigunit" id="view-clusters" style="display:none">
+				<div class="unitclose"></div>
+				<div class="logo ubuntu"></div>
+				<div class="util_title"><h2>集群  <span id="block_cluster_name"></span></h2></div>
+				<br/>
+				<div id="view_load_info">
+					<img src="../assets/images/ajax-loader-bigger.gif"/>
+				</div>
+				<div id="view-cluster-detail" style="display:none">
+					<div class="one big"><label>域名：</label><span>esb.wocloud.com</span></div>
+					<div class="one big"><label>服务类型：</label><span>Tomcat-7.0.1</span></div>
+					<div class="one big"><label>伸缩范围：</label><span>1~10</span></div>
+					<div class="one big"><label>硬件信息：</label><span>处理器：200HZ；内存空间:200M；存储空间：20G</span></div>
+					<div class="one big"><label>端口信息：</label><span>Http端口:8080;Https端口:9443;</span></div>
+					<div class="one big"><label>描述：</label><span class="bigtext">测试服务器...</span></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.ztree.all-3.5.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.ztree.exhide-3.5.js"></script>
+	<script type="text/javascript" src="../jslib/view.cluster.tree.js"></script>
+
+	
+</body>
+</html>

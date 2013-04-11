@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+.loaddata {
+	border-bottom:1px solid #E0E0E0;
+	height: 200px;
+	line-height: 600px;
+    width:100%;
+	text-align: center;
+	background: #fff;
+	margin: 0 auto;
+}
+
+.loaddata img{
+	margin-top: 6%;
+}
+
+.table th{
+	color: #48AC58;
+}

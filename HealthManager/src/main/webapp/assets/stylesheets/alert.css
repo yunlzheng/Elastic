@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+.choice_time{
+	color: #407815;
+	margin-left: -375   px;
+}
+
+.choice_type{
+	float: right;
+}
+.time{
+	clear:both;
+	float: left;
+}
+
+.table{
+	clear: both;
+}
+
+#table  tr th{
+	text-align: center;
+}
+
+.alertdetail{
+	cursor: pointer;
+}

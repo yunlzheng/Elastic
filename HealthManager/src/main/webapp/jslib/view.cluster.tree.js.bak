@@ -1,0 +1,575 @@
+var setting = {
+		view: {
+			selectedMulti: false
+		},
+		data: {
+			key: {
+				showTitle: false
+			},
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick,
+			beforeCollapse: beforeCollapse,
+			beforeExpand: beforeExpand,
+			onCollapse: onCollapse,
+			onExpand: onExpand
+		}
+	};
+
+	function beforeClick(treeId, treeNode) {
+		
+		if (treeNode.isParent) {
+			return true;
+		} else {
+			if(treeNode.name=="详细信息"){
+				
+				$("#view_load_info").show();
+				$("#view-cluster-detail").hide();
+				getClusterDetail(treeNode.pId,getClusterDetailSuccess,getClusterDetailError);
+				showClusterDetail(treeNode.getParentNode().name);
+			
+			}else if(treeNode.name=="虚拟机列表"){
+				
+				getVirtualList(treeNode.pId,treeNode.getParentNode().name,getVirtualListSuccess,getVirtualListError);
+				
+			}
+			return false;
+		}
+	}
+	function beforeCollapse(treeId, treeNode) {
+		return (treeNode.collapse !== false);
+	}
+	function onCollapse(event, treeId, treeNode) {
+		
+	}		
+	function beforeExpand(treeId, treeNode) {
+		
+		return (treeNode.expand !== false);
+	}
+	function onExpand(event, treeId, treeNode) {
+	
+	}
+
+	function getVirtualList(id, name,success, error) {
+
+		if(mode==1){
+			$("#view_clustername").text(name);
+		}else{
+			$("#search_view_clustername").text(name);
+		}
+		
+		var url = "../rest/thirdparty/vm/search/"+id;
+		$.ajax({
+
+			type : "get",
+			url : url,
+			success : success,
+			error : error,
+			timeout : 5000
+
+		});
+		$("#view_vm").empty().append('<tr><td colspan="5">数据加载中...</td></tr>');
+		if(mode==2){
+			$("#result_section").show();
+		}
+
+	}
+	
+	function getVirtualListSuccess(data){
+		
+		var target = "#view_vm";
+		var footer = "#table-footer"
+		
+		if(mode==2){
+			target='#result_view_vm';
+			footer="#result-table-footer"
+		}else{
+			
+			 target = "#view_vm";
+			 footer = "#table-footer"
+		}
+		
+		if(data==null||data==""||data.length==0){
+			
+			$(target).empty().append('<tr><td colspan="5">未找到相应记录..</td></tr>');
+			
+		}else{
+			
+			$(target).empty();
+			for ( var i = 0; i < data.length; i++) {
+				
+				if(data[i]!=0&&data[i]!=1){
+					var ip = data[i];
+					var type=data[i+1];
+					
+					var vm;
+					
+					if(type==1){
+					
+						vm = view.vm
+							.replace(/{index}/,(i+1))
+							.replace(/{ip}/g,ip)
+							.replace(/{type}/,'<span class="label label-warning">动态伸缩</span>');
+						
+					}else if(type==0){
+						
+						vm = view.vm
+							.replace(/{index}/,(i+1))
+							.replace(/{ip}/g,ip)
+							.replace(/{type}/,'<span class="label label-success">固有虚拟机</span>');
+						
+					}else{
+					    vm = view.vm
+					    	.replace(/{index}/,(i+1))
+					    	.replace(/{ip}/g,ip)
+					    	.replace(/{type}/,'<span class="label label-warning">未知</span>');
+						
+					}
+					
+					$(target).append(vm);
+					getVMConfig(ip,getVMConfigSuccess,getVMConfigError);
+				}
+				
+			}
+			
+			var option = {
+					pagesize : 10,
+					currentpage : 1,
+					target : footer
+			};
+
+			$(target).qucikPage(option);
+			
+		}
+		
+	}
+	
+	function getVMConfig(ip,success,error){
+		
+		$.ajax({
+			dataType:"json",
+			type : "get",
+			url : "../rest/monitorconfig/" + ip,
+			success : success,
+			error : error,
+			timeOut : 5000
+
+		});
+		
+	}
+	
+	function getVMConfigSuccess(data){
+		
+		if(data==null||data==""){
+			
+		}else{
+			
+			var ip = data.ip;
+			$("[configdata='"+ip+"']").empty().append('<a href="sdetail.html?ip='+ip+'"><i class="icon-list-alt"></i>监控详情</a>').append("&nbsp;&nbsp;").append('<a href="serverconfig.html?ip='+ip+'"><i class="icon-cog"></i>修改监控设置</a>');
+		}
+		
+	}
+	
+	function getVMConfigError(){
+		
+	}
+	
+	function showClusterDetail(name){
+		
+		$("#block_cluster_name").text(name);
+		
+		if(blockParent()){}
+		$.blockUI({
+			message:$('#view-clusters'),
+			fadeIn:  0, 
+			fadeOut:  0,
+			css: {
+				padding:	'20px',
+				margin:		0,
+				width:		'550px',
+				height:		'300px',
+				top:		'20%',
+				left:		'20%',
+				textAlign:	'left',
+				color:		'#000',
+				border:		'0px solid #ccc',
+				borderRadius: '10px',
+				backgroundColor:'#fff',
+				cursor:		'default'
+			},
+			overlayCSS:  {
+				backgroundColor:	'#000',
+				opacity:			 0.6,
+				cursor:				'default'
+			}
+		});
+		
+		
+		
+		$(".unitclose").click(function(){
+			
+			$.unblockUI({
+				fadeIn:  0, 
+				fadeOut:  0});
+			unblockParent();
+			
+		});
+		
+	}
+	
+	function getClusterDetail(id,success,error){
+		
+		var url = "../rest/thirdparty/clusters/"+id;
+		$.ajax({
+
+			type : "get",
+			url : url,
+			success : success,
+			error : error,
+			timeout : 5000
+
+		});
+		
+	}
+	
+	function getClusterDetailSuccess(data){
+		
+		$("#view_load_info").hide();
+		$("#view-cluster-detail").show();
+		if(data!=null){
+			console.log(data);
+			var detail = clustersView.detail
+			.replace(/{domain}/g,data.pxname)
+			.replace(/{ascategory}/g,data.asCategory)
+			.replace(/{asversion}/g,data.asSerial)
+			.replace(/{min}/g,data.min)
+			.replace(/{max}/g,data.max)
+			.replace(/{cpu}/g,data.cpu)
+			.replace(/{mem}/g,data.mem)
+			.replace(/{disk}/g,data.disk)
+			.replace(/{httpport}/g,data.httpPort)
+			.replace(/{httpsport}/g,data.httpsPort)
+			.replace(/{desc}/g,data.description);
+			$("#view-cluster-detail").empty().append(detail);
+		}
+		
+	}
+	function getClusterDetailError(){
+		
+		
+		
+	}
+	
+	function getVirtualListError(){
+		
+		$("#view_vm").empty().append('<tr><td colspan="5">数据加载异常...</td></tr>');
+		
+	}
+	
+	function searchCluster(){
+		
+		$("#view-tab-result").show();
+		$("#result_section").hide();
+		var searchKey = $("#clusterSearchInput").attr("value");
+		var hasresult = false;
+		
+		$("#view_searchkey").text('"'+searchKey+'"的查询');
+		
+		$("#view-result").empty();
+		
+		var nodes = searchTree.getNodes();
+		for(var i=0;i<nodes.length;i++){
+			
+			var node = nodes[i];
+			
+			searchTree.showNode(node);
+			if(node.name.indexOf(searchKey)!=-1){
+				searchTree.expandNode(node);
+				hasresult=true;
+			
+			}else{
+			
+				searchTree.hideNode(node);
+			}
+			
+		}
+		
+		if(hasresult){
+			
+			$("#zTreeSearch").show();
+			$("#view-tab-result").click();
+			
+			
+		}else{
+			
+			$("#result_section").hide();
+			$("#view-tab-result").click();
+			
+		}
+		
+	}
+	
+	function searchVM(){
+		
+		$("#view-vm-tab-result").show();
+		$("#view-vm-tab-result").click();
+		var searchKey = $("#vmSearchInput").val();
+		$("#view_vm_searchKey").text('"'+searchKey+'"');
+		
+		var finded = false;
+		
+		$("#search_vm_result").empty();
+		/**搜索关键字*/
+		$("#result_view_vm_monitor").children().each(function(){
+			
+			var text = $(this).text();
+			if(text.indexOf(searchKey)!=-1){
+				var temp = $(this).clone();
+				finded = true;
+				temp.appendTo("#search_vm_result");
+			}
+			
+		});
+		
+		if(!finded){
+			
+			$("#search_vm_result").append('<tr><td colspan="8">查询结果为空</td></tr>');
+			
+		}
+		
+		
+	}
+	
+	/**获取正在监控中的虚拟机列表*/
+	function getMonitorningList(success,error){
+		
+		var url = "../rest/monitorconfig";
+		$.ajax({
+
+			type : "get",
+			url : url,
+			success : success,
+			error : error,
+			timeout : 5000
+
+		});
+	}
+	
+	function getMonitoringListSuccess(data){
+		
+		$("#result_view_vm_monitor").empty();
+		if(data!=null&&data.length!=0){
+			
+			for(var i=0;i<data.length;i++){
+				
+				var vm = data[i];
+				var _view = view.monitorvm;
+				_view = _view.replace(/{ip}/g,vm.ip);
+				_view = _view.replace(/{status}/g,'<span class="label label-success">运行中</span>');
+				_view = _view.replace(/{id}/g,(i+1));
+				_view = _view.replace(/{cpu}/g,tracsMonitorStatus(vm.showCpu));
+				_view = _view.replace(/{mem}/g,tracsMonitorStatus(vm.showMem));
+				_view = _view.replace(/{disk}/g,tracsMonitorStatus(vm.showDisk));
+				_view = _view.replace(/{network}/g,tracsMonitorStatus(vm.showIo));
+			
+				$("#result_view_vm_monitor").append(_view);
+				
+				
+			}
+			
+			var pageconfig={
+				
+				pagesize : 6,
+				currentpage : 1,
+				target : "#monitor-table-footer"
+			}
+			
+			$("#result_view_vm_monitor").qucikPage(pageconfig);
+			
+		}else{
+			
+			$("#result_view_vm_monitor").append('<tr><td colspan="8">数据为空</td></tr>');
+			
+		}
+	}
+	
+	function getMonitoringListError(){
+		
+	}
+	
+	function tracsMonitorStatus(bool){
+		if(bool){
+			return '<i class="icon-ok"></i>';
+		}else{
+			return '<i class="icon-remove"></i>';
+		}
+	}
+	
+	var searchTree;
+	
+	var mode = 1;
+	
+	var clustersView = {
+			
+			detail:'<div class="one big"><label>域名：</label><span>{domain}</span></div>'+
+				'<div class="one big"><label>服务类型：</label><span>{ascategory}-{asversion}</span></div>'+
+				'<div class="one big"><label>伸缩范围：</label><span>{min}~{max}</span></div>'+
+				'<div class="one big"><label>硬件信息：</label><span>处理器：{cpu}HZ；内存空间:{mem}M；存储空间：{disk}G</span></div>'+
+				'<div class="one big"><label>端口信息：</label><span>Http端口:{httpport};Https端口:{httpsport};</span></div>'+
+				'<div class="one big"><label>描述：</label><span class="bigtext">{desc}</span></div>'
+			
+	}
+	
+	var view = {
+			
+			unit:'<div class="unit" title="点击查看集群详情" data="{id}" clustername={clustername}>'+
+				'<div class="logo {system}"></div>'+
+				'<div class="util_title"><h2>{clustername}</h2></div>'+
+				'<div class="one first">'+
+					'<label>域名：</label><span>{domain}</span>'+
+				'</div>'+
+				'<div class="one">'+
+					'<label>伸缩范围：</label><span>{min}~{max}</span>'+
+				'</div>'+
+				'<div class="one">'+
+					'<label>描述：</label><span class="bigtext">{desc}</span>'+
+				'</div>'+
+			'</div>',
+			
+			vm:'<tr><td>{index}</td><td>{ip}</td><td><span class="label label-success">运行中</span></td><td>{type}</td><td style="width:200px" class="confifopt" configdata={ip}><a href="serverconfig.html?ip={ip}"><i class="icon-eye-open"></i>开通服务器监控服务</a></td></tr>',
+			
+			monitorvm:'<tr><td>{id}</td><td>{ip}</td><td>{status}</td><td>{cpu}</td><td>{mem}</td><td>{disk}</i></td><td>{network}</td><td><a href="sdetail.html?ip={ip}"><i class="icon-list-alt"></i>监控详情</a>&nbsp;&nbsp;<a href="serverconfig.html?ip={ip}"><i class="icon-cog"></i>修改监控设置</a></td></tr>',
+			
+			clustervm:'<div class="clusterview" vmlistdomkey="{clusterid}" style="display:none">'+
+						'<div class="logo ubuntu"></div>'+
+						'<div class="util_title"><h2>集群{clustername}</h2></div>'+
+						'<div id="view-vm-parent">'+
+							'<table class="table">'+
+								'<thead><tr><th>虚拟机编号</th><th>虚拟机IP地址</th><th>虚拟机状态</th><th>虚拟机类型</th><th style="width:200px">操作</th></tr></thead>'+
+								'<tbody>'+
+									'<tr><td colspan="5">数据加载中..</td></tr>'+
+								'</tbody>'+
+							'</table>'+
+							'<div class="table-footer">'+
+								'<div class="table-data-summary">第 0 - 0条记录/ 共 0条记录</div>'+
+								'<div class="table-pagination">'+
+								'<span class="pagination-info">第<input type="text" value="0">页 / 共 0页 </span>'+
+								'<a class="pagination-button disable" rel="first"><img src="../assets/images/pagination-first-arrow.png"/></a>'+
+								'<a class="pagination-button disable" rel="brfore"><img src="../assets/images/pagination-prev-arrow.png"/></a>'+
+								'<a class="pagination-button disable" rel="after"><img src="../assets/images/pagination-next-arrow.png"/></a>'+
+								'<a class="pagination-button disable" rel="last"><img src="../assets/images/pagination-last-arrow.png"/></a>'+
+							'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'
+					
+	}
+	
+	$(document).ready(function(){
+		
+		
+		$("#view-tabs").tabs("#tabs");
+		
+		$("#view-tab-servers").click(function(){
+			mode=1;
+		});
+		
+		$("#view-tab-result").click(function(){
+			mode=2;
+		});
+		
+		$("#view-tab-monitor").click(function(){
+			
+			$("#vmSearch").show();
+			$("#clusterSearch").hide();
+			
+		});
+		
+		$("#view-tab-servers").click(function(){
+			
+			$("#vmSearch").hide();
+			$("#clusterSearch").show();
+			
+		});
+		
+		/**关闭搜索结果*/
+		$("#tab-close-cluster").click(function(){
+			
+			$("#view-tab-result").hide();
+			$("#view-tab-servers").click();
+			event.stopPropagation();
+			
+		});
+		
+		$("#tab-close-vm").click(function(){
+			
+			$("#view-vm-tab-result").hide();
+			$("#view-tab-monitor").click();
+			event.stopPropagation();
+			
+		});
+		
+		/**
+		 * 搜索相关事件监听
+		 * */
+		$(".searchInput").bind("focus",function(){
+			
+			$(this).attr("value","");
+			
+		});
+		
+		
+		$("#clusterSearchButton").bind("click",searchCluster);
+		$("#searchClusterForm").bind("submit",searchCluster)
+		
+		$("#vmSearchButton").bind("click",searchVM);
+		$("#searchVMForm").bind("submit",searchVM);
+		
+		getMonitorningList(getMonitoringListSuccess,getMonitoringListError);
+		
+		$.ajax({
+			  url: "../rest/clusters/private/tree",
+			  type:"get",
+			  success: success,
+			  error:error,
+			  timeout : 3000
+		});
+		
+		function success(data){
+			
+			console.log(data);
+			if(data!=null||data.length!=0){
+				
+				getVirtualList(data[0].id,data[0].name,getVirtualListSuccess,getVirtualListError);
+				
+				$.fn.zTree.init($("#zTree"), setting, data);
+				searchTree = $.fn.zTree.init($("#zTreeSearch"), setting, data);
+				
+				/**加载集群虚拟机dom信息*/
+				for(var i=0;i<data.length;i++){
+					
+					var _view =  view.clustervm
+						.replace(/{clustername}/g,data[i].name)
+						.replace(/{clusterid}/g,data[i].id);
+					
+					$(_view).appendTo("#view_clusters_doms");
+					getVirtualList
+					
+				}
+				
+			}
+			
+		}
+		
+		function error(data){
+			
+			console.log(data);
+			
+		}
+		
+		
+		
+	});

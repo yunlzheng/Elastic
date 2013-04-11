@@ -1,5 +1,7 @@
 package com.cloud.elastic.runtimes.startup;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -19,6 +21,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cloud.elastic.commons.dao.RuntimeDao;
 import com.cloud.elastic.commons.bean.Runtime;
 
+import com.cloud.elastic.runtimes.Globals;
 import com.cloud.elastic.runtimes.core.RunTimesCore;
 import com.cloud.elastic.runtimes.info.SystemInfo;
 import com.cloud.elastic.runtimes.rabbit.convert.RuntimeInstanceMessageConverter;
@@ -35,6 +38,31 @@ import com.cloud.elastic.runtimes.rabbit.listener.RuntimeInstanceMessageListener
 public class Bootstrap {
 	
 	private static Log log  = LogFactory.getLog(Bootstrap.class);
+	
+	private void setRouterRoot(){
+		
+		File routerJar = new File(System.getProperty("user.dir"),"Runtimes-0.0.1-SNAPSHOT.jar");
+		if(routerJar.exists()){
+			
+			try {
+				
+				System.setProperty(Globals.ELASTIC_RUNTIMES_ROOT, (new File(System.getProperty("user.dir"),"..")).getCanonicalPath());
+				
+			} catch (IOException e) {
+			
+				System.setProperty(Globals.ELASTIC_RUNTIMES_ROOT,System.getProperty("user.dir"));
+			}
+			
+			
+		}else{
+			
+			System.setProperty(Globals.ELASTIC_RUNTIMES_ROOT,System.getProperty("user.dir"));
+			
+		}
+		
+		log.info("USE "+Globals.ELASTIC_RUNTIMES_ROOT+":"+System.getProperty(Globals.ELASTIC_RUNTIMES_ROOT));
+		
+	}
 	
 	public static void main(String[] args) {
 		

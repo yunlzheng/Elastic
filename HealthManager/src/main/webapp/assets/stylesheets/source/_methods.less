@@ -1,0 +1,80 @@
+/**
+ * Layout style
+ *
+ * SMA Applied Tech Ltd. All right reserved.
+ *
+**/
+
+.clearfix {
+  *zoom:1;
+  &:before, &:after {
+    display:table;content:"";
+  }
+  &:after {
+    clear:both;
+  }
+}
+
+.border-radius (@radius: 5px) {
+  -webkit-border-radius: @radius;
+   -khtml-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+/*.rounded-corner (@side: left, @radius: 5px) {
+  -webkit-border-{@side}-radius: @radius;
+   -khtml-border-{@side}-radius: @radius;
+     -moz-border-{@side}-radius: @radius;
+      -ms-border-{@side}-radius: @radius;
+       -o-border-{@side}-radius: @radius;
+          border-{@side}-radius: @radius;
+}
+*/
+.shadow (@style, @c) {
+  -webkit-box-shadow: @style @c;
+   -khtml-box-shadow: @style @c;
+     -moz-box-shadow: @style @c;
+      -ms-box-shadow: @style @c;
+       -o-box-shadow: @style @c;
+          box-shadow: @style @c;
+}
+
+.shadow-inset (@style, @c) {
+  -webkit-box-shadow: @style @c inset;
+   -khtml-box-shadow: @style @c inset;
+     -moz-box-shadow: @style @c inset;
+      -ms-box-shadow: @style @c inset;
+       -o-box-shadow: @style @c inset;
+          box-shadow: @style @c inset;
+}
+
+.transition(@type, @duration:.25s, @function: ease-in-out) {
+  -webkit-transition: @type @duration @function;
+   -khtml-transition: @type @duration @function;
+     -moz-transition: @type @duration @function;
+      -ms-transition: @type @duration @function;
+       -o-transition: @type @duration @function;
+          transition: @type @duration @function;
+}
+
+/*
+.transition4css3(@type, @duration:.25s, @function: ease-in-out) {
+  -webkit-transition: -webkit-{@type} @duration @function;
+   -khtml-transition:  -khtml-{@type} @duration @function;
+     -moz-transition:    -moz-{@type} @duration @function;
+      -ms-transition:     -ms-{@type} @duration @function;
+       -o-transition:      -o-{@type} @duration @function;
+          transition:           @type @duration @function;
+}
+*/
+/*.linear-gradient(@property, @from, @to) {
+  @{property}: -webkit-gradient(linear, 0 0, 0 100%, from(#{@from}), to(#{@to}));
+  {@property}: -moz-linear-gradient(top, @from, @to);
+  // IE6,IE7
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{@from}, endColorstr=#{@to});
+  // IE8
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{@from}', endColorstr='#{@to}')";
+}*/

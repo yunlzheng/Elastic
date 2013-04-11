@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/tabs.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/icon.css"/>
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/label.css"/>
+<style type="text/css">
+.charts {
+	height: 250px;
+	margin-bottom: 30px;
+}
+
+.backend td {
+	background: #ccc !important;
+}
+</style>
+
+</head>
+<body class="iframebody">
+
+	<div class="conLayer">
+		
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">云监控</a><span>&gt;</span><a href="#">LB负载均衡</a>
+			</p>
+		</div>
+		
+		<div class="section" style="margin-top:50px">
+			<div class="title container">服务器资源列表</div>
+			<div class="table-header">
+				<span class="searchFrame right"> 
+				<input type="button" class="searchButton" id="searchButton"/>
+				<img class="searchimg" style="position: absolute;right: 0px;top: 5px;display: none;" src="../assets/images/searchminus.png"/> 
+				<span class="searchLeft"></span> 
+				<input type="text" class="searchInput" value="应用名搜索" id="searchInput" style="color: gray;"/></span>
+			</div>
+
+		</div>
+		<div class="section" style="margin-top:0px">
+			<ul class="nav nav-tabs" id="nav-tabs" style="margin-bottom: 0px;">
+				<li class="tab active" tab-data="tab-lb" id="tab-view"><a>LB监控数据</a></li>
+				<li class="tab" tab-data="tab-result" style="display:none"><a>搜索<span id="temp-searchkey"></span>结果<i class="icon-remove" id="result_tab_close" title=""></i></a></li>
+			</ul>
+		</div>
+		<div id="tabs">
+			<div id="lblist" class="section" tab-data="tab-lb">
+				<div class="loadinfo" id="loadinfo">
+					<img src="../assets/images/ajax-loader-bigger.gif" alt="" />
+				</div>
+			</div>
+			<div tab-data="tab-result" id="tab-result" class="section">
+				
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/json2.js"></script>
+	<script type="text/javascript" src="../jslib/cycle.js"></script>
+	<script type="text/javascript" src="../jslib/csonv.js"></script>
+	<script type="text/javascript" src="../jslib/view.admin.lb.js"></script>
+
+
+</body>
+</html>

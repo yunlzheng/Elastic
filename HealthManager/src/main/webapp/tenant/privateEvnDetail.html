@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 单个服务器监控详情界面 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/icon.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/label.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/tabs.css" />
+
+<style type="text/css">
+.charts {
+	height: 300px;
+	margin-bottom: 30px;
+	clear: both;
+	width: 90%;
+	margin:0 auto;
+}
+
+.title_menu {
+	float: right;
+	margin-right: 40px;
+}
+
+.title_menu a {
+	margin-left: 5px;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.cpu_mode,.mem_mode,.io_mode,.disk_mode {
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+.active {
+	background: #EEF7E6;
+}
+</style>
+
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a>云监控</a><span>&gt;</span><a href="artifacts.html">应用监控</a>&gt;</span><a id="view-nav-top">私有环境详情</a>
+			</p>
+		</div>
+		
+		<div class="section" style="margin-top: 50px;">
+			<div class="head-title">
+				<div class="title container">
+					<span id="view-page-title">集群环境基本信息</span>
+				</div>
+				<p>名称&nbsp;:&nbsp;&nbsp;<span id="view_private_name" ></span></p>
+				
+				<div id="cluster-infos">
+					<p>分配的域名&nbsp;:&nbsp;&nbsp;<span id="view_domain_name" ></span></p>
+					<p>
+						创建时间&nbsp;:&nbsp;&nbsp;<span class="label label-info" id="view_server_jointime"></span>&nbsp;&nbsp;
+					</p>
+					<p>应用服务器版本&nbsp;:&nbsp;&nbsp;<span class="label label-info"><span id="view_asCatrgory"></span>-<span id="view_asVersion">5.6.0</span></span></p>
+				</div>
+				<div class="head-title sys-logo" style="display:none"><img src="../assets/images/ubuntu_logo.png"/></div>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	
+		<div class="section">
+			<ul class="nav nav-tabs" id="nav-tabs" style="margin-bottom: 0px;">
+				<li class="tab" tab-data="tab-list"><a>部署的应用列表</a></li>
+				<li class="tab active" tab-data="tab-bytes"><a>流量统计</a></li>
+				<li class="tab" tab-data="tab-exception"><a>异常统计</a></li>
+				<li class="tab" tab-data="tab-queue"><a>请求队列信息</a></li>
+				<li class="tab" tab-data="tab-session"><a>访问量统计</a></li>
+			</ul>
+		</div>
+
+		<div id="tabs">
+
+			<div class="section" tab-data="tab-bytes">
+				<div class="charts" id="charts-bytes">
+					<div align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" tab-data="tab-exception">
+				
+				<div class="charts" id="charts_error">
+					<div align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+	
+			<div class="section" tab-data="tab-queue">
+				
+				<div class="charts" id="charts_queue">
+					<div align="center">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" tab-data="tab-session">
+				<div class="charts" id="charts-sessions">
+					<div align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="section" tab-data="tab-list">
+				<table id="view-apps-table" class="table" style="width:95%;margin:0 auto;">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>项目名</th>
+							<th style="width:200px">创建时间</th>
+							<th>版本号</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="view-apps-tbody">
+						<tr><td colspan="6">未部署应用程序</td></tr>
+					</tbody>
+				</table>
+				<div id="view-apps-loadinfo" align="center" style="margin-top: 150px;">
+					<img src="../assets/images/ajax-loader-bigger.gif" />
+				</div>
+			</div>
+
+		</div>
+	
+	</div>
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../assets/javascripts/jquery-ui.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../assets/javascripts/uni.Class.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/view.private.js"></script>
+	
+</body>
+
+
+</html>

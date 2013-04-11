@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>云监控</title>
+	<link rel="stylesheet"  href="jquerymobile/css/themes/default/jquery.mobile-1.2.0-rc.2.css" />
+	<link rel="stylesheet"  href="jquerymobile/css/themes/jqdoc/jqm-docs.css" />
+	<script src="jquerymobile/js/jquery.js"></script>
+	<script src="jquerymobile/js/jquery.mobile-1.2.0-rc.2.js"></script>
+	
+</head>
+<body>
+<div data-role="page" class="type-home">
+	<div data-role="content">
+		<p class="jqm-version"></p>
+
+		<div class="content-secondary">
+
+			<div id="jqm-homeheader">
+				<h1 id="jqm-logo">ICP.Monitor 云监控系统</h1>
+				<p></p>
+			</div>
+
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">我的控制台</li>
+				<li><a href="tenant/base.html" data-ajax="false">基本信息</a></li>
+				<li><a href="tenant/peoplelist.html" data-ajax="false">监控人员信息</a></li>
+			</ul>
+
+		</div>
+		<!--/content-primary-->
+		<div class="content-primary">
+			<nav>
+				<ul data-role="listview" data-inset="true" data-theme="c"data-dividertheme="f" >
+					<li data-role="list-divider">云监控</li>
+					<li><a href="tenant/serverlist.html" data-ajax="false">服务器监控</a></li>
+					<li><a href="tenant/applist.html" data-ajax="false">应用监控</a></li>
+					<li data-role="list-divider" data-ajax="false">统计信息</li>
+					<li><a href="tenant/exceptionlist.html" data-ajax="false">异常信息</a></li>
+					<li><a href="tenant/warnTab.html" data-ajax="false">报警信息</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>&copy; 2012 ICP.Monitor Mobile</p>
+	</div>
+
+</div>
+</body>
+</html>

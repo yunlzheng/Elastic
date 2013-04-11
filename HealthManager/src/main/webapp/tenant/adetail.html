@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 单个服务器监控详情界面 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css">
+<script type="text/javascript" src="../jslib/jquery.js"></script>
+<script type="text/javascript" src="../jslib/highcharts.js"></script>
+<script type="text/javascript" src="../jslib/hightcharts.demo.js"></script>
+<script type="text/javascript" src="../jslib/adetail.js"></script>
+<style type="text/css">
+	
+	.charts{
+		height:300px;
+		margin-bottom: 30px;
+	}
+	
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">云监控</a><span>&gt;</span><a href="servers.html">服务器监控</a>&gt;</span><a
+					href="#">服务器监控详情</a>
+				<a href="create.html" class="button" style="color:#fff"> 
+					<span class="cl"></span>
+					<span class="cr"></span>
+					创建新的监控项
+				</a>
+			</p>
+		</div>
+		<div class="section" style="margin-top:50px">
+			<div class="title container">WebIm</div>
+			<p>有效时间：2012/12/31-2013/12/31</p>
+			<p>访问量统计:2039302</p>
+		</div>
+
+		<div class="section">
+			<div class="title container">当前活跃用户数</div>
+			<div class="charts" id="charts_load"></div>
+		</div>
+		<div class="section">
+			<div class="title container">资源监控</div>
+			<div class="charts" id="charts_disk"></div>
+		</div>
+
+		<div class="section">
+			<div class="title container">监控日志</div>
+			<div class="table-header">
+				<span class="searchFrame right"> <input type="button"
+					class="searchButton"> <span class="searchLeft"></span> <input
+						type="text" class="searchInput"、></span>
+			</div>
+
+			<table cellpadding="0" cellspacing="0" class="table">
+				<tbody>
+					<tr>
+						<th>日志编号</th>
+						<th>监控项目</th>
+						<th>信息级别</th>
+						<th>开始时间</th>
+						<th>结束时间</th>
+						<th>详细信息</th>
+						<th>操作</th>
+					</tr>
+					<tr>
+						<td>a0023</td>
+						<td>CPU信息</td>
+						<td>异常</td>
+						<td>2012/8/13 12:00</td>
+						<td>2013/8/12 13:00</td>
+						<td>CPU 暂用率持续偏高</td>
+						<td><a href="#">配置详情</a> | <a href="sdetail.html">监控详情</a></td>
+					</tr>
+					<tr>
+						<td>a0023</td>
+						<td>CPU信息</td>
+						<td>异常</td>
+						<td>2012/8/13 12:00</td>
+						<td>2013/8/12 13:00</td>
+						<td>CPU 暂用率持续偏高</td>
+						<td><a href="#">配置详情</a> | <a href="sdetail.html">监控详情</a></td>
+					</tr>
+					<tr>
+						<td>a0023</td>
+						<td>CPU信息</td>
+						<td>异常</td>
+						<td>2012/8/13 12:00</td>
+						<td>2013/8/12 13:00</td>
+						<td>CPU 暂用率持续偏高</td>
+						<td><a href="#">配置详情</a> | <a href="sdetail.html">监控详情</a></td>
+					</tr>
+					<tr>
+						<td>a0023</td>
+						<td>CPU信息</td>
+						<td>异常</td>
+						<td>2012/8/13 12:00</td>
+						<td>2013/8/12 13:00</td>
+						<td>CPU 暂用率持续偏高</td>
+						<td><a href="#">配置详情</a> | <a href="sdetail.html">监控详情</a></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<div class="table-footer">
+				<div class="table-data-summary">第 20 - 40 条纪录 / 共 230 条纪录</div>
+				<div class="table-pagination">
+					第<input type="text" value="8">页 / 共 12 页 <a href="#"
+						class="pagination-button"><img
+							src="../assets/images/pagination-first-arrow.png"></a> <a
+						href="#" class="pagination-button"><img
+							src="../assets/images/pagination-prev-arrow.png"></a> <a
+						href="#" class="pagination-button disable"><img
+							src="../assets/images/pagination-next-arrow.png"></a> <a
+						href="#" class="pagination-button disable"><img
+							src="../assets/images/pagination-last-arrow.png"></a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

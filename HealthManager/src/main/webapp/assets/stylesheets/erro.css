@@ -1,0 +1,230 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+  letter-spacing: 0px;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body {
+  background: #fff;
+  /*    font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+
+  font: 14px/21px "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
+  color: #444;
+  -webkit-text-size-adjust: 100%;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+/*
+.border-side-radius (@side: left, @radius: 5px) {
+    ~"-webkit-border-@{side}-radius": @radius;
+    ~"-khtml-border-@{side}-radius": @radius;
+    ~"-moz-border-@{side}-radius": @radius;
+    ~"-ms-border-@{side}-radius": @radius;
+    ~"-o-border-@{side}-radius": @radius;
+    ~"border-@{side}-radius": @radius;
+}
+*/
+a {
+  color: #59a609;
+  text-decoration: none;
+}
+a:hover {
+  color: #fff;
+}
+header {
+  width: 732px;
+  height: 88px;
+  margin: 0px auto;
+  /* For browsers who cannot support this */
+
+  background: #fff7f7f7;
+  /* IE6, IE7 */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fff7f7f7,endcolorstr=#ffcdcdcd ,gradientType=0);
+  /* IE8, IE9 */
+
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fff7f7f7,endcolorstr=#ffcdcdcd,gradientType=0);
+  background-image: -webkit-linear-gradient(top, #f7f7f7, #cdcdcd);
+  background-image: -moz-linear-gradient(top, #f7f7f7, #cdcdcd);
+  background-image: -ms-linear-gradient(top, #f7f7f7, #cdcdcd);
+  background-image: -o-linear-gradient(top, #f7f7f7, #cdcdcd);
+  background-image: linear-gradient(top, #f7f7f7, #cdcdcd);
+  border-bottom: 1px solid #999;
+}
+aside {
+  width: 210px;
+  height: 100%;
+  float: right;
+  margin-left: 20px;
+  background: #fff;
+  -webkit-box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+  -khtml-box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+  -moz-box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+  -ms-box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+  -o-box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+  box-shadow: 0px 0px 10px rgba(160, 160, 160, 0.5);
+}
+
+#main {
+  width: 960px;
+  margin: 0px auto;
+}
+
+.aligin{
+  width:732px;
+  height:432px;
+  margin:0px auto;
+  position: relative;
+  background:url('../images/erro_bg.jpg');
+  border:1px solid #ccc;
+ }
+.mt{ margin-top: 132px;}
+.error_message {
+    width:432px;
+    margin:0px auto;
+    margin-top:110px;
+}
+.error_icon{
+  width: 70px;
+  margin-top: 20px;
+  float: left;
+}
+.error_text{
+  margin-left: 100px;
+}
+p{
+  line-height:2em;font-size:14px; color:#FFFFFF;
+}
+h1{
+  line-height:1.5em;
+  font-size:32px;
+   color:#FFFFFF;
+ }

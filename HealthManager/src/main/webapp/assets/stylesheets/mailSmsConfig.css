@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+.breadcrumb p{
+  font-family: Arial, Helvetica, sans-serif;	
+}
+
+.config h3{
+	font-size:20px; 
+}
+
+table {
+	width:60%;
+	margin-left: 100px;
+}
+.config_left{
+	float: right;
+	color: #360;
+	padding-right: 20px;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align: center;
+}
+
+.config_right{
+	vertical-align: middle;
+}
+
+
+
+#config_button{
+	margin-left: 24%;
+}
+

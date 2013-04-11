@@ -1,0 +1,5 @@
+var Global = {
+	
+		loaded:false
+		
+};

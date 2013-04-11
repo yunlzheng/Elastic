@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>应用监控</title>
+		<link rel="stylesheet"  href="../jquerymobile/css/themes/default/jquery.mobile-1.2.0-rc.2.css" />
+		<link rel="stylesheet"  href="../jquerymobile/css/themes/jqdoc/jqm-docs.css" />
+		<script src="../jquerymobile/js/jquery.js"></script>
+		<script src="../jquerymobile/js/jquery.mobile-1.2.0-rc.2.js"></script>
+		<script src="../jquerymobile/js/app.js"></script>
+	</head> 
+<body> 
+<div data-role="page" class="type-interior">
+	<!-- /header -->
+	<div data-role="header" data-theme="f">
+		<h1>我的应用</h1>
+		<a href="../index.html" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div>
+
+	<div data-role="content">
+		<!--/content-primary,there should hava a popup dialog -->		
+		<div class="content-primary">
+			 <ul data-role="listview" data-filter="true" data-filter-placeholder="Search app name..." data-inset="true">
+				<!-- <li data-role="listdivider" data-theme="f">我的应用</li>
+				<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">应用d998</a></li>
+				<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">应用300</a></li>
+				<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">应用v002</a></li>
+				<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">应用v003</a></li>
+				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="#">应用v004</a></li> -->
+			</ul>
+		</div>
+
+		<!-- /content -->
+		<div class="content-secondary">
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+				<h3>更多</h3>
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<li><a href="base.html" data-ajax="false">基本信息</a></li> 
+						<li><a href="peoplelist.html" data-ajax="false">监控人员</a></li>
+						<li><a href="serverlist.html" data-ajax="false">服务器监控</a></li> 
+						<!--<li><a href="applist.html">应用监控</a></li>-->
+						<li><a href="exceptionlist.html" data-ajax="false">异常统计</a></li>
+						<li><a href="warnTab.html" data-ajax="false">告警统计</a></li>
+					</ul>
+			</div>
+		</div>		
+
+	</div>
+
+	<div data-role="footer" class="footer-docs" data-theme="c" >
+		<p>&copy; 2012 ICP.Monitor</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+</html>

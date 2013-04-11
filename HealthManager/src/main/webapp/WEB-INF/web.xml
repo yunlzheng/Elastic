@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+	<display-name>icp.monitor</display-name>
+	<description>icp.monitor</description>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/beans.xml</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>WEB-INF/log4j.properties</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>6000</param-value>
+	</context-param>
+
+	<!-- 全局变量 -->
+	<context-param>
+		<description>用户首页</description>
+		<param-name>tenantHome</param-name>
+		<param-value>http://monitor.wocloud.com/tenant/index.html</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>管理员主页</description>
+		<param-name>adminHome</param-name>
+		<param-value>http://monitor.wocloud.com/admin/index.html</param-value>
+	</context-param>
+	
+	<context-param>
+		<description>服务开通页面</description>
+		<param-name>openPage</param-name>
+		<param-value>http://monitor.wocloud.com/open.jsp</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>redirectURL</param-name>
+		<param-value>http://monitor.wocloud.com/IdentityServlet</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>icenter</param-name>
+		<param-value>http://www.wocloud.com</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>sessionKey</param-name>
+		<param-value>user</param-value>
+	</context-param>
+	
+	<!-- 安全登录相关变量 -->
+	<context-param>
+		<param-name>IdpUrl</param-name>
+		<param-value>https://login.wocloud.com/samlsso</param-value>
+	</context-param>
+	
+
+	<!-- filters -->
+	<filter>
+		<filter-name>IdentityFilter</filter-name>
+		<filter-class>com.icp.monitor.displayer.filter.IdentityFilter</filter-class>
+		<init-param>
+			<description>无需过滤的url地址用';'隔离 如 a;b;c</description>
+			<param-name>noCheckURLList</param-name>
+			<param-value>/IdentityServlet;</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>AuthorityFilter</filter-name>
+		<filter-class>com.icp.monitor.displayer.filter.AuthorityFilter</filter-class>
+		<init-param>
+			<param-name>noCheckURIList</param-name>
+			<param-value>/rest/account/;</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>AuthorityRightFilter</filter-name>
+		<filter-class>com.icp.monitor.displayer.filter.AuthorityRightFilter</filter-class>
+	</filter>
+	
+	<!-- filter-mapping -->
+  
+ 	<filter-mapping>
+		<filter-name>IdentityFilter</filter-name>
+		<url-pattern>/tenant/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>IdentityFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorityFilter</filter-name>
+		<url-pattern>/tenant/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorityFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorityRightFilter</filter-name>
+		<url-pattern>/tenant/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorityRightFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>IdentityFilter</filter-name>
+		<url-pattern>/mobile/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>AuthorityFilter</filter-name>
+		<url-pattern>/mobile/*</url-pattern>
+	</filter-mapping>
+  	
+	<!-- listener -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.icp.monitor.displayer.listener.ApplicationStatusListener</listener-class>
+	</listener>
+	<!-- servlet -->
+
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Proxy</servlet-name>
+		<servlet-class>com.icp.monitor.displayer.servlet.Proxy</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Proxy</servlet-name>
+		<url-pattern>/proxy</url-pattern>
+	</servlet-mapping>
+
+	
+	<!-- 租户服务器状态采集器 
+	<servlet>
+		<description>tenant collector server info</description>
+		<servlet-name>receiverServlet</servlet-name>
+		<servlet-class>com.icp.monitor.displayer.servlet.ReceiverServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	-->
+	
+	<!--系统 LB状态收集启动器 -->
+	<!--
+	<servlet>
+		<servlet-name>LBStatusCollectorServlet</servlet-name>
+		<servlet-class>com.icp.monitor.displayer.servlet.LBStatusCollectorServlet</servlet-class>
+		<init-param>
+			<param-name>delay</param-name>
+			<param-value>6000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>period</param-name>
+			<param-value>10000</param-value>
+			
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		
+	</servlet>
+	-->
+	<!--管理员 VM状态收集启动器 -->
+	<!--  
+	<servlet>
+		<servlet-name>AdminVMStatusCollectorServlet</servlet-name>
+		<servlet-class>com.icp.monitor.displayer.servlet.AdminVMStatusCollectorServlet</servlet-class>
+		<init-param>
+			<param-name>delay</param-name>
+			<param-value>6000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>period</param-name>
+			<param-value>600000</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	-->
+	<servlet>
+		<servlet-name>IdentityServlet</servlet-name>
+		<servlet-class>com.icp.monitor.displayer.servlet.IdentityServlet</servlet-class>
+		<init-param>
+			<param-name>AttribIndex</param-name>
+			<param-value>3234443</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Issuer</param-name>
+			<param-value>monitor</param-value>
+		</init-param>
+		<init-param>
+			<param-name>NameId</param-name>
+			<param-value>icp.monitor</param-value>
+		</init-param>
+		<init-param>
+			<param-name>NameQualifier</param-name>
+			<param-value>xxoo</param-value>
+		</init-param>
+		
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>IdentityServlet</servlet-name>
+		<url-pattern>/IdentityServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- error setting 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/error_warning.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/error_warning.html</location>
+	</error-page>
+	-->
+
+</web-app>

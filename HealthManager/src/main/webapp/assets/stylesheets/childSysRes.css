@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+.models{
+	width:45%;
+	height: 200px;
+	border:1px solid #CCC;
+	float: left;
+	margin-right: 20px;
+	margin-left:20px;
+	margin-bottom: 40px;
+	min-width: 400px;
+	cursor: pointer;
+}
+
+.model_title{
+	text-align: center;
+	width: 100%;
+	color: #407815;
+	font-weight: bold;
+}
+
+.model_describ p{
+	text-indent: 2em;
+}

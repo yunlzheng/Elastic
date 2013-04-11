@@ -14,18 +14,27 @@
 <title>用户登录</title>
 </head>
 <body>
-	<div class="container">
-
-	     <form action="service/foo/users/login" method="POST" class="form-signin">
-	        <h2 class="form-signin-heading">用户登录</h2>
-	        <input name="email"  type="text" class="input-block-level" placeholder="电子邮箱地址">
-	        <input name="password"  type="password" class="input-block-level" placeholder="密码">
-	        <label class="checkbox">
-	          <input type="checkbox" value="remember-me"> 记住我
-	        </label>
-	        <button class="btn btn-large btn-primary" type="submit">登录</button>
-	     </form>
-    
+	<div class="loadimg">
+	</div>
+	<div class="container ">
+	
+		<div class="login">
+			 <div class="modal-header">
+			    <h3>欢迎登录用户中心</h3>
+			  </div>
+		     <form action="service/foo/users/login" method="POST" class="form-signin">
+		       <div class="modal-body clearfix">
+		       	 <label for="">邮箱地址</label>
+		       	 <input name="email"  type="text" class="input-block-level" >
+		       	 <label for="">登录密码</label>
+		       	 <input name="password"  type="password" class="input-block-level">
+		       </div>
+		       <div class="modal-footer">
+				  <button type="submit" class="btn btn-primary pull-right">登录</button>
+			   </div>
+		     </form>
+	    </div>
+	
     </div>
 	<script type="text/javascript" src="assect/js/jquery.js"></script>
 	<script type="text/javascript" src="assect/js/bootstrap.js"></script>

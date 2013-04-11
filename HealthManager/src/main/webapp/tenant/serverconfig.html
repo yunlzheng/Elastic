@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/button.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/skins/green.css" />
+
+
+<style type="text/css">
+select {
+	margin-left: 20px;
+	width: 150px;
+}
+
+label {
+	min-width: 150px;
+	display: inline-block;
+}
+
+label.min {
+	min-width: 50px;
+	max-width: 100px;
+	display: inline-block;
+}
+
+td input[type="checkbox"] {
+	float: left;
+}
+
+.first .step1{
+	display:block;
+}
+
+.first .step2{
+	display:none;
+}
+
+.second .step1{
+	display:none;
+}
+
+.second .step2{
+	display:block;
+}
+
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">云监控</a><span>&gt;</span><a href="clustersv2.html">云服务器</a><span>&gt;</span><a href="#"
+					id="mode_title"></a>
+			</p>
+		</div>
+
+		<div class="section" style="margin-top:50px">
+			<div class="title container">
+				[<span id="view_ip"></span>]监控项设置&nbsp;&nbsp;&nbsp;<span
+					id="btn_delete_span"></span>
+			</div>
+			<p>设置监控项目</p>
+			<div class="container">
+
+				<div>
+					<input type="checkbox" id="check_cpu" class="set" for="select_cpu" />
+					<label>CPU</label>
+					<label class="min">报警阀值</label>
+					<select id="select_cpu" for="cpu" class="hold" disabled="disabled">
+						<option value="50">50%</option>
+						<option value="60">60%</option>
+						<option value="70">70%</option>
+						<option value="80">80%</option>
+						<option value="90">90%</option>
+						<option value="95">95%</option>
+					</select>
+				</div>
+				<div>
+					<input type="checkbox" id="check_mem" class="set" for="select_mem" />
+					<label>内存</label>
+					<label class="min">报警阀值</label>
+					<select id="select_mem" for="mem" class="hold" disabled="disabled">
+						<option value="50">50%</option>
+						<option value="60">60%</option>
+						<option value="70">70%</option>
+						<option value="80">80%</option>
+						<option value="90">90%</option>
+						<option value="95">95%</option>
+					</select>
+				</div>
+				<div>
+					<input type="checkbox" id="check_io" class="set" for="select_io" />
+					<label>IO</label>
+					<label class="min">报警阀值</label>
+					<select id="select_io" for="io" class="hold" disabled="disabled">
+						<option value="50">50%</option>
+						<option value="60">60%</option>
+						<option value="70">70%</option>
+						<option value="80">80%</option>
+						<option value="90">90%</option>
+						<option value="95">95%</option>
+					</select>
+				</div>
+				<div>
+					<input type="checkbox" id="check_disk" class="set" for="select_disk" />
+					<label>磁盘</label>
+					<label class="min">报警阀值</label>
+					<select id="select_disk" for="disk" class="hold" disabled="disabled" >
+						<option value="50">50%</option>
+						<option value="60">60%</option>
+						<option value="70">70%</option>
+						<option value="80">80%</option>
+						<option value="90">90%</option>
+						<option value="95">95%</option>
+					</select>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="title container">设置监控选项</div>
+			<div>
+				<label>监控频率:</label> <select id="check_deyling">
+					<option value="1">30分钟</option>
+					<option value="2">1小时</option>
+					<option value="3">2小时</option>
+					
+				</select> &nbsp;	&nbsp; <sapn>服务器信息采集的时间间隔</sapn>
+			</div>
+			<div style="display:none">
+				<label>重试几次后告警：</label> <select>
+					<option>1次</option>
+					<option>2次</option>
+					<option>3次</option>
+				</select> 	&nbsp;	&nbsp; <sapn>连续几次服务器出现异常后报警</sapn>
+			</div>
+
+		</div>
+
+		<div class="section">
+			<div class="title container">设置常规告警通知人员&nbsp;&nbsp;&nbsp;<button id="addMember" class="btn btn-success">添加预警人员</button></div>
+			<div class="container">
+				<div class="table-header">
+					<span class="searchFrame right"> <input type="button"
+						class="searchButton" /><img class="searchimg" style="position: absolute;right: 0px;top: 5px;display: none;" src="../assets/images/searchminus.png"/>  <span class="searchLeft"></span> <input
+						type="text" class="searchInput" /></span>
+				</div>
+
+				<table cellpadding="0" cellspacing="0" class="table">
+					<thead>
+						<tr>
+
+							<th>操作</th>
+							<th>姓名</th>
+							<th>电子邮箱</th>
+							<th>短信</th>
+							<th>创建时间</th>
+						</tr>
+					</thead>
+					<tbody id="alertmemberlist">
+
+
+					</tbody>
+				</table>
+				
+				<div class="table-footer"></div>
+			</div>
+		</div>
+		<div class="section" align="right">
+			<a href="#" class="button" id="btn_update"> <span class="cl"></span>
+				<span class="cr"></span> 保存
+			</a> 
+		</div>
+
+	</div>
+
+	<div id="mem-window" style="display:none">
+			<table cellpadding="0" cellspacing="0" class="table">
+					<thead>
+						<tr>
+							<th style="width:80px">编号</th>
+							<th style="width:100px">姓名</th>
+							<th style="width:150px">电子邮箱</th>
+							<th style="width:150px">短信</th>
+							<th style="width:150px">创建时间</th>
+						</tr>
+					</thead>
+					<tbody id="view_memberlist">
+
+
+					</tbody>
+					
+					
+				</table>
+				<div class="table-footer" id="footer1"></div>
+	</div>
+
+	<div id="success-window" class="window success-window">
+		<p id="windows-info">监控设置信息保存成功！</p>
+		<div class="actions">
+			<p>
+				<a class="button" id="do_action"> <span class="cl"></span> <span class="cr"></span>
+					关闭
+				</a> 
+			</p>
+		</div>
+	</div>
+	
+	
+	<div id="alertmember-window" class="window success-window">
+		<p id="alertmember">请选择添加预警人员</p>
+		<div class="actions">
+			<p>
+				<a  class="button" id="alert_sureaction"> <span class="cl"></span> <span class="cr"></span>
+					确定
+				</a> 
+			</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/artDialog.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/model.alertmember.js"></script>
+	<script type="text/javascript" src="../jslib/model.monitorthreshold.js"></script>
+	<script type="text/javascript" src="../jslib/model.member.js"></script>
+	<script type="text/javascript" src="../jslib/model.monitorconfig.js"></script>
+	<script type="text/javascript" src="../jslib/view.monitorconfig.js"></script>
+
+
+</body>
+</html>

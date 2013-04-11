@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/skins/green.css" />
+
+<style type="text/css">
+.charts {
+	height: 250px;
+	margin-bottom: 30px;
+}
+
+select[attrib]{
+  display: none;
+}
+
+.table th{
+  text-align: center;
+}
+
+.selected{
+float: right;
+}
+
+.time{
+  float: right;
+  margin-top: -35px;
+}
+</style>
+<title>异常处理</title>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+
+		<div align="left" class="breadcrumb">
+			<p>
+				当前位置：<a href="#">系统管理员平台</a><span>&gt;</span><a href="#">异常信息</a>
+			</p>
+		</div>
+
+		<div class="section" style="margin-top:50px">
+
+			<div class="charts" id="exception_chart"></div>
+
+		</div>
+
+
+		<!-- 故障部分 -->
+		<div class="section">
+			<div class="fault_part">
+				<div class="selected">
+					<span>过滤条件:</span>
+					
+					<select id="select_type">
+					   <option selected="selected" id="select_all" value="0"> 查看所有异常 </option>
+					   <option value="1"> 服务器异常 </option>
+					   <option value="2"> 应用异常 </option>
+					</select>
+					
+					<select id="select_level">
+					   <option class="allexc" selected="selected" value="0"> 查看所有级别异常信息</option>
+					   <option class="seriousExc" value="1"> 严重故障 </option>
+					   <option class="generalExc" value="2"> 一般故障 </option>
+					   <option class="generalExc" value="3"> 预警</option>
+					 
+					</select>
+					
+					
+
+				</div>
+				<br />
+
+				<div class="time" style="display: none;">
+				<br />
+				<p class="choice_time">请选择时间段</p>
+
+				<span>起始时间: <input type="text" class="time_start"  /></span>
+				&nbsp;&nbsp;&nbsp; <span>结束时间: <input type="text" class="time_end" /></span>
+				</div>
+
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>流水号</th>
+							<th>监控项目</th>
+							<th>开始时间</th>
+							<th>恢复时间</th>
+							<th>故障持续时间</th>
+							<th>故障原因</th>
+							<th>故障级别</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+
+					<tbody id="tbody">
+
+					</tbody>
+
+				</table>
+				<div class="more" align="center" id="more"><img src='../assets/images/ajax-loader.gif'/><span>数据加载中...</span></div>
+			</div>
+		</div>
+		
+		<div id="excDetailDialog" style="display:none;">
+			
+				<form class="info-form">
+					<div class="loading"><img src="../assets/images/ajax-loader-bigger.gif"/></div>
+					<div class="information">
+						
+					</div>
+				</form>
+			
+		</div>
+		
+	</div>
+
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/artDialog.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+
+	<script type="text/javascript" src="../jslib/admin.model.exceptions.js"></script>
+	<script type="text/javascript" src="../jslib/admin.view.exceptions.js"></script>
+
+
+
+</body>
+</html>

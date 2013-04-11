@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云监控-联通云计算综合管理平台</title>
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+</head>
+<body style="height:500px;">
+	
+	<div id="baseLayer"></div>
+	
+	<header>
+		<div class="welcome">欢迎您，<a href="http://www.wocloud.com" title="用户中心" style="color:#fff"><span id="account"></span></a></div>
+		<time id="timer"></time>
+		<div class="logout">
+			<a href="../mobile">手机版</a>
+			<a href="../IdentityServlet?type=logout">退出</a>
+		</div>
+	</header>
+	<!-- 顶部导航层 -->
+	<div id="topLayer">
+		<div class="topMenu container">
+			<a href="#" class="logo"></a>
+			<!-- 所有顶上的栏目都需要cl和cr两个span，用于显示链接左右的边框样式 -->
+			<ul>
+			    <li>
+            		<a href="#" onclick="window.open('http://www.wocloud.com')" class="link">
+                         用户中心
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+            		</a>
+            	</li>
+                <li>
+                    <a href="#" onclick="window.open('http://www.wocloud.com')" class="link">
+                        云主机即服务
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="window.open('http://deploy.wocloud.com')" class="link">
+                        部署即服务
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="window.open('http://appserver.wocloud.com')" class="link">
+      应用服务器即服务
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+                    </a>
+                </li>
+                 <li>
+                    <a href="#" class="link"> 数据库即服务
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="link"> 存储即服务
+                        <span class="cl"></span>
+                        <span class="cr"></span>
+                    </a>
+                </li>
+            </ul>
+		</div>
+
+		<!-- ? -->
+		<div class="topLoading container"></div>
+	</div>
+
+	<!-- 左边菜单栏 -->
+	<div id="menuLayer">
+		<div class="leftMenu container">
+			<div class="top">
+				<div class="title container"><a href="http://www.wocloud.com" style="color:#fff" title="用户中心">首页</a></div>
+				<div class="titleMask container"></div>
+			</div>
+			<div class="con container">
+				<a class="but container">我的控制台</a>
+				<p class="container icpmenu">
+					<a href="index.html#1" data="index.html#1" class="chilBut container chilOver">监控概况</a>
+					<a href="index.html#2" data="index.html#2" class="chilBut container">监控人员</a>
+				</p>
+				<a  class="but container">云监控</a>
+				<p class="container icpmenu">
+					<a href="index.html#3" data="index.html#3" class="chilBut container">云服务器</a> 
+					<a href="index.html#4" data="index.html#4" class="chilBut container">应用</a>
+				</p>
+				<a  class="but container">统计信息</a>
+				<p class="container icpmenu">
+					<a href="index.html#5" data="index.html#5" class="chilBut container">异常信息</a> 
+					<a href="index.html#6" data="index.html#6" class="chilBut container">报警信息</a>
+				</p>
+			</div>
+			
+			<div class="mask"></div>
+		</div>
+		<div id="frame-bg"></div>
+	</div>
+
+	<!-- 右边内容层 -->
+	<div id="contentLayerFrameWrapper">
+		<iframe id="contentLayerFrame" src="base.html" frameborder=0
+			name="contentFrame"> </iframe>
+	</div>
+	
+	<script type="text/javascript" src="../assets/javascripts/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.ajaxlistener.js"></script>
+	<script type="text/javascript" src="../assets/javascripts/content.js"></script>
+	<script type="text/javascript" src="../assets/javascripts/content-tenant.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.time.0.0.1.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		
+		$.ajaxSetup({cache:false});
+		
+		$("#timer").time();
+		
+		
+		$("#ajaxListener").ajaxListener();
+		
+		$.ajax({
+
+			type : "get",
+			url : "../rest/account",
+			success : success,
+			error : error,
+			timeout : 3000
+
+		});
+		
+		function success(data){
+			
+			
+			if(data==""){
+				data="guest@guest.com";
+			}
+			$("#account").text(data);
+			$.cookie('account', data);
+			
+		}
+		
+		function error(){
+			
+			$.cookie('account', "guest@guest.com");
+		}
+		
+	
+		
+		
+	});
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+/**
+ * application.less
+ * 
+ * SMA Applied Tech Ltd. All right reserved. 
+ *
+ * Author: ChenXin <chenxin@smapp.hk>
+ *
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+  letter-spacing: 0px;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body {
+  background: #fff;
+  /*    font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+
+  font: 14px/21px "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
+  color: #444;
+  -webkit-text-size-adjust: 100%;
+}
+/**
+ * Layout style
+ *
+ * SMA Applied Tech Ltd. All right reserved.
+ *
+**/
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+/*.rounded-corner (@side: left, @radius: 5px) {
+  -webkit-border-{@side}-radius: @radius;
+   -khtml-border-{@side}-radius: @radius;
+     -moz-border-{@side}-radius: @radius;
+      -ms-border-{@side}-radius: @radius;
+       -o-border-{@side}-radius: @radius;
+          border-{@side}-radius: @radius;
+}
+*/
+/*
+.transition4css3(@type, @duration:.25s, @function: ease-in-out) {
+  -webkit-transition: -webkit-{@type} @duration @function;
+   -khtml-transition:  -khtml-{@type} @duration @function;
+     -moz-transition:    -moz-{@type} @duration @function;
+      -ms-transition:     -ms-{@type} @duration @function;
+       -o-transition:      -o-{@type} @duration @function;
+          transition:           @type @duration @function;
+}
+*/
+/*.linear-gradient(@property, @from, @to) {
+  @{property}: -webkit-gradient(linear, 0 0, 0 100%, from(#{@from}), to(#{@to}));
+  {@property}: -moz-linear-gradient(top, @from, @to);
+  // IE6,IE7
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{@from}, endColorstr=#{@to});
+  // IE8
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#{@from}', endColorstr='#{@to}')";
+}*/header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #000;
+  width: 100%;
+  text-align: center;
+  color: #eee;
+  font-size: 12px;
+  z-index: 1000;
+}
+#animation {
+  width: 100%;
+  min-width: 960px;
+  height: 872px;
+  background: url('../images/login_bg.jpg') no-repeat top center;
+  position: absolute;
+  left: 0px;
+  bottom: 308px;
+  z-index: 100;
+}
+#login-wrapper {
+  width: 100%;
+  height: 308px;
+  background: url('../images/login-form-bg.jpg') repeat-x top center;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  z-index: 1000;
+}
+#login-wrapper #login {
+  width: 960px;
+  height: 278px;
+  margin: 0px auto;
+  *zoom: 1;
+}
+#login-wrapper #login:before,
+#login-wrapper #login:after {
+  display: table;
+  content: "";
+}
+#login-wrapper #login:after {
+  clear: both;
+}
+#login-wrapper #login #logo {
+  width: 448px;
+  margin-top: 48px;
+  text-align: right;
+  float: left;
+  line-height: 150%;
+}
+#login-wrapper #login #logo #system-name {
+  margin-right: 8px;
+  margin-top: 15px;
+}
+#login-wrapper #login #login-form {
+  width: 470px;
+  float: left;
+  margin-left: 30px;
+  margin-top: 52px;
+}
+#login-wrapper #login #login-form .input-group {
+  margin-bottom: 7px;
+  width: auto;
+  position: relative;
+}
+#login-wrapper #login #login-form .input-group .error {
+  width: auto;
+  position: absolute;
+  display: block;
+  left: 250px;
+  top: 3px;
+  background: #ffffcd;
+  border: 1px solid #999;
+  padding: 5px;
+  font-size: 13px;
+}
+#login-wrapper #login #login-form .input-group .error .arrow {
+  position: absolute;
+  left: -8px;
+  top: 8px;
+  content: "";
+  width: 0px;
+  height: 0px;
+  display: inline-block;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 8px 8px 8px 0;
+  border-right-color: #ffffcd;
+}
+#login-wrapper #login #login-form .input-group .error .arrow:after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  display: inline-block;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 10px 9px 10px 0;
+  border-right-color: #999;
+  position: absolute;
+  top: -10px;
+  left: -1px;
+  z-index: -1;
+}
+#login-wrapper #login #login-form input[type="text"],
+#login-wrapper #login #login-form input[type="password"] {
+  color: #333;
+  font-size: 18px;
+  padding: 6px 6px;
+  width: 217px;
+  -webkit-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  outline: none;
+  border-top: 1px solid #827f7f;
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+  border-bottom: 1px solid #ffffff;
+  -webkit-box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  -khtml-box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  -moz-box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  -ms-box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  -o-box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  box-shadow: inset 0px 35px 35px rgba(240, 240, 240, 0.8);
+  background: #d8d8d8;
+}
+#login-wrapper #login #login-form input[type="text"]:focus,
+#login-wrapper #login #login-form input[type="password"]:focus {
+  outline: none;
+  -webkit-box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  -khtml-box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  -moz-box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  -ms-box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  -o-box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  box-shadow: inset 0px 0px 0px rgba(33, 62, 11, 0.4);
+  background: #fff;
+}
+#login-wrapper #login #login-form .action {
+  width: 147px;
+  float: left;
+}
+#login-wrapper #login #login-form .action a {
+  text-decoration: none;
+  color: #407815;
+}
+#login-wrapper #login #login-form .action a:hover {
+  color: #57a31d;
+}
+#login-wrapper #login #login-form .action a span {
+  display: inline-block;
+  margin-top: 38px;
+  margin-left: 13px;
+}
+#login-wrapper #footer {
+  height: 30px;
+  line-height: 30px;
+  color: #888;
+  width: 100%;
+  font-size: 13px;
+}
+#login-wrapper #footer p {
+  text-align: center;
+}
+body.small-screen #animation {
+  bottom: 188px;
+}
+body.small-screen #login-wrapper {
+  height: 188px;
+}
+body.small-screen #login-wrapper #login {
+  height: 158px;
+}
+body.small-screen #login-wrapper #login #logo {
+  margin-top: 11px;
+}
+body.small-screen #login-wrapper #login #logo #unicom-logo img {
+  width: 124px;
+  height: auto;
+}
+body.small-screen #login-wrapper #login #logo #system-name {
+  margin-top: 15px;
+}
+body.small-screen #login-wrapper #login #logo #system-name img {
+  width: 249px;
+  height: auto;
+}
+body.small-screen #login-wrapper #login #login-form {
+  margin-top: 15px;
+}
+body.small-screen #login-wrapper #login #login-form input[type="text"],
+body.small-screen #login-wrapper #login #login-form input[type="password"] {
+  color: #333;
+  font-size: 14px;
+  padding: 4px 4px;
+  width: 217px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+body.small-screen #login-wrapper #login #login-form .action a img {
+  width: 117px;
+  height: auto;
+}
+body.small-screen #login-wrapper #login #login-form .action a span {
+  margin-top: 30px;
+  margin-left: 0px;
+}

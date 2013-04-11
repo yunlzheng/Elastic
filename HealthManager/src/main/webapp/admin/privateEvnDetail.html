@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- 单个服务器监控详情界面 -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/tabs.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/label.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/lbdetail.css" />
+
+
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a>云监控</a><span>&gt;</span><a href="lbmonitor.html" id="view-nav-top-1">LB负载均衡</a>&gt;</span><a id="view-nav-top-2">监控日志</a>
+			</p>
+		</div>
+		<div class="section" style="margin-top: 50px;" id="section_title">
+			<div class="head-title">
+				<div class="title container">
+					<span id="view-page-title">集群环境-<span id="view_private_name">XXX</span></span>
+				</div>
+			</div>
+			
+		</div>
+		<div style="clear: both;"></div>
+	
+		<div class="section">
+			<ul class="nav nav-tabs" id="nav-tabs" style="margin-bottom: 0px;">
+				
+				<li class="tab active" tab-data="tab-bytes"><a>流量统计</a></li>
+				<li class="tab" tab-data="tab-exception"><a>异常统计</a></li>
+				<li class="tab" tab-data="tab-queue"><a>请求队列信息</a></li>
+				<li class="tab" tab-data="tab-session"><a>访问量统计</a></li>
+			</ul>
+		</div>
+
+		<div id="tabs">
+
+			<div class="section" tab-data="tab-bytes">
+				<div class="charts" id="charts-bytes">
+					<div  class="ajaxinfo" align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" tab-data="tab-exception">
+				
+				<div class="charts" id="charts_error">
+					<div class="ajaxinfo" align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+	
+			<div class="section" tab-data="tab-queue">
+				
+				<div class="charts" id="charts_queue">
+					<div class="ajaxinfo" align="center">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+
+			<div class="section" tab-data="tab-session">
+				<div class="charts" id="charts-sessions">
+					<div class="ajaxinfo" align="center" style="margin-top: 150px;">
+						<img src="../assets/images/ajax-loader-bigger.gif" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="section" tab-data="tab-list">
+				<table id="view-apps-table" class="table" style="width:95%;margin:0 auto;">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>项目名</th>
+							<th style="width:200px">创建时间</th>
+							<th>状态</th>
+							<th>版本号</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="view-apps-tbody">
+						<tr><td>1</td><td>sina</td><td>2012-11-21 11:09:59</td><td>0.0.1-release</td><td>运行中</td><td><a href="#">打开连接</a></td></tr>
+					</tbody>
+				</table>
+				<div id="view-apps-loadinfo" align="center" style="margin-top: 150px;">
+					<img src="../assets/images/ajax-loader-bigger.gif" />
+				</div>
+			</div>
+		</div>
+	
+</div>
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../assets/javascripts/jquery-ui.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../assets/javascripts/uni.Class.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../jslib/jquery.plugin.tabs.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.getparam.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/view.admin.private.js"></script>
+	
+</body>
+
+
+</html>

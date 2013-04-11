@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/alert.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/skins/green.css" />
+
+<style type="text/css">
+
+	.charts {
+	
+		height: 250px;
+		
+	}
+
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div class="breadcrumb" style="">
+			<p align="left">
+				当前位置：<a href="base.html">系统管理员平台</a><span>&gt;</span><a href="#">报警信息</a> 
+			</p>
+		</div>
+		<div class="section" style="margin-top:50px">
+			<div class="charts" id="alert_chart"></div>
+		</div>
+
+		<div class="section">
+			<div class="choice_type">
+			
+				<label>过滤条件:</label>
+				<select id="typeselect">
+					<option value="display_all">显示所有类型通知信息</option>
+					<option value="display_by_emails">只显示email通知信息</option>
+					<option value="display_by_phones">只显示短信通知信息</option>
+				</select>
+			</div>
+
+			
+			<br />
+			<table class="table" id = "table">
+				<thead>
+					<tr>
+						<th>流水号</th>
+						<th>收件人</th>
+						<th>通知方式</th>
+						<th>发送时间</th>
+						<th>报警源头</th>
+						<th>内容</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+
+				<tbody id="body_content">
+					
+				</tbody>
+				
+			</table>
+			
+			<div class="more" align="center" id="more"><img src='../assets/images/ajax-loader.gif'/><span>数据加载中...</span></div>
+		</div>
+		
+		<div id="excDetailDialog" style="display:none">
+			<div>
+				<form class="info-form">
+					<div class="loading"><img src="../assets/images/ajax-loader-bigger.gif"/></div>
+					<div class="information">
+						
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/artDialog.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/admin.model.alert.js"></script>
+	<script type="text/javascript" src="../jslib/admin.view.alert.js"></script>
+
+	
+</body>
+</html>

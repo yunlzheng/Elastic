@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/content.css" />
+<link rel="stylesheet" type="text/css" href="../assets/stylesheets/skins/green.css" />
+
+<style type="text/css">
+.charts {
+	height: 250px;
+	margin-bottom: 30px;
+	clear: both;
+}
+</style>
+</head>
+<body class="iframebody">
+	<div class="conLayer">
+		<div class="breadcrumb">
+			<p>
+				当前位置：<a href="#">系统管理员平台</a><span>&gt;</span><a href="#">监控概况</a>
+			</p>
+		</div>
+		<div class="section" style="margin-top: 50px">
+			<div class="title container">云监控概况</div>
+			<div class="charts" id="base_charts"></div>
+		</div>
+		<div class="section">
+			<div class="title container">故障历史</div>
+			
+			<table cellpadding="0" cellspacing="0" class="table">
+
+				<thead>
+					<tr>
+						<th>流水号</th>
+						<th>监控项目</th>
+						<th>开始时间</th>
+						<th>恢复时间</th>
+						<th>故障持续时间</th>
+						<th>故障原因</th>
+						<th>故障级别</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+
+
+				<tbody id="tbody">
+				
+
+				</tbody>
+			</table>
+			<div class="more" align="center" id="more"><img src='../assets/images/ajax-loader.gif'/><span>数据加载中...</span></div>
+		</div>
+		
+		<div id="excDetailDialog" style="width:400px;display:none">
+			<div>
+				<form class="info-form">
+					<div class="loading"><img src="../assets/images/ajax-loader-bigger.gif"/></div>
+					<div class="information">
+						
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../jslib/jquery.js"></script>
+	<script type="text/javascript" src="../jslib/artDialog.js"></script>
+	<script type="text/javascript" src="../jslib/highcharts.js"></script>
+	<script type="text/javascript" src="../jslib/jquery-plugin.paging.js"></script>
+	<script type="text/javascript" src="../jslib/jquery.parent.block.frame.js"></script>
+	<script type="text/javascript" src="../jslib/admin.model.base.js"></script>
+	<script type="text/javascript" src="../jslib/admin.view.base.js"></script>
+</body>
+</html>
