@@ -30,13 +30,15 @@ import com.cloud.elastic.commons.bean.Application;
 import com.cloud.elastic.commons.bean.RUnit;
 import com.cloud.elastic.commons.bean.Runtime;
 import com.cloud.elastic.runtime.RunTimes;
+import com.cloud.elastic.runtimes.Globals;
 import com.cloud.elastic.runtimes.info.SystemInfo;
 
 
 public class RunTimesCore implements RunTimes{
 
 	private static Log log = LogFactory.getLog(RunTimesCore.class);
-	private static String rootPath = System.getProperty("user.home")+File.separator+"Runtimes"+File.separator;
+	//private static String rootPath = System.getProperty("user.home")+File.separator+"Runtimes"+File.separator;
+	private static String rootPath = System.getProperty(Globals.ELASTIC_RUNTIMES_ROOT)+File.separator+"Runtimes"+File.separator;
 	
 	@Autowired
 	private RuntimeDao runtimeDao;
@@ -78,10 +80,21 @@ public class RunTimesCore implements RunTimes{
 		String uuid = SystemInfo.getInstanceKey();
 		
 		Runtime runtime = runtimeDao.get(uuid);
-		Application application = applicationDao.get(runtime.getApplication_uuid());
-		if(application==null){
-			throw new NullArgumentException("应用不存在");
+		Application application = null;
+		try{
+			
+			application = applicationDao.get(runtime.getApplication_uuid());
+			if(application==null){
+				throw new NullArgumentException("应用不存在");
+			}
+			
+		}catch(Exception e){
+			
+			e.printStackTrace();
+			return;
+			
 		}
+		
 		
 		String url = application.getUrl();
 		

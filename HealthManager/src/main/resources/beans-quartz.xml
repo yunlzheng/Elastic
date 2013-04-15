@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="QuartzDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />	
+		<property name="jdbcUrl" value="jdbc:mysql://localhost/db_quartz?useUnicode=true&amp;characterEncoding=UTF-8" />	
+		<property name="user" value="root" />	
+		<property name="password" value="root" />	
+		<property name="initialPoolSize" value="5" /> 
+		<property name="minPoolSize" value="5" /> 
+		<property name="maxPoolSize" value="20" /> 
+		<property name="acquireIncrement" value="2" /> 
+		<property name="maxIdleTime" value="3600" /> 
+		<property name="idleConnectionTestPeriod"  value="180"/>  
+		<property name="automaticTestTable" value="C3P0TESTTABLE"/> 
+    </bean>	
+    
+    <bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+	  
+	   <!--
+	     <property name="dataSource"><ref bean="QuartzDataSource"/></property>
+	   	 <property name="configLocation" value="classpath:quartz.properties"/>
+	    -->
+	  
+	   <property name="applicationContextSchedulerContextKey" value="applicationContextKey"/> 
+	   <property name="triggers">  
+	        <list>  
+	            <ref bean="TomcatJob5TriggerBean"/>
+	        </list>  
+	   </property>  
+	</bean>
+	
+	<bean id="TomcatJobs" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="name" value="TomcatJobs"></property>
+		<property name="jobClass" value="com.cloud.elastic.health.plugins.tomcat.quartz.jobs.TomcatJobs"></property>
+	</bean>
+	
+	<bean id="TocatReportJobs" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="name" value="TocatReportJobs"></property>
+		<property name="jobClass" value="com.cloud.elastic.health.plugins.tomcat.quartz.jobs.TocatReportJobs"></property>
+	</bean>
+	
+	<bean id="TocatReportJobsTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="TocatReportJobs"></property>
+		<property name="cronExpression" value="0 0 * * * ?"></property>
+	</bean>
+	
+	
+	<bean id="TomcatJob5TriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="TomcatJobs"></property>
+		<property name="cronExpression" value="0 */5 * * * ?"></property>
+	</bean>
+
+</beans>

@@ -28,7 +28,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 	<!-- JDBC 数据访问配置 -->
 	<bean id="datasources" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.1.151/db_elastic?useUnicode=true&amp;characterEncoding=UTF-8" /> 
+		<property name="url" value="jdbc:mysql://192.168.1.107/db_elastic?useUnicode=true&amp;characterEncoding=UTF-8" /> 
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>

@@ -31,18 +31,11 @@ public class UserResourcesImpl implements UserResources{
 	
 	@POST
 	@Path("/login")
-	public void login(@Context HttpServletRequest request,@Context HttpServletResponse response) throws IOException{
+	public void login(@Context HttpServletRequest request,@Context HttpServletResponse response,MultivaluedMap<String, Object> formParams) throws IOException{
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		System.out.println(email+"  "+password);
-		
-//		if(email==null||email.equals("")||password==null||password.equals("")){
-//			
-//			response.sendRedirect(request.getContextPath()+"/login.jsp#error2");
-//			return;
-//		}
+
 		
 		User templatesUser = new User();
 		templatesUser.setEmail(email);
@@ -50,7 +43,6 @@ public class UserResourcesImpl implements UserResources{
 		
 		List<User> users = userDao.findEqualByEntity(templatesUser, new String[]{"email","password"});
 		
-		System.out.println(users.size());
 		
 		if(users.size()>0){
 			

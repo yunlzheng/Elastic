@@ -40,34 +40,34 @@
 			</div>
 			<div class="space"></div>
 			<div class="create_content">
-				<form class="form">
+				<form id="createTomcatForm" action="../service/rest/tomcat/form" method="post" class="form">
 					
 					<fieldset>
 						<legend>填写监控信息</legend>
 						<div class="file_item">
 							<label>监控项目名称:</label>
-							<input type="text"/>
+							<input name="name" type="text"/>
 							<span class="mes">给监控项目起一个名字，比如：Apache@Web117 或 MySQL@DB45。</span>
 						</div>
 						<div class="file_item">
 							<label>Tomcat状态页：</label>
-							<input type="text"/>
+							<input name="statusPageUrl" type="text"/>
 							<span class="mes">请填写Tomcat状态页地址，如：http://IP:端口/manager/status</span>
 						</div>
 						
 						<div class="file_item">
 							<label>Tomcat用户名:</label>
-							<input type="text"/>
+							<input name="tomcatUserName" type="text"/>
 							<span class="mes">请填写Tomcat用户名，建议您为监控宝创建专用Tomcat登录帐号</span>
 						</div>
 						<div class="file_item">
 							<label>Tomcat密码:</label>
-							<input type="text"/>
+							<input name="tomcatPassword" type="text"/>
 							<span class="mes">请填写以上Tomcat用户的密码。</span>
 						</div>
 						<div class="file_item">
 							<label>所要监控服务名:</label>
-							<input type="text"/>
+							<input name="servicesName" type="text"/>
 							<span class="mes">请填写Tomcat所要监控服务名。如：http-bio-8080</span>
 						</div>
 					</fieldset>
@@ -76,17 +76,19 @@
 						<legend>填写监控信息</legend>
 						<div class="file_item">
 							<label>监控频率:</label>
-							<input type="radio"/><span>5分钟</span>
+							<input name="intervalTime" value="5" type="radio"/><span>5分钟</span>
 						</div>
 					</fieldset>
-					
+					<button style="margin-left:400px" type="submit" class="btn btn-success">创建监控项</button>
+				
 				</form>
-				<button style="margin-left:400px" type="button" class="btn btn-success">创建监控项</button>
 				
 			</div>
 		</div>
 
 	<script type="text/javascript" src="../assect/js/jquery.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.form.js"></script>
+	<script type="text/javascript" src="../assect/js/jquery.tomcat.create.js"></script>
 	<script type="text/javascript" src="../assect/js/bootstrap.js"></script>
 </body>
 </html>

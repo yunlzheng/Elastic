@@ -3,6 +3,7 @@ package com.cloud.elastic.commons.monitor.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,7 @@ public class TomcatJvmMemory implements Serializable{
 	/**Jvm最大内存*/
 	private long jvmMax;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
 	private Tomcat tomcat;
 
 	public String getUuid() {

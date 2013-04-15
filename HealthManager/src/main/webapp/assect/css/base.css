@@ -4,6 +4,7 @@ body{
 	color:#999999;
 	padding-left:20px;
 	padding-bottom: 50px;
+	overflow-x: hidden;
 }
 .head{
 
@@ -79,6 +80,7 @@ body{
 	margin-top: 5px;
 	display: inline-block;
 	text-decoration: none;
+	color:#fff;
 	
 }
 
@@ -94,7 +96,7 @@ body{
 .side{
 	
 	width:207px;
-	position:absolute;
+	position:fixed;
 	top:20px;
 	left:0px;
 	bottom:0px;
@@ -113,15 +115,15 @@ margin: 0;
 }
 
 h1.brand a {
-background: url(../img/logo_big.png) top left no-repeat;
-display: block;
-float: left;
-width: 116px;
-height: 110px;
-text-indent: -9999px;
-margin-left: 56px;
-margin-top: 15px;
-margin-bottom: 25px;
+	background: url(../img/logo_big.png) top left no-repeat;
+	display: block;
+	float: left;
+	width: 116px;
+	height: 110px;
+	text-indent: -9999px;
+	margin-left: 56px;
+	margin-top: 15px;
+	margin-bottom: 25px;
 }
 
 .side li{
@@ -151,21 +153,23 @@ margin-bottom: 25px;
 
 .side h3{
 	
-	
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	color: #999999;
 	font-size: 16px;
+
 }
 
 .main_content{
 	
 	margin-left: 229px;
+	min-width: 1050px;
 	
 }
 
 .content{
 	
 	padding-right: 20px;
+	margin-right:50px;
 	
 }
 
@@ -173,6 +177,7 @@ margin-bottom: 25px;
 	
 	background-color: #EAF8FF;
 	min-height:140px;
+	
 	padding:10px;
 	border: 2px solid #e1e1e8;
 	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
@@ -202,6 +207,12 @@ margin-bottom: 25px;
 	
 }
 
+.hero-unit.monitor{
+	
+	min-height: 250px;
+	
+}
+
 .hero-unit .big-info{
 	
 	text-align: center;
@@ -223,18 +234,31 @@ margin-bottom: 25px;
 	font-family: STCaiyun ,FangSong  ;
 }
 
+.hero-unit.table{
+	
+	background-color:#fff;
+	margin-top: 10px;
+	
+}
+
+.table .table{
+	
+	margin-top: 20px;
+	
+}
+
 .topbar{
 
 	overflow: hidden;
 	margin-left: -10px;
-	padding-left: 10px;
+	
 	background: #f2f2f2;
 	border-bottom: 1px solid #e5e5e5;
 	padding: 10px 25px;
-	margin-top: 0;
+
 	margin-left: -25px;
 	margin-bottom: 20px;
-	margin-right: -25px;
+	margin-right: -80px;
 	min-width: 700px;
 	
 }
@@ -293,6 +317,25 @@ margin-bottom: 25px;
 	margin-left:95px;
 	
 }
+
+.btn a{
+	color:#000;
+}
+
+.btn-danger a{
+	
+	color: #fff;
+	text-decoration: none;
+	
+}
+
+.container{
+	
+	margin-top:10px;
+	max-width: 940px;
+	
+}
+
 /* 
  @media (max-width: 980px) {
    Enable use of floated navbar text
@@ -307,5 +350,4 @@ margin-bottom: 25px;
    }
    
  } */
-
 

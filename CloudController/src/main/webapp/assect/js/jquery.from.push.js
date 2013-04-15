@@ -118,7 +118,7 @@ function showError(data){
 	console.log(data);
 	infoDialog.close();
 	errorDialog = $.dialog({
-    	content:'应用创建失败，无可用的资源',
+    	content:'应用创建失败，仓库服务异常',
     	lock:true,
 	});
 	

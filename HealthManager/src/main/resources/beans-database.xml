@@ -56,6 +56,12 @@ http://cxf.apache.org/schemas/jaxws.xsd">
 		</property>
 	</bean>
 	
+	<bean id="TomcatLogDao" class="com.cloud.elastic.commons.dao.impl.TomcatLogDaoImpl">
+		<property name="sessionFactory">
+			<ref local="monitorSessionFactory" />
+		</property>
+	</bean>
+	
 	<bean id="TomcatFlowDao" class="com.cloud.elastic.commons.dao.impl.TomcatFlowDaoImpl">
 		<property name="sessionFactory">
 			<ref local="monitorSessionFactory" />

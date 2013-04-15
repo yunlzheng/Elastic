@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 
 import javax.ws.rs.core.Response;
 
@@ -30,21 +31,18 @@ public class UserResourcesImpl implements UserResources{
 	
 	@POST
 	@Path("/login")
-	public void login(@Context HttpServletRequest request,@Context HttpServletResponse response) throws IOException{
+	public void login(@Context HttpServletRequest request,@Context HttpServletResponse response,MultivaluedMap<String, Object> formParams) throws IOException{
 		
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String email = formParams.getFirst("email").toString();
+		String password = formParams.getFirst("password").toString();
 		
-		System.out.println(email+"  "+password);
-
+	
 		
 		User templatesUser = new User();
 		templatesUser.setEmail(email);
 		templatesUser.setPassword(password);
 		
 		List<User> users = userDao.findEqualByEntity(templatesUser, new String[]{"email","password"});
-		
-		System.out.println(users.size());
 		
 		if(users.size()>0){
 			
@@ -95,6 +93,12 @@ public class UserResourcesImpl implements UserResources{
 	}
 
 	public Response delete(Integer pk) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Response save(HttpServletRequest request,
+			MultivaluedMap<String, Object> formParams) {
 		// TODO Auto-generated method stub
 		return null;
 	}

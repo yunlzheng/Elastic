@@ -39,6 +39,21 @@ public class Bootstrap {
 	
 	private static Log log  = LogFactory.getLog(Bootstrap.class);
 	
+	private ApplicationContext context = null;
+	
+
+	public ApplicationContext getContext() {
+		return context;
+	}
+
+
+
+	public void setContext(ApplicationContext context) {
+		this.context = context;
+	}
+
+
+
 	private void setRouterRoot(){
 		
 		File routerJar = new File(System.getProperty("user.dir"),"Runtimes-0.0.1-SNAPSHOT.jar");
@@ -64,25 +79,17 @@ public class Bootstrap {
 		
 	}
 	
-	public static void main(String[] args) {
+	
+	
+	public void startup(String ip){
 		
-		String ip = null;
+		setRouterRoot();
+		
 		Runtime entity = new Runtime();
-		
-		//验证参数
-		if(args.length!=0){
-			
-			ip = args[0];
-			
-		}else{
-			log.info("Arguments[ip] no avaliable");
-			System.exit(1);
-		}
 		
 		entity.setIp(ip);
 		
-		ApplicationContext context= new ClassPathXmlApplicationContext(new String[]{"beans.xml"}); 
-		
+		context= new ClassPathXmlApplicationContext(new String[]{"beans.xml"}); 
 		
 		//注册Runtimes实例到数据库
 		RuntimeDao runtimeDao = context.getBean(RuntimeDao.class);
@@ -121,7 +128,8 @@ public class Bootstrap {
 		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
 		
-		Queue runtimesQueue = new Queue("runtimes-"+entity.getUuid());
+		//创建一个自动删除的消息队列
+		Queue runtimesQueue = new Queue("runtimes-"+entity.getUuid(),false,false,true);
 		container.setQueues(runtimesQueue);
 		MessageListenerAdapter listenerAdapter = new MessageListenerAdapter(runtimeInstanceMessageListener,new RuntimeInstanceMessageConverter());
 		listenerAdapter.setDefaultListenerMethod("handleLog");
@@ -131,14 +139,27 @@ public class Bootstrap {
 		log.info("runtimes instance listener container isRunning?"+container.isRunning());
 		log.info("Started Runtimes Instance["+entity.getUuid()+"]");
 
-		RunTimesCore core = (RunTimesCore) context.getBean("Core");
 		
-		try {
-			core.startRunit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		String ip = null;
+		
+		//验证参数
+		if(args.length!=0){
+			
+			ip = args[0];
+			
+		}else{
+			log.info("Arguments[ip] no avaliable");
+			System.exit(1);
 		}
+		
+		Bootstrap bootstrap = new Bootstrap();
+		bootstrap.startup(ip);
+		RunTimesCore core =  bootstrap.getContext().getBean("Core",RunTimesCore.class);
 		
 	}
 	

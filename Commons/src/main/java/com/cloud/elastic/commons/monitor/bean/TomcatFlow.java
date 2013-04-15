@@ -3,6 +3,7 @@ package com.cloud.elastic.commons.monitor.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 /**Tomcat流量信息日志*/
@@ -20,21 +22,30 @@ public class TomcatFlow implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;
+	
 	/**编号*/
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(length=32)
 	private String uuid;
+	
 	/**每秒接收流量*/
 	private long bytesReceived;
+	
 	/**每秒发送流量*/
 	private long bytesSend;
+	
 	/**日志时间*/
 	private Date logDate;
+	
+	/**小时数*/
+	private int hour;
+	
 	/**所属Tomcat*/
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
 	private Tomcat tomcat;
+	
 	public String getUuid() {
 		return uuid;
 	}
@@ -64,6 +75,12 @@ public class TomcatFlow implements Serializable{
 	}
 	public void setTomcat(Tomcat tomcat) {
 		this.tomcat = tomcat;
+	}
+	public int getHour() {
+		return hour;
+	}
+	public void setHour(int hour) {
+		this.hour = hour;
 	}
 	
 }

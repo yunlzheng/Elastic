@@ -150,12 +150,13 @@ public class GenericHibernateDao <T extends Serializable,PK extends Serializable
 	@SuppressWarnings("unchecked")
 	public List<T> findEqualByEntity(T entity, String[] propertyNames) {
 		
-		  Criteria criteria = this.createCriteria();  
+		    Criteria criteria = this.createCriteria();  
 	        Example exam = Example.create(entity);  
 	        exam.excludeZeroes();  
 	        String [] defPropertys = getSessionFactory().getClassMetadata(entityClass).getPropertyNames();  
 	        for(String defProperty : defPropertys)  
 	        {  
+	        	
 	            int ii = 0;  
 	            for(ii = 0; ii < propertyNames.length; ++ii)  
 	            {  
@@ -203,6 +204,8 @@ public class GenericHibernateDao <T extends Serializable,PK extends Serializable
 	        return (List<T>) criteria.list();  
 	        
 	}
+
+
 
 	
 	

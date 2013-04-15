@@ -18,7 +18,7 @@
 <style type="text/css">
 
 </style>
-<title>应用管理控制台</title>
+<title>站点可用性监控</title>
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -50,8 +50,7 @@
 			<div class="content">
 				<div class="topbar">
 					<h2>站点可用性监控</h2>
-					<button id="btn_create" type="button" class="btn btn-danger" style="float: right;">创建监控项目</button>
-					
+					<button id="btn_create" type="button" class="btn btn-danger" style="float: right;"><a href="create.jsp">创建监控项目</a></button>
 				</div>
 				
 				<ul class="nav nav-tabs">

@@ -1,6 +1,7 @@
 package com.cloud.elastic.commons.monitor.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_tomcat")
 public class Tomcat implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 
 	/**Tomcat编号*/
@@ -29,13 +29,29 @@ public class Tomcat implements Serializable{
 	private String uuid;
 	
 	/**创建者编号*/
-	private String userId;
+	private int userId;
+	
+	/**名称*/
+	private String name;
+	
+	/**Tomcat状态页地址*/
+	private String statusPageUrl;
+	
+	/**tomcat用户名*/
+	private String tomcatUserName;
+	
+	/**tomcat密码*/
+	private String tomcatPassword;
+	
+	/**监控服务的名称*/
+	private String servicesName;
 	
 	/***监控频率*/
-	private String intervalTime;
+	private int intervalTime;
 	
-	/**JVM内存占用率报警阀值*/
-	private int jvmMemoryThreshold;
+	/**创建时间*/
+	private Date createDate;
+	
 	
 	/**报警组编号*/
 	private String groupUuid;
@@ -48,30 +64,24 @@ public class Tomcat implements Serializable{
 		this.uuid = uuid;
 	}
 
-	public String getUserId() {
+	
+
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	
 
-	public String getIntervalTime() {
+
+	public int getIntervalTime() {
 		return intervalTime;
 	}
 
-	public void setIntervalTime(String intervalTime) {
+	public void setIntervalTime(int intervalTime) {
 		this.intervalTime = intervalTime;
-	}
-
-	public int getJvmMemoryThreshold() {
-		return jvmMemoryThreshold;
-	}
-
-	public void setJvmMemoryThreshold(int jvmMemoryThreshold) {
-		this.jvmMemoryThreshold = jvmMemoryThreshold;
 	}
 
 	public String getGroupUuid() {
@@ -80,6 +90,54 @@ public class Tomcat implements Serializable{
 
 	public void setGroupUuid(String groupUuid) {
 		this.groupUuid = groupUuid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStatusPageUrl() {
+		return statusPageUrl;
+	}
+
+	public void setStatusPageUrl(String statusPageUrl) {
+		this.statusPageUrl = statusPageUrl;
+	}
+
+	public String getTomcatUserName() {
+		return tomcatUserName;
+	}
+
+	public void setTomcatUserName(String tomcatUserName) {
+		this.tomcatUserName = tomcatUserName;
+	}
+
+	public String getTomcatPassword() {
+		return tomcatPassword;
+	}
+
+	public void setTomcatPassword(String tomcatPassword) {
+		this.tomcatPassword = tomcatPassword;
+	}
+
+	public String getServicesName() {
+		return servicesName;
+	}
+
+	public void setServicesName(String servicesName) {
+		this.servicesName = servicesName;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	
 	

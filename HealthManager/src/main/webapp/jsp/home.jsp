@@ -41,8 +41,8 @@
 			<ul class="nav nav-list">
               	<li class="active"><a href="home.jsp">概况</a></li>
                 <li><a href="site.jsp">站点可用性监控</a></li>
-	            <li><a href="server.jsp">服务性能监控</a></li>
-	            <li ><a href="services.jsp">服务器性能监控</a></li>
+	            <li><a href="services.jsp">服务性能监控</a></li>
+	            <li ><a href="server.jsp">服务器性能监控</a></li>
             </ul>
              
 		</div>
@@ -50,7 +50,7 @@
 			<div class="content">
 				<div class="topbar">
 					<h2>概况</h2>
-					<button id="btn_create" type="button" class="btn btn-danger" style="float: right;">创建监控项目</button>
+					<button id="btn_create" type="button" class="btn btn-danger" style="float: right;"><a href="create.jsp">创建监控项目</a></button>
 					
 				</div>
 				
@@ -60,28 +60,55 @@
 					  </li>
 					 
 				</ul>
+				
+				<div class="row-fluid">
+					<div class="hero-unit monitor">
+						<div class="hero-head">站点监控项目状态统计</div>
+						<div id="container" class="container"></div>
+					</div>
+				</div>
+				<div class="row-fluid">
 				<table class="table table-bordered">
-	  				<thead>
-	  					<tr>
-		                  <th>#</th>
-		                  <th>应用名</th>
-		                  <th>访问域名</th>
-		                  <th>创建时间</th>
-		                  <th>应用状态</th>
-		                  <th>操作</th>
-		                </tr>
-	  				</thead>
-	  				<tbody id="table_applications">
-	  				
-	  				
-	  				</tbody>
+		  				<thead>
+		  					<tr>
+			                  <th>监控项目</th>
+			                  <th>开始时间</th>
+			                  <th>恢复时间</th>
+			                  <th>故障原因</th>
+			                  
+			                </tr>
+		  				</thead>
+		  				<tbody id="table_applications">
+		  					<tr>
+		  						<td>谷歌Http</td>
+		  						<td>2012-12-31 12:12:31</td>
+		  						<td>2012-12-31 12:12:35</td>
+		  						<td>站点访问超时</td>
+		  						
+		  					</tr>
+		  					<tr>
+		  						<td>谷歌Http</td>
+		  						<td>2012-12-31 12:12:31</td>
+		  						<td>2012-12-31 12:12:35</td>
+		  						<td>站点访问超时</td>
+		  						
+		  					</tr>
+		  					<tr>
+		  						<td>谷歌Http</td>
+		  						<td>2012-12-31 12:12:31</td>
+		  						<td>2012-12-31 12:12:35</td>
+		  						<td>站点访问超时</td>
+		  						
+		  					</tr>
+		  				</tbody>
 				</table>
-		
+				</div>
 			</div>
 		</div>
 		
 	</div>
 	<script type="text/javascript" src="../assect/js/jquery.js"></script>
+	<script type="text/javascript" src="../assect/js/highcharts.js"></script>
 	<script type="text/javascript" src="../assect/js/application.js"></script>
 	<script type="text/javascript" src="../assect/js/bootstrap.js"></script>
 	<script type="text/javascript" src="../assect/js/jquery.index.js"></script>

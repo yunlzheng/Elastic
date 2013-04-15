@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,11 +35,84 @@ public class XmlFactory {
 		
 	}
 	
+	private XmlFactory(URL url) throws DocumentException {
+		
+		SAXReader reader = new SAXReader();
+		doc = reader.read(url);
+		
+	}
+	
 	public static XmlFactory newInstance(File sources) throws DocumentException{
 		
 		return new XmlFactory(sources);
 		
 	}
+	
+	public static XmlFactory newInFactory(URL url) throws DocumentException{
+		
+		return new XmlFactory(url);
+		
+	}
+	
+	
+	
+	/**解析XML*/
+	public void paasAll(){
+		
+		Element root = doc.getRootElement();
+		@SuppressWarnings("unchecked")
+		Iterator<Element> it = root.elements().iterator();
+		while(it.hasNext()){
+			
+			Element ele = (Element)it.next(); 
+			@SuppressWarnings("unchecked")
+			List<Attribute> list = ele.attributes();
+			for(Attribute attr : list){
+				System.out.println("\t"+attr.getPath());
+			}
+			System.out.println(ele.getUniquePath());
+			
+			this.paas(ele);
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void paas(Element root){
+		
+		Iterator<Element> it = root.elements().iterator();
+		while(it.hasNext()){
+			
+			Element ele = (Element)it.next(); 
+			
+			List<Attribute> list = ele.attributes();
+			for(Attribute attr : list){
+				System.out.println("    "+attr.getPath());
+			}
+			System.out.println(ele.getUniquePath());
+			
+			this.paas(ele);
+			
+		}
+		
+	}
+	
+	
+	/**获得唯一节点值*/
+	public  String getNodeValue(String selectExpress){
+		
+		Element ele = (Element) doc.selectObject(selectExpress);
+		return ele.getText();
+	}
+	
+	/**获得唯一属性值*/
+	public String getAttrValue(String selectExpress){
+		
+		Attribute attr = (Attribute) doc.selectObject(selectExpress);
+		return attr.getText();
+	}
+	
 	
 	/**
 	 * 修改满足表达式selectExpress中的属性值
