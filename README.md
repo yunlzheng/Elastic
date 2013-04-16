@@ -19,3 +19,12 @@ Java-based elastic telescoping system
 核心控制器
 ------------
   核心控制器面向用户提供核心的管理接口，如对应用的管理，应用状态的控制，以及弹性的控制。具体能力实现由其他组件提供
+
+
+特别感谢@[cloudfoundry][2]
+-----------
+  这个系统的大部分系统架构均是参考了CloudFoundry的架构设计。
+
+
+[1]:https://github.com/cloudfoundry/
+[2]:http://e.weibo.com/u/2169336083
