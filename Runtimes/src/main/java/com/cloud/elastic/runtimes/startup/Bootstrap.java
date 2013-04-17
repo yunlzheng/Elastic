@@ -159,7 +159,7 @@ public class Bootstrap {
 		
 		Bootstrap bootstrap = new Bootstrap();
 		bootstrap.startup(ip);
-		RunTimesCore core =  bootstrap.getContext().getBean("Core",RunTimesCore.class);
+		//RunTimesCore core =  bootstrap.getContext().getBean("Core",RunTimesCore.class);
 		
 	}
 	

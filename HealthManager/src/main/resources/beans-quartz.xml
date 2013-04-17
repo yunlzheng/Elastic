@@ -34,9 +34,16 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	   <property name="triggers">  
 	        <list>  
 	            <ref bean="TomcatJob5TriggerBean"/>
+	            <ref bean="HealthJobTriggerBean"/>
 	        </list>  
 	   </property>  
 	</bean>
+	
+	<bean id="HealthJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="name" value="HealthJob"></property>
+		<property name="jobClass" value="com.cloud.elastic.health.jobs.HealthJob"></property>
+	</bean>
+	
 	
 	<bean id="TomcatJobs" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="name" value="TomcatJobs"></property>
@@ -48,11 +55,15 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<property name="jobClass" value="com.cloud.elastic.health.plugins.tomcat.quartz.jobs.TocatReportJobs"></property>
 	</bean>
 	
+	<bean id="HealthJobTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="HealthJob"></property>
+		<property name="cronExpression" value="0 * * * * ?"></property>
+	</bean>
+	
 	<bean id="TocatReportJobsTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="TocatReportJobs"></property>
 		<property name="cronExpression" value="0 0 * * * ?"></property>
 	</bean>
-	
 	
 	<bean id="TomcatJob5TriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="TomcatJobs"></property>
